@@ -4,15 +4,15 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Users, Newspaper, BarChart3, User, Trophy } from "lucide-react"
+import { Home, User, Wrench, BarChart3, Settings } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home, color: "cyan" },
-  { href: "/players", label: "Players", icon: Users, color: "purple" },
-  { href: "/news", label: "News", icon: Newspaper, color: "pink" },
-  { href: "/analytics", label: "Analytics", icon: BarChart3, color: "green" },
-  { href: "/profile", label: "Profile", icon: User, color: "cyan" },
+  { href: "/vault", label: "Vault", icon: User, color: "purple" },
+  { href: "/tools/draft-kit", label: "Draft", icon: Wrench, color: "green" },
+  { href: "/analytics", label: "Analytics", icon: BarChart3, color: "pink" },
+  { href: "/settings", label: "Settings", icon: Settings, color: "cyan" },
 ]
 
 export function BottomNav() {
@@ -248,17 +248,13 @@ export function BottomNav() {
 
             {/* Center Action Button (Optional) */}
             <motion.div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
+              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="w-16 h-16 glass-effect rounded-full flex items-center justify-center glow-cyan pointer-events-auto cursor-pointer group">
-                <Trophy className="w-8 h-8 neon-cyan group-hover:scale-110 transition-transform duration-300" />
-                <div
-                  className="absolute -inset-2 border border-cyan-400/30 rounded-full animate-spin"
-                  style={{ animationDuration: "8s" }}
-                />
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-400/20 border border-cyan-400/30 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               </div>
             </motion.div>
           </div>

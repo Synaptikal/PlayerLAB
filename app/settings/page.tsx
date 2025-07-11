@@ -1,299 +1,304 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
-import { HolographicBackground } from "@/components/ui/holographic-background"
-import { GlassContainer } from "@/components/ui/glass-container"
-import { GlowButton } from "@/components/ui/glow-button"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { 
-  Settings, 
-  User, 
-  Bell, 
-  Palette, 
-  Shield, 
-  Database,
-  Moon,
-  Sun,
-  Monitor,
-  Save,
-  Trash2
-} from "lucide-react"
+import { Switch } from "@/components/ui/switch"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Settings, User, Shield, Bell, Palette, Database, Globe, Key } from "lucide-react"
+import { useState } from "react"
 
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState("profile")
-  const [theme, setTheme] = useState("dark")
-
-  const tabs = [
-    { id: "profile", label: "Profile", icon: User },
-    { id: "notifications", label: "Notifications", icon: Bell },
-    { id: "appearance", label: "Appearance", icon: Palette },
-    { id: "security", label: "Security", icon: Shield },
-    { id: "data", label: "Data", icon: Database },
-  ]
+  const [notifications, setNotifications] = useState(true)
+  const [darkMode, setDarkMode] = useState(true)
+  const [autoSync, setAutoSync] = useState(true)
+  const [leagueType, setLeagueType] = useState("ppr")
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Holographic Background */}
-      <HolographicBackground />
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="relative z-10 pt-32 pb-16 px-6">
+        {/* Header */}
+        <motion.div
+          className="max-w-7xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
+            Settings
+          </h1>
+          <p className="text-slate-300 text-lg">
+            Customize your PlayerLAB experience and manage your preferences
+          </p>
+        </motion.div>
 
-      {/* Header */}
-      <section className="relative z-10 py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30, rotateX: -20 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
+        {/* Settings Sections */}
+        <div className="max-w-7xl mx-auto space-y-8">
+          {/* Profile Settings */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="holographic-projection w-16 h-16 mx-auto mb-6">
-              <Settings className="w-8 h-8 neon-cyan" />
-            </div>
-            <h1 className="title-lg font-orbitron font-bold mb-4 neon-cyan">SETTINGS</h1>
-            <div className="flex items-center justify-center gap-2 text-compact text-purple-400 font-mono">
-              <Shield className="w-4 h-4 animate-pulse" />
-              <span>&gt; CONFIGURE YOUR PLAYERLAB EXPERIENCE</span>
-            </div>
+            <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
+              <User className="w-6 h-6 text-cyan-400" />
+              Profile Settings
+            </h2>
+            <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="text-sm font-orbitron text-slate-400 mb-2 block">Display Name</label>
+                  <Input
+                    placeholder="Your display name"
+                    defaultValue="FantasyChamp"
+                    className="backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-orbitron text-slate-400 mb-2 block">Email</label>
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    defaultValue="user@playerlab.net"
+                    className="backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-orbitron text-slate-400 mb-2 block">League Type</label>
+                  <Select value={leagueType} onValueChange={setLeagueType}>
+                    <SelectTrigger className="backdrop-blur-xl bg-white/5 border-white/20 text-white">
+                      <SelectValue placeholder="League Type" />
+                    </SelectTrigger>
+                    <SelectContent className="backdrop-blur-xl bg-slate-900 border-cyan-400/30">
+                      <SelectItem value="ppr">PPR</SelectItem>
+                      <SelectItem value="half-ppr">Half PPR</SelectItem>
+                      <SelectItem value="standard">Standard</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-orbitron text-slate-400 mb-2 block">Team Name</label>
+                  <Input
+                    placeholder="Your team name"
+                    defaultValue="The Champions"
+                    className="backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                  />
+                </div>
+              </div>
+            </Card>
+          </motion.section>
+
+          {/* Notification Settings */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
+              <Bell className="w-6 h-6 text-cyan-400" />
+              Notifications
+            </h2>
+            <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Push Notifications</h3>
+                    <p className="text-sm text-slate-300">Receive alerts for important updates</p>
+                  </div>
+                  <Switch
+                    checked={notifications}
+                    onCheckedChange={setNotifications}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Trade Alerts</h3>
+                    <p className="text-sm text-slate-300">Get notified when trades are proposed</p>
+                  </div>
+                  <Switch
+                    checked={true}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Waiver Updates</h3>
+                    <p className="text-sm text-slate-300">Stay informed about waiver wire activity</p>
+                  </div>
+                  <Switch
+                    checked={true}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+              </div>
+            </Card>
+          </motion.section>
+
+          {/* Appearance Settings */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
+              <Palette className="w-6 h-6 text-cyan-400" />
+              Appearance
+            </h2>
+            <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Dark Mode</h3>
+                    <p className="text-sm text-slate-300">Use dark theme for better visibility</p>
+                  </div>
+                  <Switch
+                    checked={darkMode}
+                    onCheckedChange={setDarkMode}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Holographic Effects</h3>
+                    <p className="text-sm text-slate-300">Enable advanced visual effects</p>
+                  </div>
+                  <Switch
+                    checked={true}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Animations</h3>
+                    <p className="text-sm text-slate-300">Show smooth transitions and animations</p>
+                  </div>
+                  <Switch
+                    checked={true}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+              </div>
+            </Card>
+          </motion.section>
+
+          {/* Data & Sync Settings */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
+              <Database className="w-6 h-6 text-cyan-400" />
+              Data & Sync
+            </h2>
+            <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Auto Sync</h3>
+                    <p className="text-sm text-slate-300">Automatically sync with Sleeper API</p>
+                  </div>
+                  <Switch
+                    checked={autoSync}
+                    onCheckedChange={setAutoSync}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Cache Data</h3>
+                    <p className="text-sm text-slate-300">Store data locally for offline access</p>
+                  </div>
+                  <Switch
+                    checked={true}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-orbitron font-semibold text-white">Analytics</h3>
+                    <p className="text-sm text-slate-300">Share usage data to improve the app</p>
+                  </div>
+                  <Switch
+                    checked={false}
+                    className="data-[state=checked]:bg-cyan-400"
+                  />
+                </div>
+              </div>
+            </Card>
+          </motion.section>
+
+          {/* Security Settings */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+          >
+            <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
+              <Shield className="w-6 h-6 text-cyan-400" />
+              Security
+            </h2>
+            <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-orbitron font-semibold text-white mb-4">API Keys</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <Globe className="w-5 h-5 text-slate-400" />
+                      <div className="flex-1">
+                        <p className="text-sm text-slate-300">Sleeper API</p>
+                        <p className="text-xs text-slate-500">Connected • Last sync: 2 hours ago</p>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="backdrop-blur-xl bg-white/5 border-white/20 hover:bg-cyan-400/20"
+                      >
+                        Reconnect
+                      </Button>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <Key className="w-5 h-5 text-slate-400" />
+                      <div className="flex-1">
+                        <p className="text-sm text-slate-300">Custom API</p>
+                        <p className="text-xs text-slate-500">Not configured</p>
+                      </div>
+                      <Button
+                        size="sm"
+                        className="backdrop-blur-xl bg-cyan-400/20 border-cyan-400/50 hover:bg-cyan-400/30"
+                      >
+                        Configure
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </motion.section>
+
+          {/* Action Buttons */}
+          <motion.div
+            className="flex gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            <Button
+              className="backdrop-blur-xl bg-cyan-400/20 border-cyan-400/50 hover:bg-cyan-400/30"
+            >
+              Save Changes
+            </Button>
+            <Button
+              variant="outline"
+              className="backdrop-blur-xl bg-white/5 border-white/20 hover:bg-red-400/20 hover:border-red-400/50"
+            >
+              Reset to Defaults
+            </Button>
           </motion.div>
         </div>
-      </section>
-
-      {/* Settings Layout */}
-      <section className="relative z-10 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Sidebar Navigation */}
-            <div className="lg:col-span-1">
-              <GlassContainer className="p-6">
-                <h2 className="text-lg font-orbitron font-bold mb-6 text-neon-cyan">Settings</h2>
-                <nav className="space-y-2">
-                  {tabs.map((tab) => {
-                    const Icon = tab.icon
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all ${
-                          activeTab === tab.id
-                            ? "bg-neon-cyan text-deep-black shadow-glow"
-                            : "text-text-secondary hover:bg-glass-dark"
-                        }`}
-                      >
-                        <Icon className="w-4 h-4" />
-                        <span className="font-orbitron text-sm">{tab.label}</span>
-                      </button>
-                    )
-                  })}
-                </nav>
-              </GlassContainer>
-            </div>
-
-            {/* Main Content */}
-            <div className="lg:col-span-3">
-              <GlassContainer className="p-8">
-                {activeTab === "profile" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl font-orbitron font-bold mb-6 text-neon-cyan">Profile Settings</h2>
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-orbitron text-text-secondary mb-2">First Name</label>
-                          <Input placeholder="Enter your first name" />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-orbitron text-text-secondary mb-2">Last Name</label>
-                          <Input placeholder="Enter your last name" />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">Email</label>
-                        <Input placeholder="your.email@example.com" type="email" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">Username</label>
-                        <Input placeholder="Choose a username" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">Bio</label>
-                        <textarea
-                          placeholder="Tell us about yourself..."
-                          className="glass-input w-full h-24 resize-none"
-                        />
-                      </div>
-                      <GlowButton teamColor="cyan">
-                        <Save className="w-4 h-4 mr-2" />
-                        Save Changes
-                      </GlowButton>
-                    </div>
-                  </motion.div>
-                )}
-
-                {activeTab === "notifications" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl font-orbitron font-bold mb-6 text-neon-cyan">Notification Preferences</h2>
-                    <div className="space-y-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 glass-container rounded-lg">
-                          <div>
-                            <h3 className="font-orbitron font-semibold text-primary-dark">Player Updates</h3>
-                            <p className="text-sm text-text-secondary">Get notified when your tracked players have news</p>
-                          </div>
-                          <input type="checkbox" className="w-4 h-4 text-neon-cyan" defaultChecked />
-                        </div>
-                        <div className="flex items-center justify-between p-4 glass-container rounded-lg">
-                          <div>
-                            <h3 className="font-orbitron font-semibold text-primary-dark">Trade Alerts</h3>
-                            <p className="text-sm text-text-secondary">Receive notifications about trade opportunities</p>
-                          </div>
-                          <input type="checkbox" className="w-4 h-4 text-neon-cyan" />
-                        </div>
-                        <div className="flex items-center justify-between p-4 glass-container rounded-lg">
-                          <div>
-                            <h3 className="font-orbitron font-semibold text-primary-dark">Weekly Reports</h3>
-                            <p className="text-sm text-text-secondary">Get weekly performance summaries</p>
-                          </div>
-                          <input type="checkbox" className="w-4 h-4 text-neon-cyan" defaultChecked />
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {activeTab === "appearance" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl font-orbitron font-bold mb-6 text-neon-cyan">Appearance Settings</h2>
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="text-lg font-orbitron font-semibold mb-4 text-primary-dark">Theme</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <button
-                            onClick={() => setTheme("light")}
-                            className={`p-4 rounded-lg border-2 transition-all ${
-                              theme === "light"
-                                ? "border-neon-cyan shadow-glow"
-                                : "border-white/20 hover:border-white/40"
-                            }`}
-                          >
-                            <Sun className="w-6 h-6 mx-auto mb-2" />
-                            <span className="font-orbitron text-sm">Light</span>
-                          </button>
-                          <button
-                            onClick={() => setTheme("dark")}
-                            className={`p-4 rounded-lg border-2 transition-all ${
-                              theme === "dark"
-                                ? "border-neon-cyan shadow-glow"
-                                : "border-white/20 hover:border-white/40"
-                            }`}
-                          >
-                            <Moon className="w-6 h-6 mx-auto mb-2" />
-                            <span className="font-orbitron text-sm">Dark</span>
-                          </button>
-                          <button
-                            onClick={() => setTheme("auto")}
-                            className={`p-4 rounded-lg border-2 transition-all ${
-                              theme === "auto"
-                                ? "border-neon-cyan shadow-glow"
-                                : "border-white/20 hover:border-white/40"
-                            }`}
-                          >
-                            <Monitor className="w-6 h-6 mx-auto mb-2" />
-                            <span className="font-orbitron text-sm">Auto</span>
-                          </button>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-orbitron font-semibold mb-4 text-primary-dark">Holographic Effects</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between p-4 glass-container rounded-lg">
-                            <div>
-                              <h4 className="font-orbitron font-semibold text-primary-dark">Enable Animations</h4>
-                              <p className="text-sm text-text-secondary">Show holographic background animations</p>
-                            </div>
-                            <input type="checkbox" className="w-4 h-4 text-neon-cyan" defaultChecked />
-                          </div>
-                          <div className="flex items-center justify-between p-4 glass-container rounded-lg">
-                            <div>
-                              <h4 className="font-orbitron font-semibold text-primary-dark">Glow Effects</h4>
-                              <p className="text-sm text-text-secondary">Enable neon glow on interactive elements</p>
-                            </div>
-                            <input type="checkbox" className="w-4 h-4 text-neon-cyan" defaultChecked />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {activeTab === "security" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl font-orbitron font-bold mb-6 text-neon-cyan">Security Settings</h2>
-                    <div className="space-y-6">
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">Current Password</label>
-                        <Input type="password" placeholder="Enter current password" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">New Password</label>
-                        <Input type="password" placeholder="Enter new password" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-orbitron text-text-secondary mb-2">Confirm Password</label>
-                        <Input type="password" placeholder="Confirm new password" />
-                      </div>
-                      <GlowButton teamColor="cyan">
-                        Update Password
-                      </GlowButton>
-                    </div>
-                  </motion.div>
-                )}
-
-                {activeTab === "data" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl font-orbitron font-bold mb-6 text-neon-cyan">Data Management</h2>
-                    <div className="space-y-6">
-                      <div className="p-6 glass-container rounded-lg">
-                        <h3 className="text-lg font-orbitron font-semibold mb-2 text-primary-dark">Export Data</h3>
-                        <p className="text-sm text-text-secondary mb-4">Download all your PlayerLAB data including vault players, settings, and preferences.</p>
-                        <GlowButton teamColor="blue" size="sm">
-                          Export Data
-                        </GlowButton>
-                      </div>
-                      <div className="p-6 glass-container rounded-lg border border-neon-red/30">
-                        <h3 className="text-lg font-orbitron font-semibold mb-2 text-neon-red">Danger Zone</h3>
-                        <p className="text-sm text-text-secondary mb-4">Permanently delete your account and all associated data. This action cannot be undone.</p>
-                        <button className="px-4 py-2 bg-neon-red text-white rounded-lg font-orbitron text-sm hover:bg-neon-red/80 transition-colors">
-                          <Trash2 className="w-4 h-4 mr-2 inline" />
-                          Delete Account
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </GlassContainer>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   )
 } 

@@ -110,3 +110,89 @@ export const useAnalyticsStore = create<AnalyticsState>((set) => ({
   setChartData: (data) => set({ chartData: data }),
   setSelectedTimeframe: (timeframe) => set({ selectedTimeframe: timeframe }),
 }))
+
+// Dashboard Widget State
+import { persist } from "zustand/middleware"
+
+export interface DashboardWidget {
+  id: string
+  type: string
+  title: string
+  data: any
+  color: string
+}
+
+interface DashboardState {
+  widgets: DashboardWidget[]
+  setWidgets: (widgets: DashboardWidget[]) => void
+  moveWidget: (from: number, to: number) => void
+  resetWidgets: () => void
+}
+
+const defaultWidgets: DashboardWidget[] = [
+  {
+    id: "1",
+    type: "stats",
+    title: "Team Performance",
+    data: {
+      wins: 8,
+      losses: 3,
+      pointsFor: 142.3,
+      pointsAgainst: 128.7,
+      rank: 2
+    },
+    color: "cyan"
+  },
+  {
+    id: "2",
+    type: "players",
+    title: "Top Performers",
+    data: [
+      { name: "Christian McCaffrey", points: 28.4, trend: "up" },
+      { name: "Tyreek Hill", points: 24.2, trend: "up" },
+      { name: "Travis Kelce", points: 22.6, trend: "down" }
+    ],
+    color: "green"
+  },
+  {
+    id: "3",
+    type: "schedule",
+    title: "Upcoming Matchups",
+    data: [
+      { opponent: "Team Alpha", week: 8, difficulty: "Easy" },
+      { opponent: "Team Beta", week: 9, difficulty: "Medium" },
+      { opponent: "Team Gamma", week: 10, difficulty: "Hard" }
+    ],
+    color: "purple"
+  },
+  {
+    id: "4",
+    type: "alerts",
+    title: "League Alerts",
+    data: [
+      { type: "trade", message: "New trade proposed", time: "2h ago" },
+      { type: "waiver", message: "Waiver wire updated", time: "4h ago" },
+      { type: "injury", message: "Player injury reported", time: "1d ago" }
+    ],
+    color: "yellow"
+  }
+]
+
+export const useDashboardStore = create<DashboardState>()(
+  persist(
+    (set, get) => ({
+      widgets: defaultWidgets,
+      setWidgets: (widgets) => set({ widgets }),
+      moveWidget: (from, to) => {
+        const widgets = [...get().widgets]
+        const [moved] = widgets.splice(from, 1)
+        widgets.splice(to, 0, moved)
+        set({ widgets })
+      },
+      resetWidgets: () => set({ widgets: defaultWidgets }),
+    }),
+    {
+      name: "dashboard-widgets",
+    }
+  )
+)

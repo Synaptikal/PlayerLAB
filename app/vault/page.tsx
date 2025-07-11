@@ -1,210 +1,203 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { HolographicBackground } from "@/components/ui/holographic-background"
-import { GlassContainer } from "@/components/ui/glass-container"
-import { PlayerCard } from "@/components/ui/player-card"
-import { MobilePlayerCard } from "@/components/ui/mobile-player-card"
-import { GlowButton } from "@/components/ui/glow-button"
-import { Search, Filter, Star, TrendingUp, Shield } from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Search, Plus, Star, Filter, Grid, List } from "lucide-react"
+import { useState } from "react"
 
-const mockVaultPlayers = [
+// Mock data for demonstration
+const savedPlayers = [
   {
-    id: "1",
-    name: "Josh Allen",
-    team: "BUF",
-    position: "QB",
-    points: 28.4,
-    trend: "up" as const,
-    status: "active",
-    notes: "Elite QB, consistent performer",
-  },
-  {
-    id: "2",
+    id: 1,
     name: "Christian McCaffrey",
     team: "SF",
     position: "RB",
-    points: 26.8,
-    trend: "up" as const,
-    status: "active",
-    notes: "RB1, high volume",
+    status: "Active",
+    value: "High",
+    notes: "Elite RB1, great ROS schedule"
   },
   {
-    id: "3",
+    id: 2,
     name: "Tyreek Hill",
     team: "MIA",
     position: "WR",
-    points: 24.2,
-    trend: "stable" as const,
-    status: "active",
-    notes: "Speed demon, big play potential",
+    status: "Active",
+    value: "High",
+    notes: "Speed demon, consistent production"
   },
   {
-    id: "4",
+    id: 3,
     name: "Travis Kelce",
     team: "KC",
     position: "TE",
-    points: 22.6,
-    trend: "down" as const,
-    status: "watch",
-    notes: "Age concerns, monitor closely",
+    status: "Active",
+    value: "High",
+    notes: "TE1, Mahomes connection"
+  }
+]
+
+const watchlists = [
+  {
+    id: 1,
+    name: "Trade Targets",
+    count: 12,
+    color: "cyan"
   },
+  {
+    id: 2,
+    name: "Waiver Wire",
+    count: 8,
+    color: "green"
+  },
+  {
+    id: 3,
+    name: "Draft Prospects",
+    count: 15,
+    color: "purple"
+  }
 ]
 
 export default function VaultPage() {
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [searchQuery, setSearchQuery] = useState("")
+
   return (
-    <div className="min-h-screen pt-20">
-      {/* Holographic Background */}
-      <HolographicBackground />
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="relative z-10 pt-32 pb-16 px-6">
+        {/* Header */}
+        <motion.div
+          className="max-w-7xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
+            Player Vault
+          </h1>
+          <p className="text-slate-300 text-lg">
+            Manage your saved players, watchlists, and player notes
+          </p>
+        </motion.div>
 
-      {/* Header */}
-      <section className="relative z-10 py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30, rotateX: -20 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-          >
-            <div className="holographic-projection w-16 h-16 mx-auto mb-6">
-              <Shield className="w-8 h-8 neon-cyan" />
+        {/* Search and Controls */}
+        <motion.div
+          className="max-w-7xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <Input
+                placeholder="Search players..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+              />
             </div>
-            <h1 className="title-lg font-orbitron font-bold mb-4 neon-cyan">PLAYER VAULT</h1>
-            <div className="flex items-center justify-center gap-2 text-compact text-purple-400 font-mono">
-              <Star className="w-4 h-4 animate-pulse" />
-              <span>&gt; YOUR ELITE PLAYER COLLECTION</span>
-            </div>
-          </motion.div>
-
-          {/* Search and Filters */}
-          <motion.div
-            className="fantasy-panel p-6 mb-8"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-medium-grey" />
-                <input
-                  type="text"
-                  placeholder="Search vault players..."
-                  className="glass-tile pl-10 pr-4 py-2 w-full text-compact bg-transparent border-0 focus:glow-blue text-primary-dark placeholder-medium-grey"
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <Filter className="w-4 h-4 neon-cyan" />
-                <select className="glass-tile px-3 py-2 text-compact bg-transparent border-0 focus:glow-blue text-primary-dark">
-                  <option>All Positions</option>
-                  <option>QB</option>
-                  <option>RB</option>
-                  <option>WR</option>
-                  <option>TE</option>
-                </select>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Vault Players Grid */}
-      <section className="relative z-10 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {mockVaultPlayers.map((player, index) => (
-              <motion.div
-                key={player.id}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setViewMode("grid")}
+                variant={viewMode === "grid" ? "default" : "outline"}
+                size="sm"
+                className="backdrop-blur-xl bg-white/5 border-white/20 hover:bg-cyan-400/20"
               >
-                <GlassContainer className="p-6 group cursor-pointer hover:scale-105 transition-transform">
+                <Grid className="w-4 h-4" />
+              </Button>
+              <Button
+                onClick={() => setViewMode("list")}
+                variant={viewMode === "list" ? "default" : "outline"}
+                size="sm"
+                className="backdrop-blur-xl bg-white/5 border-white/20 hover:bg-cyan-400/20"
+              >
+                <List className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                className="backdrop-blur-xl bg-cyan-400/20 border-cyan-400/50 hover:bg-cyan-400/30"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add Player
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Watchlists Section */}
+        <motion.section
+          className="max-w-7xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <h2 className="text-2xl font-orbitron font-semibold text-white mb-6">Watchlists</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {watchlists.map((list, index) => (
+              <motion.div
+                key={list.id}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-glow-cyan rounded-2xl p-6 cursor-pointer transition-all duration-300">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${
-                        player.status === 'active' ? 'bg-neon-green' : 'bg-neon-yellow'
-                      }`} />
-                      <span className="text-micro font-orbitron text-neon-cyan uppercase tracking-wide">
-                        {player.status}
-                      </span>
-                    </div>
-                    <Star className="w-4 h-4 text-neon-yellow" />
+                    <h3 className="text-lg font-orbitron font-semibold text-white">{list.name}</h3>
+                    <span className="text-sm text-slate-400">{list.count} players</span>
                   </div>
-
-                  <div className="text-center mb-4">
-                    <h3 className="title-sm font-orbitron font-bold text-primary-dark mb-1">
-                      {player.name}
-                    </h3>
-                    <div className="flex items-center justify-center gap-2 text-micro">
-                      <span className="text-neon-cyan font-orbitron">{player.team}</span>
-                      <span className="text-text-secondary">•</span>
-                      <span className="text-text-secondary">{player.position}</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-3 h-3 rounded-full bg-${list.color}-400`}></div>
+                    <span className="text-sm text-slate-300">Active watchlist</span>
                   </div>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-micro text-text-secondary">Points</span>
-                      <span className="text-compact font-orbitron text-neon-green">
-                        {player.points}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-micro text-text-secondary">Trend</span>
-                      <div className="flex items-center gap-1">
-                        <TrendingUp className={`w-3 h-3 ${
-                          player.trend === 'up' ? 'text-neon-green' : 
-                          player.trend === 'down' ? 'text-neon-red' : 'text-neon-cyan'
-                        }`} />
-                        <span className="text-micro font-orbitron text-neon-cyan uppercase">
-                          {player.trend}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-white/10 pt-3">
-                    <p className="text-micro text-text-secondary leading-relaxed">
-                      {player.notes}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
-                    <GlowButton size="sm" teamColor="cyan">
-                      View Details
-                    </GlowButton>
-                    <button className="text-micro text-neon-red hover:text-neon-red/80 transition-colors">
-                      Remove
-                    </button>
-                  </div>
-                </GlassContainer>
+                </Card>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </motion.section>
 
-      {/* Add Player CTA */}
-      <section className="relative z-10 py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="fantasy-panel p-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Star className="w-12 h-12 mx-auto mb-4 neon-yellow" />
-            <h2 className="title-md font-orbitron font-bold mb-4 neon-cyan">ADD TO VAULT</h2>
-            <p className="text-compact text-text-secondary mb-6 max-w-2xl mx-auto">
-              Build your elite player collection. Add players to your vault for quick access and detailed tracking.
-            </p>
-            <GlowButton size="lg" teamColor="cyan">
-              Browse Players
-            </GlowButton>
-          </motion.div>
-        </div>
-      </section>
+        {/* Saved Players Section */}
+        <motion.section
+          className="max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <h2 className="text-2xl font-orbitron font-semibold text-white mb-6">Saved Players</h2>
+          <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
+            {savedPlayers.map((player, index) => (
+              <motion.div
+                key={player.id}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-glow-cyan rounded-2xl p-6 transition-all duration-300">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-orbitron font-semibold text-white">{player.name}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-sm text-slate-400">{player.team}</span>
+                        <span className="text-sm text-slate-400">•</span>
+                        <span className="text-sm text-slate-400">{player.position}</span>
+                        <span className="text-sm text-slate-400">•</span>
+                        <span className="text-sm text-green-400">{player.status}</span>
+                      </div>
+                    </div>
+                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-400">Value:</span>
+                      <span className="text-sm text-cyan-400 font-semibold">{player.value}</span>
+                    </div>
+                    <p className="text-sm text-slate-300">{player.notes}</p>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      </div>
     </div>
   )
 } 

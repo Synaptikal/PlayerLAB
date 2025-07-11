@@ -13,33 +13,8 @@ export default function HomePage() {
 
       {/* Main Content */}
       <div className="relative z-10">
-        {/* Top Navbar - Glassmorphic */}
-        <nav className="fixed top-0 left-0 right-0 z-100 h-16 backdrop-blur-xl bg-white/5 border-b border-white/20">
-          <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
-            <motion.h1 
-              className="text-2xl font-orbitron tracking-wide text-white"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              PLAYERLAB
-            </motion.h1>
-            <motion.ul 
-              className="flex gap-6 text-sm font-medium text-muted"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <li><a href="/vault" className="hover:text-cyan-400 transition-colors">Vault</a></li>
-              <li><a href="/tools/draft-kit" className="hover:text-cyan-400 transition-colors">Draft Kit</a></li>
-              <li><a href="/tools/trade-analyzer" className="hover:text-cyan-400 transition-colors">Trade Analyzer</a></li>
-              <li><a href="/settings" className="hover:text-cyan-400 transition-colors">Settings</a></li>
-            </motion.ul>
-          </div>
-        </nav>
-
         {/* Main Content Area */}
-        <div className="pt-24 pb-32 px-6">
+        <div className="pt-32 pb-16 px-6">
           {/* Hero Section */}
           <motion.section
             className="text-center max-w-4xl mx-auto mb-20"

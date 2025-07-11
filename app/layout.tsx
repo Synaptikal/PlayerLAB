@@ -3,8 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { HolographicBackground } from "@/components/ui/holographic-background"
-import { Navbar } from "@/components/navigation/navbar"
-import { BottomNav } from "@/components/navigation/bottom-nav"
+import Navbar from "@/components/navigation/navbar"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -28,11 +27,8 @@ export default function RootLayout({
         {/* Top Navigation */}
         <Navbar />
 
-        {/* Main Content with Bottom Padding for Navigation */}
-        <main className="relative z-10 pb-24">{children}</main>
-
-        {/* Bottom Navigation */}
-        <BottomNav />
+        {/* Main Content */}
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   )
