@@ -1,0 +1,947 @@
+{
+  "name": "PlayerLAB V2 Ultra Design System",
+  "version": "1.0.0",
+  "description": "Advanced Fantasy Sports Analytics Platform - Dark HUD Aesthetic with Holographic Interface",
+  
+  "pages": [
+    {
+      "name": "🎨 Colors & Typography",
+      "frames": [
+        {
+          "name": "Neon Palette",
+          "description": "Primary color system with neon accents and glassmorphism",
+          "layers": [
+            {
+              "name": "Deep Black",
+              "color": "#0D0D0D",
+              "usage": "Primary background"
+            },
+            {
+              "name": "Neon Cyan",
+              "color": "#00FFFF",
+              "usage": "Primary accent, glow effects"
+            },
+            {
+              "name": "Neon Blue",
+              "color": "#3B82F6",
+              "usage": "Secondary accent, team colors"
+            },
+            {
+              "name": "Neon Green",
+              "color": "#00FF6A",
+              "usage": "Success states, positive trends"
+            },
+            {
+              "name": "Neon Red",
+              "color": "#FF4C4C",
+              "usage": "Error states, negative trends"
+            },
+            {
+              "name": "Neon Purple",
+              "color": "#8B5CF6",
+              "usage": "Tertiary accent, special effects"
+            },
+            {
+              "name": "Neon Magenta",
+              "color": "#FF00FF",
+              "usage": "Special effects, highlights"
+            },
+            {
+              "name": "Glass Light",
+              "color": "rgba(255, 255, 255, 0.1)",
+              "usage": "Glassmorphism light overlay"
+            },
+            {
+              "name": "Glass Dark",
+              "color": "rgba(0, 0, 0, 0.3)",
+              "usage": "Glassmorphism dark overlay"
+            },
+            {
+              "name": "Text Primary",
+              "color": "#FFFFFF",
+              "usage": "Primary text color"
+            },
+            {
+              "name": "Text Secondary",
+              "color": "#AAAAAA",
+              "usage": "Secondary text color"
+            }
+          ]
+        },
+        {
+          "name": "Typography Styles",
+          "description": "Font hierarchy and text styles",
+          "layers": [
+            {
+              "name": "H1 - Orbitron",
+              "font": "Orbitron",
+              "size": "48-72px",
+              "weight": "Bold",
+              "color": "Neon Cyan gradient",
+              "usage": "Main headings, hero text"
+            },
+            {
+              "name": "H2 - Orbitron",
+              "font": "Orbitron",
+              "size": "32-48px",
+              "weight": "Bold",
+              "color": "#FFFFFF",
+              "usage": "Section headings"
+            },
+            {
+              "name": "H3 - Orbitron",
+              "font": "Orbitron",
+              "size": "24-32px",
+              "weight": "Semibold",
+              "color": "#FFFFFF",
+              "usage": "Subsection headings"
+            },
+            {
+              "name": "Body - Inter",
+              "font": "Inter",
+              "size": "16px",
+              "weight": "Regular",
+              "color": "#AAAAAA",
+              "usage": "Body text, descriptions"
+            },
+            {
+              "name": "Caption - Audiowide",
+              "font": "Audiowide",
+              "size": "12px",
+              "weight": "Regular",
+              "color": "#00FFFF",
+              "usage": "Captions, labels"
+            },
+            {
+              "name": "Micro - Audiowide",
+              "font": "Audiowide",
+              "size": "10px",
+              "weight": "Regular",
+              "color": "#AAAAAA",
+              "usage": "Micro text, timestamps"
+            }
+          ]
+        },
+        {
+          "name": "Glow Effects",
+          "description": "Neon glow system for interactive elements",
+          "layers": [
+            {
+              "name": "Primary Glow",
+              "shadow": "0 0 20px rgba(0, 255, 255, 0.5)",
+              "usage": "Default glow effect"
+            },
+            {
+              "name": "Intense Glow",
+              "shadow": "0 0 30px rgba(0, 255, 255, 0.8)",
+              "usage": "Hover states, active elements"
+            },
+            {
+              "name": "Blue Glow",
+              "shadow": "0 0 20px #3b82f6",
+              "usage": "Team colors, secondary actions"
+            },
+            {
+              "name": "Green Glow",
+              "shadow": "0 0 20px #00FF6A",
+              "usage": "Success states, positive data"
+            },
+            {
+              "name": "Red Glow",
+              "shadow": "0 0 20px #FF4C4C",
+              "usage": "Error states, negative data"
+            },
+            {
+              "name": "Purple Glow",
+              "shadow": "0 0 20px #8B5CF6",
+              "usage": "Special effects, tertiary actions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🧩 Components",
+      "frames": [
+        {
+          "name": "Navigation Components",
+          "layers": [
+            {
+              "name": "Top Navbar",
+              "description": "Desktop navigation with glassmorphic background",
+              "properties": {
+                "background": "Glassmorphic with backdrop blur",
+                "border": "1px neon cyan border",
+                "height": "64px",
+                "responsive": "Hidden on mobile"
+              }
+            },
+            {
+              "name": "Bottom Navigation",
+              "description": "Mobile navigation with neon glow effects",
+              "properties": {
+                "background": "Glassmorphic with intense glow",
+                "height": "80px",
+                "position": "Fixed bottom",
+                "responsive": "Hidden on desktop"
+              }
+            },
+            {
+              "name": "Sidebar Navigation",
+              "description": "Collapsible sidebar with holographic elements",
+              "properties": {
+                "width": "280px",
+                "background": "Glassmorphic with grid pattern",
+                "animation": "Slide in/out with neon trail"
+              }
+            },
+            {
+              "name": "Breadcrumb Navigation",
+              "description": "Breadcrumb with neon accents",
+              "properties": {
+                "separator": "Neon cyan arrow",
+                "hover": "Glow effect on hover"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Button System",
+          "layers": [
+            {
+              "name": "Primary Glow Button",
+              "description": "Main action button with neon cyan glow",
+              "properties": {
+                "background": "Transparent with neon border",
+                "glow": "Primary glow on hover",
+                "animation": "Scale 1.05x on hover",
+                "padding": "12px 24px",
+                "border-radius": "8px"
+              }
+            },
+            {
+              "name": "Secondary Glass Button",
+              "description": "Secondary action with glassmorphic styling",
+              "properties": {
+                "background": "Glassmorphic with backdrop blur",
+                "border": "1px white/20 border",
+                "hover": "Enhanced glow effect",
+                "padding": "12px 24px",
+                "border-radius": "8px"
+              }
+            },
+            {
+              "name": "Icon Button",
+              "description": "Circular button with glow effects",
+              "properties": {
+                "shape": "Circle",
+                "size": "44px minimum",
+                "glow": "Neon glow on hover",
+                "animation": "Rotation on hover"
+              }
+            },
+            {
+              "name": "Toggle Button",
+              "description": "Toggle with neon state indicators",
+              "properties": {
+                "active": "Neon cyan glow",
+                "inactive": "Subtle glow",
+                "animation": "Smooth transition"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Input Fields",
+          "layers": [
+            {
+              "name": "Glassmorphic Input",
+              "description": "Input with backdrop blur and neon border focus",
+              "properties": {
+                "background": "Glassmorphic with backdrop blur",
+                "border": "1px white/20 border",
+                "focus": "Neon cyan border and glow",
+                "padding": "12px 16px",
+                "border-radius": "8px"
+              }
+            },
+            {
+              "name": "Search Input",
+              "description": "Search with neon glow on focus",
+              "properties": {
+                "icon": "Search icon with neon glow",
+                "placeholder": "Glassmorphic styling",
+                "focus": "Intense neon glow"
+              }
+            },
+            {
+              "name": "Form Fields",
+              "description": "Form inputs with validation states",
+              "properties": {
+                "error": "Neon red border and glow",
+                "success": "Neon green border and glow",
+                "validation": "Real-time feedback"
+              }
+            },
+            {
+              "name": "Dropdown Select",
+              "description": "Dropdown with holographic styling",
+              "properties": {
+                "background": "Glassmorphic dropdown",
+                "options": "Hover glow effects",
+                "animation": "Slide down with neon trail"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Player Cards",
+          "layers": [
+            {
+              "name": "Default Player Card",
+              "description": "Glassmorphic card with player stats",
+              "properties": {
+                "background": "Glassmorphic with backdrop blur",
+                "border": "1px neon cyan border",
+                "glow": "Subtle glow effect",
+                "hover": "Enhanced glow and scale",
+                "padding": "16px",
+                "border-radius": "12px"
+              }
+            },
+            {
+              "name": "Active Player Card",
+              "description": "Enhanced glow for selected state",
+              "properties": {
+                "glow": "Intense neon cyan glow",
+                "scale": "1.02x scale",
+                "border": "2px neon cyan border",
+                "animation": "Pulsing glow effect"
+              }
+            },
+            {
+              "name": "Compact Player Card",
+              "description": "Smaller card for lists and grids",
+              "properties": {
+                "size": "Reduced padding and spacing",
+                "typography": "Smaller text sizes",
+                "hover": "Subtle glow effect"
+              }
+            },
+            {
+              "name": "Holographic Player Card",
+              "description": "Card with animated holographic elements",
+              "properties": {
+                "animation": "Floating data nodes",
+                "scanning": "Horizontal scanning beam",
+                "grid": "Subtle grid pattern overlay"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytics Components",
+          "layers": [
+            {
+              "name": "HUD Tiles",
+              "description": "Glassmorphic containers for data display",
+              "properties": {
+                "background": "Glassmorphic with backdrop blur",
+                "border": "1px neon border",
+                "glow": "Team color glow",
+                "hover": "Enhanced glow and scale",
+                "padding": "20px",
+                "border-radius": "16px"
+              }
+            },
+            {
+              "name": "Chart Containers",
+              "description": "Containers for data visualizations",
+              "properties": {
+                "background": "Glassmorphic with grid pattern",
+                "border": "Neon border",
+                "glow": "Subtle glow effect",
+                "responsive": "Adaptive sizing"
+              }
+            },
+            {
+              "name": "Stat Cards",
+              "description": "Cards for displaying statistics",
+              "properties": {
+                "layout": "Grid or flex layout",
+                "typography": "Large numbers with neon glow",
+                "animation": "Count-up animation",
+                "responsive": "Mobile-first design"
+              }
+            },
+            {
+              "name": "Trend Indicators",
+              "description": "Up/down arrows with colors",
+              "properties": {
+                "up": "Neon green with glow",
+                "down": "Neon red with glow",
+                "stable": "Neon cyan with glow",
+                "animation": "Pulse effect"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📱 Layouts & Grids",
+      "frames": [
+        {
+          "name": "Desktop Layout (1440px)",
+          "description": "Desktop layout with sidebar navigation",
+          "layers": [
+            {
+              "name": "Top Navbar",
+              "properties": {
+                "position": "Fixed top",
+                "height": "64px",
+                "background": "Glassmorphic with backdrop blur",
+                "z-index": "100"
+              }
+            },
+            {
+              "name": "Sidebar Navigation",
+              "properties": {
+                "position": "Fixed left",
+                "width": "280px",
+                "height": "100vh",
+                "background": "Glassmorphic with grid pattern",
+                "z-index": "90"
+              }
+            },
+            {
+              "name": "Main Content Area",
+              "properties": {
+                "margin-left": "280px",
+                "margin-top": "64px",
+                "padding": "24px",
+                "background": "Holographic background"
+              }
+            },
+            {
+              "name": "HUD Tiles Grid",
+              "properties": {
+                "grid": "2-4 columns responsive",
+                "gap": "24px",
+                "layout": "CSS Grid with auto-fit"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mobile Layout (375px)",
+          "description": "Mobile-first layout with bottom navigation",
+          "layers": [
+            {
+              "name": "Bottom Navigation",
+              "properties": {
+                "position": "Fixed bottom",
+                "height": "80px",
+                "background": "Glassmorphic with intense glow",
+                "z-index": "100"
+              }
+            },
+            {
+              "name": "Main Content Area",
+              "properties": {
+                "padding": "16px",
+                "padding-bottom": "96px",
+                "background": "Holographic background"
+              }
+            },
+            {
+              "name": "Stacked HUD Tiles",
+              "properties": {
+                "layout": "Single column",
+                "gap": "16px",
+                "margin": "0 auto",
+                "max-width": "100%"
+              }
+            },
+            {
+              "name": "Touch-Friendly Elements",
+              "properties": {
+                "button-size": "44px minimum",
+                "spacing": "16px minimum",
+                "typography": "Readable on small screens"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tablet Layout (768px)",
+          "description": "Hybrid layout for tablet devices",
+          "layers": [
+            {
+              "name": "Hybrid Navigation",
+              "properties": {
+                "top-nav": "Simplified navbar",
+                "bottom-nav": "Enhanced with more options",
+                "responsive": "Adaptive based on orientation"
+              }
+            },
+            {
+              "name": "2-Column Grid",
+              "properties": {
+                "grid": "2 columns for HUD tiles",
+                "gap": "20px",
+                "responsive": "Single column on portrait"
+              }
+            },
+            {
+              "name": "Responsive Typography",
+              "properties": {
+                "scaling": "Proportional to screen size",
+                "readability": "Optimized for tablet viewing"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "✨ Animations & Interactions",
+      "frames": [
+        {
+          "name": "Hover Effects",
+          "layers": [
+            {
+              "name": "Neon Glow Intensification",
+              "description": "Enhanced glow on hover",
+              "properties": {
+                "duration": "300ms ease",
+                "intensity": "1.5x glow increase",
+                "color": "Maintains neon color"
+              }
+            },
+            {
+              "name": "Scale Transforms",
+              "description": "Subtle scale on hover",
+              "properties": {
+                "scale": "1.05x transform",
+                "duration": "300ms ease",
+                "origin": "Center of element"
+              }
+            },
+            {
+              "name": "Rotation Effects",
+              "description": "3D rotation for depth",
+              "properties": {
+                "rotation": "2-5 degrees",
+                "perspective": "1000px",
+                "duration": "300ms ease"
+              }
+            },
+            {
+              "name": "Color Transitions",
+              "description": "Smooth color changes",
+              "properties": {
+                "duration": "300ms ease",
+                "easing": "Cubic bezier",
+                "targets": "Border, text, glow colors"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Loading States",
+          "layers": [
+            {
+              "name": "Pulsing Neon Elements",
+              "description": "Pulse animation for loading",
+              "properties": {
+                "duration": "2s infinite",
+                "easing": "Ease in out",
+                "opacity": "0.3 to 1.0"
+              }
+            },
+            {
+              "name": "Scanning Beam",
+              "description": "Horizontal scanning animation",
+              "properties": {
+                "direction": "Left to right",
+                "duration": "15s infinite",
+                "color": "Neon cyan",
+                "width": "2px"
+              }
+            },
+            {
+              "name": "Floating Data Nodes",
+              "description": "Vertical oscillation",
+              "properties": {
+                "movement": "Up and down",
+                "duration": "8s infinite",
+                "delay": "Staggered by 0.5s",
+                "rotation": "360 degrees"
+              }
+            },
+            {
+              "name": "Holographic Grid",
+              "description": "Subtle grid pattern animation",
+              "properties": {
+                "opacity": "0.1 to 0.3",
+                "duration": "4s infinite",
+                "pattern": "60x60 grid"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Page Transitions",
+          "layers": [
+            {
+              "name": "Fade with Neon Trails",
+              "description": "Page transition with neon effects",
+              "properties": {
+                "duration": "800ms",
+                "trail": "Neon cyan trail effect",
+                "direction": "Slide with fade"
+              }
+            },
+            {
+              "name": "Glassmorphic Blur",
+              "description": "Backdrop blur during transitions",
+              "properties": {
+                "blur": "12px backdrop blur",
+                "duration": "400ms",
+                "easing": "Ease in out"
+              }
+            },
+            {
+              "name": "Staggered Animations",
+              "description": "Element-by-element animation",
+              "properties": {
+                "delay": "100ms between elements",
+                "duration": "600ms per element",
+                "direction": "Top to bottom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🎯 Special Effects",
+      "frames": [
+        {
+          "name": "Holographic Background",
+          "description": "Animated background with holographic elements",
+          "layers": [
+            {
+              "name": "Dynamic Gradient Orbs",
+              "description": "Mouse-following gradient orbs",
+              "properties": {
+                "size": "384px diameter",
+                "color": "rgba(14, 165, 233, 0.3)",
+                "animation": "Scale and opacity pulse",
+                "tracking": "Mouse position"
+              }
+            },
+            {
+              "name": "Floating Data Nodes",
+              "description": "12 floating nodes with animation",
+              "properties": {
+                "count": "12 nodes",
+                "animation": "Vertical oscillation + rotation",
+                "delay": "Staggered by 0.5s",
+                "color": "Neon cyan with opacity"
+              }
+            },
+            {
+              "name": "Holographic Grid Lines",
+              "description": "SVG grid with gradient overlay",
+              "properties": {
+                "pattern": "60x60 grid",
+                "color": "rgba(14, 165, 233, 0.5)",
+                "gradient": "Linear gradient overlay",
+                "opacity": "0.1"
+              }
+            },
+            {
+              "name": "Scanning Beam",
+              "description": "Horizontal scanning animation",
+              "properties": {
+                "width": "1px",
+                "color": "Neon cyan gradient",
+                "animation": "Left to right sweep",
+                "duration": "15s infinite"
+              }
+            },
+            {
+              "name": "Corner HUD Elements",
+              "description": "Corner elements with pulsing dots",
+              "properties": {
+                "position": "Top-left and bottom-right",
+                "size": "96x96px",
+                "border": "2px neon cyan border",
+                "dots": "Pulsing neon dots"
+              }
+            },
+            {
+              "name": "Data Stream Lines",
+              "description": "5 horizontal data streams",
+              "properties": {
+                "count": "5 lines",
+                "spacing": "15% vertical",
+                "animation": "Opacity and scale pulse",
+                "delay": "Staggered by 0.6s"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Glassmorphism Effects",
+          "description": "Glass-like visual effects",
+          "layers": [
+            {
+              "name": "Backdrop Blur",
+              "description": "Blur effect for glass appearance",
+              "properties": {
+                "blur": "12px-64px",
+                "browser": "backdrop-filter: blur()",
+                "fallback": "Background blur for older browsers"
+              }
+            },
+            {
+              "name": "Transparency Layers",
+              "description": "Multiple transparency levels",
+              "properties": {
+                "light": "rgba(255, 255, 255, 0.1)",
+                "medium": "rgba(255, 255, 255, 0.15)",
+                "dark": "rgba(0, 0, 0, 0.3)",
+                "usage": "Context-dependent"
+              }
+            },
+            {
+              "name": "Border Effects",
+              "description": "Neon borders with glow",
+              "properties": {
+                "width": "1-2px",
+                "color": "Neon colors",
+                "glow": "Matching glow effect",
+                "radius": "8-16px"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📋 Documentation",
+      "frames": [
+        {
+          "name": "Component Usage Guidelines",
+          "description": "How to use each component",
+          "layers": [
+            {
+              "name": "Button Guidelines",
+              "content": [
+                "Primary buttons for main actions",
+                "Secondary buttons for secondary actions",
+                "Icon buttons for compact actions",
+                "Toggle buttons for state changes"
+              ]
+            },
+            {
+              "name": "Input Guidelines",
+              "content": [
+                "Use glassmorphic inputs for forms",
+                "Search inputs with neon glow on focus",
+                "Validation states with color coding",
+                "Dropdowns with holographic styling"
+              ]
+            },
+            {
+              "name": "Card Guidelines",
+              "content": [
+                "Player cards for player data display",
+                "HUD tiles for analytics data",
+                "Stat cards for numerical data",
+                "Responsive sizing for different screens"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Animation Specifications",
+          "description": "Detailed animation guidelines",
+          "layers": [
+            {
+              "name": "Hover Animations",
+              "content": [
+                "300ms duration for all hover effects",
+                "Ease-in-out easing for smooth transitions",
+                "Scale 1.05x for interactive elements",
+                "Glow intensification for feedback"
+              ]
+            },
+            {
+              "name": "Loading Animations",
+              "content": [
+                "Pulsing elements for loading states",
+                "Scanning beams for data processing",
+                "Floating nodes for background activity",
+                "Grid patterns for system status"
+              ]
+            },
+            {
+              "name": "Page Transitions",
+              "content": [
+                "800ms duration for page transitions",
+                "Neon trails for visual continuity",
+                "Staggered animations for content loading",
+                "Glassmorphic blur for depth"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Responsive Behavior",
+          "description": "How components adapt to screen sizes",
+          "layers": [
+            {
+              "name": "Mobile (375px-767px)",
+              "content": [
+                "Bottom navigation only",
+                "Single column layouts",
+                "Touch-friendly button sizes (44px+)",
+                "Simplified animations for performance"
+              ]
+            },
+            {
+              "name": "Tablet (768px-1023px)",
+              "content": [
+                "Hybrid navigation system",
+                "2-column grids where appropriate",
+                "Adaptive typography scaling",
+                "Optimized touch targets"
+              ]
+            },
+            {
+              "name": "Desktop (1024px+)",
+              "content": [
+                "Full navigation with sidebar",
+                "Multi-column layouts",
+                "Enhanced hover effects",
+                "Full animation suite"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Accessibility Compliance",
+          "description": "Accessibility requirements and guidelines",
+          "layers": [
+            {
+              "name": "Color Contrast",
+              "content": [
+                "High contrast neon colors",
+                "WCAG AA compliance for text",
+                "Alternative indicators for color-blind users",
+                "Focus indicators for keyboard navigation"
+              ]
+            },
+            {
+              "name": "Touch Targets",
+              "content": [
+                "Minimum 44px touch targets",
+                "Adequate spacing between elements",
+                "Clear visual feedback for interactions",
+                "Screen reader friendly structure"
+              ]
+            },
+            {
+              "name": "Keyboard Navigation",
+              "content": [
+                "Logical tab order",
+                "Visible focus indicators",
+                "Keyboard shortcuts for power users",
+                "Skip navigation links"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "designTokens": {
+    "colors": {
+      "deepBlack": "#0D0D0D",
+      "neonCyan": "#00FFFF",
+      "neonBlue": "#3B82F6",
+      "neonGreen": "#00FF6A",
+      "neonRed": "#FF4C4C",
+      "neonPurple": "#8B5CF6",
+      "neonMagenta": "#FF00FF",
+      "glassLight": "rgba(255, 255, 255, 0.1)",
+      "glassDark": "rgba(0, 0, 0, 0.3)",
+      "textPrimary": "#FFFFFF",
+      "textSecondary": "#AAAAAA"
+    },
+    "typography": {
+      "fontFamily": {
+        "orbitron": "Orbitron",
+        "inter": "Inter",
+        "audiowide": "Audiowide"
+      },
+      "fontSize": {
+        "h1": "48-72px",
+        "h2": "32-48px",
+        "h3": "24-32px",
+        "body": "16px",
+        "caption": "12px",
+        "micro": "10px"
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "xxl": "48px"
+    },
+    "borderRadius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "pill": "24px"
+    },
+    "shadows": {
+      "primaryGlow": "0 0 20px rgba(0, 255, 255, 0.5)",
+      "intenseGlow": "0 0 30px rgba(0, 255, 255, 0.8)",
+      "blueGlow": "0 0 20px #3b82f6",
+      "greenGlow": "0 0 20px #00FF6A",
+      "redGlow": "0 0 20px #FF4C4C",
+      "purpleGlow": "0 0 20px #8B5CF6"
+    }
+  },
+  
+  "breakpoints": {
+    "mobile": "375px-767px",
+    "tablet": "768px-1023px",
+    "desktop": "1024px-1440px",
+    "ultraWide": "1440px+"
+  },
+  
+  "animations": {
+    "duration": {
+      "fast": "200ms",
+      "normal": "300ms",
+      "slow": "600ms",
+      "verySlow": "800ms"
+    },
+    "easing": {
+      "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "easeOut": "cubic-bezier(0, 0, 0.2, 1)",
+      "easeIn": "cubic-bezier(0.4, 0, 1, 1)"
+    }
+  }
+} 
