@@ -1,51 +1,163 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { HolographicBackground } from "@/components/ui/holographic-background"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0A] to-[#1D1D2F] text-white px-6 py-10">
-      {/* NAVBAR */}
-      <nav className="flex justify-between items-center mb-16">
-        <h1 className="text-2xl font-orbitron tracking-wide">PLAYERLAB</h1>
-        <ul className="flex gap-6 text-sm font-medium text-muted">
-          <li><a href="/vault">Vault</a></li>
-          <li><a href="/tools/draft-kit">Draft Kit</a></li>
-          <li><a href="/tools/trade-analyzer">Trade Analyzer</a></li>
-          <li><a href="/settings">Settings</a></li>
-        </ul>
-      </nav>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Holographic Background */}
+      <HolographicBackground />
 
-      {/* HERO SECTION */}
-      <section className="text-center max-w-3xl mx-auto mb-20">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">Own the Draft. Win the League.</h2>
-        <p className="text-muted mb-6 text-lg">AI-powered fantasy insights at your fingertips. Smarter trades. Better picks. Total domination.</p>
-        <Button className="text-lg px-8 py-4 rounded-xl backdrop-blur bg-accent/30 border border-accent hover:bg-accent/60 transition">
-          Launch Tools
-        </Button>
-      </section>
+      {/* Main Content */}
+      <div className="relative z-10">
+        {/* Top Navbar - Glassmorphic */}
+        <nav className="fixed top-0 left-0 right-0 z-100 h-16 backdrop-blur-xl bg-white/5 border-b border-white/20">
+          <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <motion.h1 
+              className="text-2xl font-orbitron tracking-wide text-white"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              PLAYERLAB
+            </motion.h1>
+            <motion.ul 
+              className="flex gap-6 text-sm font-medium text-muted"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <li><a href="/vault" className="hover:text-cyan-400 transition-colors">Vault</a></li>
+              <li><a href="/tools/draft-kit" className="hover:text-cyan-400 transition-colors">Draft Kit</a></li>
+              <li><a href="/tools/trade-analyzer" className="hover:text-cyan-400 transition-colors">Trade Analyzer</a></li>
+              <li><a href="/settings" className="hover:text-cyan-400 transition-colors">Settings</a></li>
+            </motion.ul>
+          </div>
+        </nav>
 
-      {/* FEATURE TILES */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <Card className="bg-white/5 border border-white/10 backdrop-blur rounded-2xl p-6 hover:scale-[1.02] transition">
-          <h3 className="text-xl font-semibold mb-2">Draft Kit</h3>
-          <p className="text-muted text-sm">Get instant recommendations and top picks based on your live roster.</p>
-        </Card>
-        <Card className="bg-white/5 border border-white/10 backdrop-blur rounded-2xl p-6 hover:scale-[1.02] transition">
-          <h3 className="text-xl font-semibold mb-2">Trade Analyzer</h3>
-          <p className="text-muted text-sm">AI breakdowns of trade fairness, value shifts, and win probability.</p>
-        </Card>
-        <Card className="bg-white/5 border border-white/10 backdrop-blur rounded-2xl p-6 hover:scale-[1.02] transition">
-          <h3 className="text-xl font-semibold mb-2">Vault</h3>
-          <p className="text-muted text-sm">Track your saved players, favorites, and custom watchlists in one place.</p>
-        </Card>
-      </section>
+        {/* Main Content Area */}
+        <div className="pt-24 pb-32 px-6">
+          {/* Hero Section */}
+          <motion.section
+            className="text-center max-w-4xl mx-auto mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <motion.h2 
+              className="text-5xl md:text-7xl font-orbitron font-bold mb-6 leading-tight bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              Own the Draft. Win the League.
+            </motion.h2>
+            <motion.p 
+              className="text-xl md:text-2xl text-slate-300 mb-8 font-inter"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              AI-powered fantasy insights at your fingertips. Smarter trades. Better picks. Total domination.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+            >
+              <Button className="text-lg px-8 py-4 rounded-xl backdrop-blur-xl bg-white/10 border border-cyan-400/50 hover:bg-cyan-400/20 hover:border-cyan-400 hover:shadow-glow-cyan transition-all duration-300 hover:scale-105">
+                Launch Tools
+              </Button>
+            </motion.div>
+          </motion.section>
 
-      {/* FOOTER */}
-      <footer className="text-center text-muted text-xs mt-24">
-        &copy; {new Date().getFullYear()} PlayerLAB. Built with AI + Passion.
-      </footer>
+          {/* Feature Tiles - HUD Grid */}
+          <motion.section 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            {/* Draft Kit Card */}
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-glow-cyan rounded-2xl p-6 h-full transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-3 h-3 rounded-full bg-cyan-400 mr-3 animate-pulse"></div>
+                  <h3 className="text-xl font-orbitron font-semibold text-white">Draft Kit</h3>
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  Get instant recommendations and top picks based on your live roster. AI-powered insights for every draft decision.
+                </p>
+              </Card>
+            </motion.div>
+
+            {/* Trade Analyzer Card */}
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              <Card className="backdrop-blur-xl bg-white/5 border border-purple-400/30 hover:border-purple-400/60 hover:shadow-glow-purple rounded-2xl p-6 h-full transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-3 h-3 rounded-full bg-purple-400 mr-3 animate-pulse"></div>
+                  <h3 className="text-xl font-orbitron font-semibold text-white">Trade Analyzer</h3>
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  AI breakdowns of trade fairness, value shifts, and win probability. Make informed decisions with confidence.
+                </p>
+              </Card>
+            </motion.div>
+
+            {/* Vault Card */}
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <Card className="backdrop-blur-xl bg-white/5 border border-green-400/30 hover:border-green-400/60 hover:shadow-glow-green rounded-2xl p-6 h-full transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-3 h-3 rounded-full bg-green-400 mr-3 animate-pulse"></div>
+                  <h3 className="text-xl font-orbitron font-semibold text-white">Vault</h3>
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  Track your saved players, favorites, and custom watchlists in one place. Your personal player database.
+                </p>
+              </Card>
+            </motion.div>
+          </motion.section>
+
+          {/* Live Status Indicator */}
+          <motion.div
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+          >
+            <div className="backdrop-blur-xl bg-slate-900/80 rounded-2xl border border-cyan-400/30 p-4">
+              <div className="flex items-center gap-3">
+                <motion.div
+                  className="w-3 h-3 rounded-full bg-green-400"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.6, 1, 0.6],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                />
+                <span className="text-sm font-orbitron text-green-400 uppercase tracking-wide">Live Sleeper API</span>
+                <div className="text-xs font-mono text-slate-400">{new Date().toLocaleTimeString()}</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
