@@ -5,53 +5,31 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { Activity } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RealPlayerCard } from "./real-player-card"
 
 interface HolographicAnalyticsTileProps {
   title: string
   subtitle?: string
-  icon?: React.ComponentType<{ className?: string }>
-  players?: Array<{
-    id: string
-    name: string
-    team: string
-    position: string
-    avatarUrl?: string
-    teamLogoUrl?: string
-    age?: number
-    experience?: number
-    injuryStatus?: "healthy" | "questionable" | "doubtful" | "out" | "probable"
-    stats?: {
-      completions?: number
-      attempts?: number
-      yards: number
-      touchdowns: number
-      carries?: number
-      receptions?: number
-      targets?: number
-      points: number
-    }
-    trend?: "up" | "down" | "stable"
-    trendValue?: number
-    points: number
-    projectedPoints?: number
-    ownership?: number
-  }>
+  icon?: React.ReactElement
+  children?: React.ReactNode
   data?: Array<{ label: string; value: number; trend?: "up" | "down" | "stable" }>
   delay?: number
   className?: string
   variant?: "players" | "data" | "chart"
+  glowColor?: "cyan" | "purple" | "green" | "red" | "yellow"
+  holographicElement?: boolean
 }
 
 export function HolographicAnalyticsTile({
   title,
   subtitle,
-  icon: Icon = Activity,
-  players = [],
+  icon = <Activity className="w-6 h-6" />,
+  children,
   data = [],
   delay = 0,
   className,
   variant = "players",
+  glowColor = "cyan",
+  holographicElement = false,
 }: HolographicAnalyticsTileProps) {
   const renderWireframeOverlay = () => (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -165,16 +143,7 @@ export function HolographicAnalyticsTile({
 
     return (
       <div className="space-y-3">
-        {players.slice(0, 3).map((player, index) => (
-          <RealPlayerCard
-            key={player.id}
-            player={player}
-            variant="compact"
-            showPoints={true}
-            showTrendMeter={true}
-            delay={delay + index * 0.1}
-          />
-        ))}
+        {children}
       </div>
     )
   }
@@ -228,7 +197,9 @@ export function HolographicAnalyticsTile({
         <div className="flex items-center gap-4 mb-2">
           <div className="relative">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center ring-2 ring-cyan-400/30 group-hover:ring-cyan-400/60 transition-all duration-300">
-              <Icon className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
+              <div className="text-cyan-400 group-hover:scale-110 transition-transform duration-300">
+                {icon}
+              </div>
             </div>
             {/* Pulsing Ring */}
             <motion.div
