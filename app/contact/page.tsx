@@ -95,7 +95,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Get in touch with our team. We're here to help you dominate your fantasy leagues.
+            Get in touch with our team. We&apos;re here to help you dominate your fantasy leagues.
           </motion.p>
         </div>
       </section>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                 >
                   <CheckCircle className="w-16 h-16 mx-auto mb-4 text-neon-green" />
                   <h3 className="text-xl font-bold mb-2 text-neon-green">Message Sent!</h3>
-                  <p className="text-text-secondary">We'll get back to you within 24 hours.</p>
+                  <p className="text-text-secondary">We&apos;ll get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

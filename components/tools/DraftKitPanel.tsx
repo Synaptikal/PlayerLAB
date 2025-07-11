@@ -1,20 +1,21 @@
 'use client'
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
+import { getDraftSuggestions } from '@/lib/ai/draftKit';
 
 export function DraftKitPanel() {
   const [roster, setRoster] = useState('')
-  const [league, setLeague] = useState('Half-PPR')
+  const [league, setLeague] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
 
-  async function analyze() {
-    const res = await fetch('/api/tools/draft-analyzer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ roster: roster.split(','), leagueType: league }),
-    })
-    const data = await res.json()
-    setSuggestions(data.suggestions)
+  async function handleGetDraftSuggestions() {
+    try {
+      const suggestions = await getDraftSuggestions(roster.split(','), league);
+      setSuggestions(suggestions);
+    } catch (error) {
+      console.error('Error fetching draft suggestions:', error);
+      setSuggestions(['Error fetching draft suggestions.']);
+    }
   }
 
   return (
@@ -25,7 +26,7 @@ export function DraftKitPanel() {
         <option value='Standard'>Standard</option>
         <option value='Full-PPR'>Full-PPR</option>
       </select>
-      <button onClick={analyze}>Analyze</button>
+      <button onClick={handleGetDraftSuggestions}>Analyze</button>
       <ul>{suggestions.map((s, i) => <li key={i}>{s}</li>)}</ul>
     </Card>
   )

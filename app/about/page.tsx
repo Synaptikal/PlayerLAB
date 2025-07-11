@@ -168,7 +168,7 @@ export default function AboutPage() {
             <Mail className="w-12 h-12 mx-auto mb-4 neon-cyan" />
             <h2 className="title-md font-orbitron font-bold mb-4 neon-blue">READY TO CONNECT?</h2>
             <p className="text-compact text-dark-grey mb-6">
-              Have questions about PlayerLAB or want to join our mission? We'd love to hear from you.
+              Have questions about PlayerLAB or want to join our mission? We&apos;d love to hear from you.
             </p>
             <button className="btn-compact glow-blue">GET IN TOUCH</button>
           </div>
