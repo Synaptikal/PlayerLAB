@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Quick save script - commits and pushes all changes immediately
-echo "🔄 Quick saving to GitHub..."
+# Quick save script - commits and pushes all changes immediately to MAIN branch
+echo "🔄 Quick saving to GitHub main branch..."
+
+# Make sure we're on main branch
+git checkout main
 
 # Add all changes
 git add -A
@@ -16,7 +19,7 @@ fi
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 git commit -m "Auto-save: $TIMESTAMP"
 
-# Push to remote
-git push
+# Push to main branch
+git push origin main
 
-echo "✅ All changes saved to GitHub!"
+echo "✅ All changes saved to GitHub main branch!"
