@@ -70,3 +70,10 @@ pnpm-lock.yaml
 # Temporary folders
 tmp/
 temp/
+
+# Ignore temp, archive, and large files
+PlayerLAB_V2_Ultra_Clean_2025-07-11_10-06-41.zip
+zip files/
+temp_*/
+*.zip
+!PlayerLAB-Production-Ready-20250711-112011.zip

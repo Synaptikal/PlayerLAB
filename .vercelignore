@@ -1,0 +1,7 @@
+PlayerLAB_V2_Ultra_Clean_2025-07-11_10-06-41.zip
+zip files/
+temp_*/
+*.zip
+!.gitignore
+!.env.local
+!.vercelignore 
