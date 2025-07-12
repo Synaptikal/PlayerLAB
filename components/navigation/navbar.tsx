@@ -5,19 +5,27 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { FlaskLogo } from "@/components/ui/flask-logo"
-import { Menu, X, Home, User, Wrench, BarChart3, Settings, Target, LayoutDashboard, FlaskConical, Puzzle, Trophy } from 'lucide-react';import { cn } from "@/lib/utils"
+import { Menu, X, Home, User, BarChart3, Settings, Target, LayoutDashboard, FlaskConical, Puzzle, Trophy, TrendingUp, Activity, Zap, Brain, Users } from 'lucide-react';import { cn } from "@/lib/utils"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home, color: "cyan" },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, color: "blue" },
   { href: "/vault", label: "Vault", icon: User, color: "purple" },
-  { href: "/tools/draft-kit", label: "Draft Kit", icon: Wrench, color: "green" },
-  { href: "/tools/trade-analyzer", label: "Trade Analyzer", icon: Target, color: "pink" },
-  { href: "/tools/smart-tester", label: "Smart Tester", icon: FlaskConical, color: "indigo" },
-  { href: "/analytics", label: "Analytics", icon: BarChart3, color: "orange" },
-  { href: "/plugins", label: "Plugins", icon: Puzzle, color: "teal" },
-  { href: "/achievements", label: "Achievements", icon: Trophy, color: "amber" },
-  { href: "/settings", label: "Settings", icon: Settings, color: "yellow" },
+  { href: "/news", label: "News", icon: TrendingUp, color: "green" },
+  { href: "/trends", label: "Trends", icon: Activity, color: "emerald" },
+  { href: "/hype", label: "Hype", icon: Zap, color: "pink" },
+  { href: "/analysis", label: "Analysis", icon: Brain, color: "indigo" },
+  { href: "/tools/draft-kit", label: "Draft Kit", icon: Target, color: "orange" },
+  { href: "/tools/trade-analyzer", label: "Trade Analyzer", icon: Target, color: "red" },
+  { href: "/tools/smart-tester", label: "Smart Tester", icon: FlaskConical, color: "violet" },
+  { href: "/analytics", label: "Analytics", icon: BarChart3, color: "teal" },
+  { href: "/plugins", label: "Plugins", icon: Puzzle, color: "amber" },
+  { href: "/achievements", label: "Achievements", icon: Trophy, color: "yellow" },
+  { href: "/leagues", label: "Leagues", icon: Users, color: "lime" },
+  { href: "/teams", label: "Teams", icon: Users, color: "sky" },
+  { href: "/players", label: "Players", icon: User, color: "rose" },
+  { href: "/matchups", label: "Matchups", icon: Target, color: "fuchsia" },
+  { href: "/settings", label: "Settings", icon: Settings, color: "slate" },
 ]
 
 export default function Navbar() {
