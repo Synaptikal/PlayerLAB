@@ -5,8 +5,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, TrendingUp, TrendingDown, Star, Target, Users, Zap } from "lucide-react"
-import { useState } from "react"
+import { Search, TrendingDown, Star, Target, Users, Zap } from 'lucide-react';import { useState } from "react"
 
 // Mock data for demonstration
 const draftRankings = [

@@ -51,7 +51,7 @@ export interface SocialSource {
 }
 
 class MultiSocialAPI {
-  private cache: Map<string, any> = new Map()
+  private cache: Map<string, unknown> = new Map()
   private cacheTimestamp: Map<string, number> = new Map()
   private readonly CACHE_DURATION = 1000 * 60 * 10 // 10 minutes
 
@@ -218,13 +218,13 @@ class MultiSocialAPI {
 
       for (const subreddit of subreddits) {
         try {
-          const data = await apiClient.get(`${API_CONFIG.SOCIAL.REDDIT.BASE_URL}/r/${subreddit}/hot.json?limit=25`);
+          const data = await apiClient.get(`${API_CONFIG.SOCIAL.REDDIT.BASE_URL}/r/${subreddit}/hot.json?25`);
           
-          data.data.children.forEach((post: any, index: number) => {
+          data.data.children.forEach((post: unknown) => {
             const postData = post.data
             const content = postData.title + (postData.selftext ? ' ' + postData.selftext : '')
             
-            // Filter for relevant content
+            // for relevant content
             if (this.isRelevantContent(content, sport, playerName)) {
               posts.push({
                 id: `reddit_${postData.id}`,
@@ -272,11 +272,11 @@ class MultiSocialAPI {
   // Mastodon Posts Implementation
   private async fetchMastodonPosts(sport: string, playerName?: string): Promise<SocialPost[]> {
     try {
-      const data = await apiClient.get(`${API_CONFIG.SOCIAL.MASTODON.BASE_URL}/timelines/public?limit=40`);
+      const data = await apiClient.get(`${API_CONFIG.SOCIAL.MASTODON.BASE_URL}/timelines/public?40`);
       
       const posts: SocialPost[] = []
 
-      data.forEach((post: any) => {
+      data.forEach((post: unknown) => {
         const content = post.content.replace(/<[^>]*>/g, '') // Remove HTML tags
         
         if (this.isRelevantContent(content, sport, playerName)) {
@@ -333,32 +333,30 @@ class MultiSocialAPI {
   }
 
   // Helper methods
+  // Only use NFL/football for now
   private getRedditSubreddits(sport: string): string[] {
     const subredditMap: { [key: string]: string[] } = {
-      "NFL": ["nfl", "fantasyfootball", "NFL_Draft"],
-      "NBA": ["nba", "fantasybball", "NBADraft"],
-      "MLB": ["baseball", "fantasybaseball", "MLBDraft"],
-      "NHL": ["hockey", "fantasyhockey", "NHL_Draft"]
+      "NFL": ["nfl", "fantasyfootball", "NFL_Draft"]
+      // "NBA": ["nba", "fantasybball", "NBADraft"],
+      // "MLB": ["baseball", "fantasybaseball", "MLBDraft"],
+      // "NHL": ["hockey", "fantasyhockey", "NHL_Draft"]
     }
-    return subredditMap[sport] || ["sports"]
+    return subredditMap[sport] || ["nfl"]
   }
 
   private isRelevantContent(content: string, sport: string, playerName?: string): boolean {
-    const lowerContent = content.toLowerCase()
     const sportKeywords: { [key: string]: string[] } = {
-      "NFL": ["nfl", "football", "quarterback", "running back", "wide receiver", "tight end"],
-      "NBA": ["nba", "basketball", "point guard", "shooting guard", "small forward", "power forward", "center"],
-      "MLB": ["mlb", "baseball", "pitcher", "catcher", "first base", "second base", "third base", "shortstop"],
-      "NHL": ["nhl", "hockey", "goalie", "defenseman", "left wing", "right wing"]
+      "NFL": ["nfl", "football", "quarterback", "running back", "wide receiver", "tight end", "defense", "kicker"]
+      // "NBA": ["nba", "basketball", "point guard", "shooting guard", "small forward", "power forward", "center"],
+      // "MLB": ["mlb", "baseball", "pitcher", "catcher", "first base", "second base", "third base", "shortstop"],
+      // "NHL": ["nhl", "hockey", "goalie", "defenseman", "left wing", "right wing"]
     }
-    
     const keywords = sportKeywords[sport] || []
+    const lowerContent = content.toLowerCase()
     const hasSportKeywords = keywords.some(keyword => lowerContent.includes(keyword))
-    
     if (playerName) {
       return hasSportKeywords && lowerContent.includes(playerName.toLowerCase())
     }
-    
     return hasSportKeywords
   }
 
@@ -436,12 +434,13 @@ class MultiSocialAPI {
   }
 
   // Generate mock social posts for fallback
+  // Only generate NFL/football posts for now
   private generateMockSocialPosts(sport: string, playerName?: string, platform: string = "mock"): SocialPost[] {
-    const mockPosts: SocialPost[] = [
+    return [
       {
         id: "1",
         platform: platform,
-        content: `${sport} is heating up! 🔥 Great performance from the top players this season. #${sport} #Fantasy`,
+        content: `NFL is heating up! 🔥 Great performance from the top players this season. #NFL #FantasyFootball`,
         author: "SportsFan",
         authorHandle: "@sportsfan",
         publishedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
@@ -487,8 +486,6 @@ class MultiSocialAPI {
         followers: Math.floor(Math.random() * 20000) + 2000
       }
     ]
-
-    return mockPosts
   }
 
   // Generate mock social metrics

@@ -28,8 +28,8 @@ export function HolographicAnalyticsTile({
   delay = 0,
   className,
   variant = "players",
-  glowColor = "cyan",
-  holographicElement = false,
+  // glowColor = "cyan",
+  // holographicElement = false
 }: HolographicAnalyticsTileProps) {
   const renderWireframeOverlay = () => (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -43,8 +43,7 @@ export function HolographicAnalyticsTile({
             linear-gradient(rgba(255, 0, 255, 0.2) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 0, 255, 0.2) 1px, transparent 1px)
           `,
-          backgroundSize: "40px 40px, 40px 40px, 80px 80px, 80px 80px",
-        }}
+          backgroundSize: "40px 40px, 40px 40px, 80px 80px, 80px 80px"}}
       />
 
       {/* Holographic Scan Lines */}
@@ -55,14 +54,12 @@ export function HolographicAnalyticsTile({
           style={{ top: `${15 + i * 15}%` }}
           animate={{
             opacity: [0.2, 0.8, 0.2],
-            scaleX: [0.8, 1.2, 0.8],
-          }}
+            scaleX: [0.8, 1.2, 0.8]}}
           transition={{
             duration: 4 + i * 0.5,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
-            delay: delay + i * 0.3,
-          }}
+            delay: delay + i * 0.3}}
         />
       ))}
 
@@ -73,19 +70,16 @@ export function HolographicAnalyticsTile({
           className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400 opacity-60"
           style={{
             left: `${10 + (i % 4) * 25}%`,
-            top: `${20 + Math.floor(i / 4) * 40}%`,
-          }}
+            top: `${20 + Math.floor(i / 4) * 40}%`}}
           animate={{
             scale: [0.5, 1.2, 0.5],
             opacity: [0.3, 0.8, 0.3],
-            rotate: [0, 180, 360],
-          }}
+            rotate: [0, 180, 360]}}
           transition={{
             duration: 3 + i * 0.2,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
-            delay: delay + i * 0.1,
-          }}
+            delay: delay + i * 0.1}}
         />
       ))}
 
@@ -163,8 +157,7 @@ export function HolographicAnalyticsTile({
           0 0 0 1px rgba(6, 182, 212, 0.3),
           inset 0 1px 0 rgba(255, 255, 255, 0.1),
           inset 0 -1px 0 rgba(255, 0, 255, 0.1)
-        `,
-      }}
+        `}}
       initial={{ opacity: 0, y: 30, rotateX: -15, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
       transition={{ duration: 0.8, delay, type: "spring", stiffness: 100 }}
@@ -172,8 +165,7 @@ export function HolographicAnalyticsTile({
         y: -12,
         rotateX: 8,
         scale: 1.02,
-        transition: { duration: 0.4 },
-      }}
+        transition: { duration: 0.4 }}}
     >
       {/* Holographic Wireframe Overlay */}
       {renderWireframeOverlay()}
@@ -206,14 +198,12 @@ export function HolographicAnalyticsTile({
               className="absolute inset-0 rounded-2xl border-2 border-cyan-400/40"
               animate={{
                 scale: [1, 1.2, 1],
-                opacity: [0.4, 0, 0.4],
-              }}
+                opacity: [0.4, 0, 0.4]}}
               transition={{
                 duration: 3,
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
-                delay: delay + 0.5,
-              }}
+                delay: delay + 0.5}}
             />
           </div>
 
@@ -230,13 +220,11 @@ export function HolographicAnalyticsTile({
               className="w-3 h-3 rounded-full bg-green-400"
               animate={{
                 scale: [1, 1.3, 1],
-                opacity: [0.6, 1, 0.6],
-              }}
+                opacity: [0.6, 1, 0.6]}}
               transition={{
                 duration: 2,
                 repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
+                ease: "easeInOut"}}
             />
             <span className="text-xs font-orbitron text-green-400 uppercase tracking-wide">LIVE</span>
           </div>
@@ -258,14 +246,12 @@ export function HolographicAnalyticsTile({
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none rounded-3xl"
         animate={{
-          opacity: [0.3, 0.6, 0.3],
-        }}
+          opacity: [0.3, 0.6, 0.3]}}
         transition={{
           duration: 4,
           repeat: Number.POSITIVE_INFINITY,
           ease: "easeInOut",
-          delay: delay,
-        }}
+          delay: delay}}
       />
 
       {/* Edge Glow Effect */}
@@ -276,14 +262,12 @@ export function HolographicAnalyticsTile({
         className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent"
         animate={{
           y: [0, 300, 0],
-          opacity: [0, 1, 0],
-        }}
+          opacity: [0, 1, 0]}}
         transition={{
           duration: 6,
           repeat: Number.POSITIVE_INFINITY,
           ease: "easeInOut",
-          delay: delay + Math.random() * 3,
-        }}
+          delay: delay + Math.random() * 3}}
       />
     </motion.div>
   )

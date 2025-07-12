@@ -135,7 +135,7 @@ class SleeperAPI {
               age: playerData.age || 0,
               years_exp: playerData.years_exp || 0,
               injury_status: playerData.injury_status,
-              fantasy_positions: playerData.fantasy_positions || [],
+              fantasy_positions: playerData.fantasy_positions || []
             })
           }
         })
@@ -157,7 +157,7 @@ class SleeperAPI {
     type: "add" | "drop",
     sport = "nfl",
     lookback_hours = 24,
-    limit = 25,
+    limit = 25
   ): Promise<SleeperTrendingPlayer[]> {
     try {
       console.log(`🔄 Fetching trending ${type} players from Sleeper API...`)
@@ -263,7 +263,7 @@ class SleeperAPI {
   }
 
   // NEW: Get fantasy news and updates
-  async getFantasyNews(limit = 20): Promise<any[]> {
+  async getFantasyNews(): Promise<unknown[]> {
     try {
       console.log("🔄 Fetching fantasy news...")
       // Using a fantasy news API endpoint (mock for now, but can be replaced with real API)
@@ -307,7 +307,7 @@ class SleeperAPI {
   }
 
   // NEW: Get player analysis and insights
-  async getPlayerAnalysis(playerId?: string): Promise<any[]> {
+  async getPlayerAnalysis(): Promise<unknown[]> {
     try {
       console.log("🔄 Fetching player analysis...")
       const players = await this.getAllPlayers()
@@ -320,7 +320,7 @@ class SleeperAPI {
         const player = players.get(playerId)
         if (player) {
           analysisData.push({
-            playerId,
+            
             playerName: player.full_name,
             position: player.position,
             team: player.team,
@@ -349,7 +349,7 @@ class SleeperAPI {
   }
 
   // NEW: Get trending players with real data
-  async getTrendingPlayersReal(limit = 20): Promise<any[]> {
+  async getTrendingPlayersReal(limit = 20): Promise<unknown[]> {
     try {
       console.log("🔄 Fetching trending players...")
       const players = await this.getAllPlayers()
@@ -386,7 +386,7 @@ class SleeperAPI {
   }
 
   // NEW: Get social hype and community buzz
-  async getSocialHype(limit = 20): Promise<any[]> {
+  async getSocialHype(limit = 20): Promise<unknown[]> {
     try {
       console.log("🔄 Fetching social hype data...")
       const players = await this.getAllPlayers()
@@ -395,11 +395,11 @@ class SleeperAPI {
       // Generate social hype data for popular players
       const popularPlayerIds = ["4035", "4046", "4993", "4098", "4881", "5045", "4017", "4029", "4036", "4039"]
       
-      for (const playerId of popularPlayerIds) {
+      for (const playerId of popularPlayerIds.slice(0, limit)) {
         const player = players.get(playerId)
         if (player) {
           hypeData.push({
-            playerId,
+            
             playerName: player.full_name,
             position: player.position,
             team: player.team,
@@ -441,8 +441,7 @@ class SleeperAPI {
       points: playerPoints,
       trend: Math.random() > 0.6 ? "up" : Math.random() > 0.3 ? "down" : "stable",
       projectedPoints: playerPoints * 0.85 + Math.random() * 5,
-      ownership: Math.floor(Math.random() * 100) + 1,
-    }
+      ownership: Math.floor(Math.random() * 100) + 1}
   }
 
   transformSleeperPlayer(sleeperPlayer: SleeperPlayer, additionalData: Partial<PlayerData> = {}): PlayerData {
@@ -454,16 +453,14 @@ class SleeperAPI {
     return {
       ...basePlayer,
       ...additionalData,
-      stats,
-    }
+      stats}
   }
 
   private generatePositionStats(position: string, points: number) {
     const baseStats = {
       yards: 0,
       touchdowns: 0,
-      points: points,
-    }
+      points: points}
 
     switch (position) {
       case "QB":
@@ -472,8 +469,7 @@ class SleeperAPI {
           completions: Math.floor(points * 0.8) + Math.floor(Math.random() * 10),
           attempts: Math.floor(points * 1.2) + Math.floor(Math.random() * 15),
           yards: Math.floor(points * 12) + Math.floor(Math.random() * 100),
-          touchdowns: Math.floor(points / 6) + Math.floor(Math.random() * 2),
-        }
+          touchdowns: Math.floor(points / 6) + Math.floor(Math.random() * 2)}
 
       case "RB":
         return {
@@ -481,8 +477,7 @@ class SleeperAPI {
           carries: Math.floor(points * 0.7) + Math.floor(Math.random() * 8),
           yards: Math.floor(points * 4) + Math.floor(Math.random() * 50),
           touchdowns: Math.floor(points / 8) + Math.floor(Math.random() * 2),
-          receptions: Math.floor(Math.random() * 6),
-        }
+          receptions: Math.floor(Math.random() * 6)}
 
       case "WR":
       case "TE":
@@ -491,8 +486,7 @@ class SleeperAPI {
           receptions: Math.floor(points * 0.4) + Math.floor(Math.random() * 5),
           targets: Math.floor(points * 0.6) + Math.floor(Math.random() * 8),
           yards: Math.floor(points * 6) + Math.floor(Math.random() * 40),
-          touchdowns: Math.floor(points / 10) + Math.floor(Math.random() * 2),
-        }
+          touchdowns: Math.floor(points / 10) + Math.floor(Math.random() * 2)}
 
       default:
         return baseStats

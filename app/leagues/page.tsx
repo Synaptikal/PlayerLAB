@@ -4,23 +4,10 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Search, 
-  Users, 
-  Trophy, 
-  Calendar,
-  ArrowRight,
-  Plus,
-  Settings,
-  Eye,
-  Star,
-  AlertCircle,
-  CheckCircle,
-  Clock
-} from "lucide-react"
+import { Trophy, Users, Star, Eye} from 'lucide-react';
 import { sleeperAPI } from "@/lib/sleeper-api"
+import { Input } from "@/components/ui/input"
 
 interface League {
   league_id: string
@@ -62,7 +49,8 @@ export default function LeaguesPage() {
       } else {
         setError("League not found. Please check the league ID.")
       }
-    } catch (err) {
+    } catch {
+      console.error("Error fetching leagues")
       setError("Failed to connect to league. Please try again.")
     } finally {
       setIsLoading(false)
@@ -114,9 +102,9 @@ export default function LeaguesPage() {
                     className="bg-cyan-500 hover:bg-cyan-600 text-white"
                   >
                     {isLoading ? (
-                      <Clock className="w-4 h-4 animate-spin" />
+                      <span className="animate-spin">⏳</span>
                     ) : (
-                      <Search className="w-4 h-4" />
+                      <span>🔍</span>
                     )}
                   </Button>
                 </div>
@@ -124,7 +112,7 @@ export default function LeaguesPage() {
 
               {error && (
                 <div className="flex items-center gap-2 text-red-400 text-sm">
-                  <AlertCircle className="w-4 h-4" />
+                  <span>⚠️</span>
                   {error}
                 </div>
               )}
@@ -179,9 +167,7 @@ export default function LeaguesPage() {
                   View League
                 </Button>
                 <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Settings
-                </Button>
+                  </Button>
               </div>
             </Card>
           </motion.div>

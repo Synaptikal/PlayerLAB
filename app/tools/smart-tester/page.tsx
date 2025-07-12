@@ -3,33 +3,9 @@
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { 
-  FlaskConical,
-  Play,
-  Download,
-  Copy,
-  CheckCircle,
-  AlertTriangle,
-  Bug,
-  Code,
-  FileText,
-  Zap,
-  Target,
-  Settings,
-  Eye,
-  RefreshCw,
-  Sparkles,
-  TestTube,
-  FileCode,
-  PlayCircle,
-  Save,
-  Share2,
-  Trash2
-} from "lucide-react"
-import { useState } from "react"
+import { Play, Copy, CheckCircle, AlertTriangle, Bug,  Eye, RefreshCw, Sparkles, TestTube, FileCode, PlayCircle } from 'lucide-react';import { useState } from "react"
 
 interface TestCase {
   id: string
@@ -358,7 +334,7 @@ test('widget drag and drop', async ({ page }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="space-y-6">
-              {generatedTests.map((test, index) => (
+              {generatedTests.map((test) => (
                 <Card key={test.id} className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
@@ -397,10 +373,10 @@ test('widget drag and drop', async ({ page }) => {
                     </div>
                   </div>
                   
-                  {/* Code Preview */}
+                  {/* Preview */}
                   <div className="bg-slate-900/50 rounded-lg p-4 mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-slate-300">Test Code</span>
+                      <span className="text-sm font-medium text-slate-300">Test </span>
                       <Button
                         size="sm"
                         variant="ghost"

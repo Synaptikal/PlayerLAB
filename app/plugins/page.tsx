@@ -3,55 +3,8 @@
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { 
-  Puzzle,
-  Zap,
-  Download,
-  Star,
-  Eye,
-  Settings,
-  Search,
-  Filter,
-  Grid,
-  List,
-  Play,
-  Pause,
-  Square,
-  Code,
-  Database,
-  Globe,
-  Shield,
-  Users,
-  TrendingUp,
-  Activity,
-  Plus,
-  CheckCircle,
-  AlertTriangle,
-  Clock,
-  Download as DownloadIcon,
-  Upload,
-  Share2,
-  Heart,
-  MessageSquare,
-  GitBranch,
-  Package,
-  ExternalLink,
-  Lock,
-  Unlock,
-  Crown,
-  Sparkles,
-  Target,
-  BarChart3,
-  FlaskConical,
-  Palette,
-  Bot,
-  Lightbulb,
-  Bell,
-  CloudRain
-} from "lucide-react"
-import { useState } from "react"
+import { Puzzle, Zap, Star, Eye, Search, Grid, List, Database, Globe, Activity, Plus, ExternalLink, BarChart3, Palette, Bot, Bell, CloudRain, Check, Download } from 'lucide-react';import { useState } from "react"
 
 interface Plugin {
   id: string
@@ -66,7 +19,7 @@ interface Plugin {
   status: "installed" | "available" | "updating"
   features: string[]
   tags: string[]
-  icon: any
+  icon: unknown
   color: string
   lastUpdated: string
   size: string
@@ -83,7 +36,7 @@ interface APIIntegration {
   endpoints: number
   rateLimit: string
   pricing: string
-  icon: any
+  icon: unknown
   color: string
 }
 
@@ -94,7 +47,7 @@ const mockPlugins: Plugin[] = [
     description: "Enhanced analytics with custom widgets, heatmaps, and real-time data visualization",
     author: "PlayerLAB Team",
     version: "2.1.0",
-    category: "Analytics",
+    category: "Fantasy Football",
     rating: 4.8,
     downloads: 15420,
     price: "free",
@@ -113,7 +66,7 @@ const mockPlugins: Plugin[] = [
     description: "Intelligent trade analysis powered by machine learning algorithms",
     author: "FantasyAI Labs",
     version: "1.5.2",
-    category: "AI/ML",
+    category: "Fantasy Football",
     rating: 4.9,
     downloads: 8920,
     price: "premium",
@@ -132,7 +85,7 @@ const mockPlugins: Plugin[] = [
     description: "Premium dark theme with custom color schemes and animations",
     author: "ThemeCraft",
     version: "3.0.1",
-    category: "UI/UX",
+    category: "Fantasy Football",
     rating: 4.7,
     downloads: 23410,
     price: "premium",
@@ -151,7 +104,7 @@ const mockPlugins: Plugin[] = [
     description: "Seamless integration with Sleeper fantasy football platform",
     author: "PlayerLAB Team",
     version: "1.2.0",
-    category: "Integration",
+    category: "Fantasy Football",
     rating: 4.6,
     downloads: 18750,
     price: "free",
@@ -170,14 +123,14 @@ const mockPlugins: Plugin[] = [
     description: "Professional draft tools with rankings, projections, and strategy guides",
     author: "DraftMaster Pro",
     version: "2.3.0",
-    category: "Draft Tools",
+    category: "Fantasy Football",
     rating: 4.9,
     downloads: 12560,
     price: "enterprise",
     status: "available",
     features: ["Live Rankings", "Projections", "Strategy Guides", "Mock Drafts"],
     tags: ["draft", "rankings", "projections"],
-    icon: Target,
+    icon: BarChart3, // Added a valid icon to fix the missing property error
     color: "orange",
     lastUpdated: "2024-01-05",
     size: "8.7MB",
@@ -189,7 +142,7 @@ const mockPlugins: Plugin[] = [
     description: "Intelligent notification system with custom alerts and scheduling",
     author: "NotifyPro",
     version: "1.8.3",
-    category: "Communication",
+    category: "Fantasy Football",
     rating: 4.5,
     downloads: 9870,
     price: "free",
@@ -210,7 +163,7 @@ const mockAPIIntegrations: APIIntegration[] = [
     name: "ESPN Fantasy API",
     description: "Connect to ESPN fantasy football leagues and data",
     provider: "ESPN",
-    category: "Fantasy Sports",
+    category: "Fantasy Football",
     status: "available",
     endpoints: 15,
     rateLimit: "1000 requests/hour",
@@ -223,7 +176,7 @@ const mockAPIIntegrations: APIIntegration[] = [
     name: "Yahoo Fantasy API",
     description: "Access Yahoo fantasy football data and league management",
     provider: "Yahoo",
-    category: "Fantasy Sports",
+    category: "Fantasy Football",
     status: "connected",
     endpoints: 12,
     rateLimit: "500 requests/hour",
@@ -236,7 +189,7 @@ const mockAPIIntegrations: APIIntegration[] = [
     name: "NFL Stats API",
     description: "Real-time NFL statistics and player data",
     provider: "NFL",
-    category: "Sports Data",
+    category: "Football Data",
     status: "available",
     endpoints: 25,
     rateLimit: "2000 requests/hour",
@@ -249,7 +202,7 @@ const mockAPIIntegrations: APIIntegration[] = [
     name: "Weather API",
     description: "Weather data for game day conditions and analysis",
     provider: "OpenWeather",
-    category: "External Data",
+    category: "Fantasy Football",
     status: "available",
     endpoints: 8,
     rateLimit: "1000 requests/day",
@@ -261,7 +214,7 @@ const mockAPIIntegrations: APIIntegration[] = [
 
 const categories = [
   "All",
-  "Analytics",
+  "Fantasy Football",
   "AI/ML",
   "UI/UX",
   "Integration",
@@ -304,7 +257,7 @@ export default function PluginsPage() {
   }
 
   const renderPluginCard = (plugin: Plugin) => {
-    const Icon = plugin.icon
+    const Icon = typeof plugin.icon === 'function' ? plugin.icon : BarChart3;
     
     return (
       <motion.div
@@ -362,7 +315,7 @@ export default function PluginsPage() {
             <div className="flex items-center gap-2">
               {plugin.status === "installed" ? (
                 <Button size="sm" variant="ghost" className="backdrop-blur-xl bg-white/5 hover:bg-cyan-400/20">
-                  <Settings className="w-4 h-4" />
+                  <Check className="w-4 h-4" />
                 </Button>
               ) : (
                 <Button size="sm" className="backdrop-blur-xl bg-cyan-400/20 border-cyan-400/50 hover:bg-cyan-400/30">
@@ -381,7 +334,7 @@ export default function PluginsPage() {
   }
 
   const renderAPICard = (api: APIIntegration) => {
-    const Icon = api.icon
+    const Icon = typeof api.icon === 'function' ? api.icon : Globe;
     
     return (
       <motion.div
@@ -427,7 +380,7 @@ export default function PluginsPage() {
             <div className="flex items-center gap-2">
               {api.status === "connected" ? (
                 <Button size="sm" variant="ghost" className="backdrop-blur-xl bg-white/5 hover:bg-purple-400/20">
-                  <Settings className="w-4 h-4" />
+                  <Check className="w-4 h-4" />
                 </Button>
               ) : (
                 <Button size="sm" className="backdrop-blur-xl bg-purple-400/20 border-purple-400/50 hover:bg-purple-400/30">
@@ -508,11 +461,12 @@ export default function PluginsPage() {
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <Input
+              <input
+                type="text"
                 placeholder="Search plugins..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                className="pl-10 backdrop-blur-xl bg-white/5 border-white/20 text-white placeholder:text-slate-400 w-full py-2 rounded"
               />
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { TrendingUp, TrendingDown, Minus, AlertTriangle, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface PlayerStats {
   completions?: number
@@ -173,11 +174,12 @@ export function SleeperPlayerCard({
           <div className="relative">
             <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-700">
               {player.avatarUrl ? (
-                <img
+                <Image
                   src={player.avatarUrl || "/placeholder.svg"}
                   alt={player.name}
+                  width={40}
+                  height={40}
                   className="w-full h-full object-cover"
-                  crossOrigin="anonymous"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold">
@@ -186,11 +188,12 @@ export function SleeperPlayerCard({
               )}
             </div>
             {player.teamLogoUrl && (
-              <img
+              <Image
                 src={player.teamLogoUrl || "/placeholder.svg"}
                 alt={player.team}
+                width={16}
+                height={16}
                 className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-slate-800 p-0.5"
-                crossOrigin="anonymous"
               />
             )}
           </div>
@@ -282,11 +285,12 @@ export function SleeperPlayerCard({
         <div className="relative">
           <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-700 ring-2 ring-cyan-400/30">
             {player.avatarUrl ? (
-              <img
+              <Image
                 src={player.avatarUrl || "/placeholder.svg"}
                 alt={player.name}
+                width={64}
+                height={64}
                 className="w-full h-full object-cover"
-                crossOrigin="anonymous"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-xl">
@@ -295,11 +299,12 @@ export function SleeperPlayerCard({
             )}
           </div>
           {player.teamLogoUrl && (
-            <img
+            <Image
               src={player.teamLogoUrl || "/placeholder.svg"}
               alt={player.team}
+              width={24}
+              height={24}
               className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-slate-800 p-1 ring-2 ring-slate-700"
-              crossOrigin="anonymous"
             />
           )}
         </div>

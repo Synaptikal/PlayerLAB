@@ -3,10 +3,10 @@
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Settings, User, Shield, Bell, Palette, Database, Globe, Key } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import {  User, Shield, Bell, Palette, Database, Globe, Key } from "lucide-react"
 import { useState } from "react"
 
 export default function SettingsPage() {
@@ -26,16 +26,15 @@ export default function SettingsPage() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Settings
-          </h1>
+            </h1>
           <p className="text-slate-300 text-lg">
             Customize your PlayerLAB experience and manage your preferences
           </p>
         </motion.div>
 
-        {/* Settings Sections */}
+        {/* Sections */}
         <div className="max-w-7xl mx-auto space-y-8">
-          {/* Profile Settings */}
+          {/* Profile */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,8 +42,7 @@ export default function SettingsPage() {
           >
             <h2 className="text-2xl font-orbitron font-semibold text-white mb-6 flex items-center gap-2">
               <User className="w-6 h-6 text-cyan-400" />
-              Profile Settings
-            </h2>
+              Profile </h2>
             <Card className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -89,7 +87,7 @@ export default function SettingsPage() {
             </Card>
           </motion.section>
 
-          {/* Notification Settings */}
+          {/* Notification */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,7 +134,7 @@ export default function SettingsPage() {
             </Card>
           </motion.section>
 
-          {/* Appearance Settings */}
+          {/* Appearance */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -183,7 +181,7 @@ export default function SettingsPage() {
             </Card>
           </motion.section>
 
-          {/* Data & Sync Settings */}
+          {/* Data & Sync */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -230,7 +228,7 @@ export default function SettingsPage() {
             </Card>
           </motion.section>
 
-          {/* Security Settings */}
+          {/* Security */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

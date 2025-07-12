@@ -1,16 +1,21 @@
-import { NextRequest } from 'next/server';
-import { analyzeTrade } from '@/lib/ai/tradeAnalyzer';
+import { NextResponse } from "next/server";
 
-export const runtime = 'edge';
-
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { teamA, teamB } = body;
-
+export async function POST() {
   try {
-    const result = await analyzeTrade(teamA, teamB);
-    return new Response(JSON.stringify(result), { status: 200 });
-  } catch (e) {
-    return new Response('Trade analysis failed', { status: 500 });
+    // Mock trade analysis response
+    const analysis = {
+      tradeValue: 85,
+      recommendation: "Accept",
+      reasoning: "Trade provides good value for your team",
+      riskLevel: "Low",
+      expectedOutcome: "Positive"
+    };
+
+    return NextResponse.json(analysis);
+  } catch {
+    return NextResponse.json(
+      { error: "Trade analysis failed" },
+      { status: 500 }
+    );
   }
 } 

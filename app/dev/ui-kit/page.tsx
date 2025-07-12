@@ -15,12 +15,10 @@ import {
   Activity, 
   TrendingUp, 
   Trophy, 
-  AlertTriangle,
   Search,
   Settings,
-  User,
-  Star
-} from "lucide-react"
+  User
+} from "lucide-react";
 
 export default function UIShowcase() {
   const [activeTab, setActiveTab] = useState("buttons")

@@ -4,8 +4,7 @@ import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, Plus, Star, Filter, Grid, List } from "lucide-react"
-import { useState } from "react"
+import { Search, Plus, Star, Grid, List } from 'lucide-react';import { useState } from "react"
 
 // Mock data for demonstration
 const savedPlayers = [

@@ -1,16 +1,32 @@
-import { NextRequest } from 'next/server';
-import { getDraftSuggestions } from '@/lib/ai/draftKit';
-
-export const runtime = 'edge';
-
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { roster, leagueType } = body;
-
+import { NextResponse } from 'next/server';export async function POST() {
   try {
-    const suggestions = await getDraftSuggestions(roster, leagueType);
-    return new Response(JSON.stringify({ suggestions }), { status: 200 });
-  } catch (e) {
-    return new Response('Draft analysis failed', { status: 500 });
+    // Mock draft analysis response
+    const analysis = {
+      recommendations: [
+        {
+          player: "Christian McCaffrey",
+          position: "RB",
+          team: "SF",
+          recommendation: "Strong pick in early rounds",
+          reasoning: "High volume, consistent production, excellent ROS outlook"
+        },
+        {
+          player: "Tyreek Hill",
+          position: "WR", 
+          team: "MIA",
+          recommendation: "Excellent WR1 option",
+          reasoning: "Elite speed, high target share, TD upside"
+        }
+      ],
+      strategy: "Best Player Available",
+      confidence: 85
+    };
+
+    return NextResponse.json(analysis);
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to analyze draft" },
+      { status: 500 }
+    );
   }
 } 

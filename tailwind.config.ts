@@ -1,26 +1,31 @@
 import type { Config } from "tailwindcss"
 
-// PlayerLAB Vault v2 Design System Lock
+// PlayerLAB Vault v2 Design System Lock - FIGMA SPEC COMPLIANT
 const PLAYERLAB_DESIGN_TOKENS = {
   colors: {
-    // Locked PlayerLAB Color Palette
+    // FIGMA SPEC NEON COLOR PALETTE
     "deep-black": "#0D0D0D",
     "neon-cyan": "#00FFFF",
-    "neon-magenta": "#FF00FF",
+    "neon-blue": "#3B82F6",
     "neon-green": "#00FF6A",
     "neon-red": "#FF4C4C",
     "neon-purple": "#8B5CF6",
+    "neon-magenta": "#FF00FF",
+    "neon-yellow": "#FFFF00",
+    "neon-orange": "#FF8C00",
     "text-primary": "#FFFFFF",
     "text-secondary": "#AAAAAA",
     "glass-light": "rgba(255, 255, 255, 0.1)",
     "glass-dark": "rgba(0, 0, 0, 0.3)",
+    "glass-medium": "rgba(255, 255, 255, 0.15)",
   },
   fonts: {
-    // Locked Branding Fonts (Self-Hosted)
+    // FIGMA SPEC FONT FAMILIES
     header: ["Orbitron", "sans-serif"],
     body: ["Inter", "sans-serif"],
     orbitron: ["Orbitron", "sans-serif"],
     inter: ["Inter", "sans-serif"],
+    audiowide: ["Audiowide", "sans-serif"], // FIGMA SPEC ADDITION
   },
   shadows: {
     // Locked Glow System

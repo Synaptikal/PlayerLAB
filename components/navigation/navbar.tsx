@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { FlaskLogo } from "@/components/ui/flask-logo"
-import { Menu, X, Home, User, Wrench, BarChart3, Settings, Zap, Target, Shield, LayoutDashboard, FlaskConical, Puzzle, Trophy } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Menu, X, Home, User, Wrench, BarChart3, Settings, Target, LayoutDashboard, FlaskConical, Puzzle, Trophy } from 'lucide-react';import { cn } from "@/lib/utils"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home, color: "cyan" },

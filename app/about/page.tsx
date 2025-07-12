@@ -9,13 +9,13 @@ const teamMembers = [
   {
     name: "Alex Chen",
     role: "Founder & CEO",
-    bio: "Former data scientist with 10+ years in sports analytics. Led analytics teams at ESPN and Yahoo Sports before founding PlayerLAB to democratize fantasy insights.",
+    bio: "Former data scientist with 10+ years in football analytics. Led analytics teams at ESPN and Yahoo Sports before founding PlayerLAB to democratize fantasy football insights.",
     image: "/placeholder.svg?height=300&width=300",
   },
   {
     name: "Sarah Johnson",
     role: "Head of Product",
-    bio: "Fantasy sports enthusiast and UX design expert. Previously designed user experiences at DraftKings and FanDuel, bringing deep understanding of fantasy player needs.",
+    bio: "Fantasy football enthusiast and UX design expert. Previously designed user experiences at DraftKings and FanDuel, bringing deep understanding of fantasy football player needs.",
     image: "/placeholder.svg?height=300&width=300",
   },
   {
@@ -48,7 +48,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Building the future of fantasy sports analytics with AI-driven insights and cutting-edge tools.
+            Building the future of fantasy football analytics with AI-driven insights and cutting-edge tools.
           </motion.p>
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function AboutPage() {
             <Target className="w-12 h-12 mx-auto mb-4 neon-cyan" />
             <h2 className="title-md font-orbitron font-bold mb-4 neon-blue">OUR MISSION</h2>
             <p className="text-compact text-dark-grey leading-relaxed max-w-2xl mx-auto">
-              PlayerLAB exists to revolutionize fantasy sports through advanced analytics, real-time insights, and
+              PlayerLAB exists to revolutionize fantasy football through advanced analytics, real-time insights, and
               AI-powered decision-making tools. We believe every fantasy player deserves access to{" "}
               <span className="neon-cyan font-semibold">professional-grade analytics</span>
               that were once exclusive to industry insiders.

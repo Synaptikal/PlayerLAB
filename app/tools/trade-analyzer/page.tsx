@@ -3,11 +3,9 @@
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, TrendingUp, TrendingDown, Scale, Zap, Users, ArrowRight, CheckCircle, XCircle } from "lucide-react"
-import { useState } from "react"
+import { Scale, Zap, Users, ArrowRight, CheckCircle, XCircle } from 'lucide-react';import { useState } from "react"
 
 // Mock data for demonstration
 const tradeAnalysis = {
@@ -62,7 +60,7 @@ export default function TradeAnalyzerPage() {
           </p>
         </motion.div>
 
-        {/* Trade Input Form */}
+        {/* Trade Form */}
         <motion.section
           className="max-w-7xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}

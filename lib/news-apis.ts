@@ -4,34 +4,25 @@
 import { apiClient } from './api-client';
 import { API_CONFIG } from './config';
 
-export interface NewsItem {
-  id: string
-  title: string
-  summary: string
-  content?: string
-  source: string
-  publishedAt: string
-  url?: string
-  imageUrl?: string
-  category: string
-  sport: string
-  impact: "high" | "medium" | "low"
-  tags: string[]
-  author?: string
-  readTime?: number
+interface NewsSource {
+  name: string;
+  url: string;
+  category: string;
 }
 
-export interface NewsSource {
-  name: string
-  baseUrl: string
-  requiresKey: boolean
-  rateLimit: string
-  sports: string[]
-  categories: string[]
+interface NewsItem {
+  id: string;
+  title: string;
+  summary: string;
+  source: string;
+  category: string;
+  impact: "high" | "medium" | "low";
+  publishedAt: string;
+  url: string;
 }
 
 class MultiNewsAPI {
-  private cache: Map<string, any> = new Map()
+  private cache: Map<string, unknown> = new Map()
   private cacheTimestamp: Map<string, number> = new Map()
   private readonly CACHE_DURATION = 1000 * 60 * 15 // 15 minutes
 
@@ -129,10 +120,10 @@ class MultiNewsAPI {
         news = await this.fetchFantasyProsNews(sport, limit)
         break
       case "NewsAPI":
-        news = await this.fetchNewsAPINews(sport, limit)
+        news = await this.fetchNewsAPINews()
         break
       case "GNews":
-        news = await this.fetchGNewsNews(sport, limit)
+        news = await this.fetchGNewsNews()
         break
       default:
         console.warn(`⚠️ Unknown news source: ${source.name}`)
@@ -155,7 +146,7 @@ class MultiNewsAPI {
       const news: NewsItem[] = []
 
       if (data.articles) {
-        data.articles.slice(0, limit).forEach((article: any, index: number) => {
+        data.articles.slice(0, limit).forEach((article: unknown, index: number) => {
           news.push({
             id: `espn_${index}`,
             title: article.headline || `ESPN ${sport} News`,
@@ -190,7 +181,7 @@ class MultiNewsAPI {
       const news: NewsItem[] = []
 
       if (data.articles) {
-        data.articles.slice(0, limit).forEach((article: any, index: number) => {
+        data.articles.slice(0, limit).forEach((article: unknown, index: number) => {
           news.push({
             id: `fantasypros_${index}`,
             title: article.title || `Fantasy ${sport} News`,
@@ -218,11 +209,11 @@ class MultiNewsAPI {
   }
 
   // NewsAPI Implementation (requires API key)
-  private async fetchNewsAPINews(sport: string, limit: number): Promise<NewsItem[]> {
+  private async fetchNewsAPINews(): Promise<NewsItem[]> {
     try {
       // This would require an API key in production
       // For now, return mock data
-      return this.generateMockNews(sport, limit, "NewsAPI")
+      return this.generateMockNews("", 50, "NewsAPI")
     } catch (error) {
       console.error("❌ Error fetching NewsAPI news:", error)
       return []
@@ -230,11 +221,11 @@ class MultiNewsAPI {
   }
 
   // GNews Implementation (requires API key)
-  private async fetchGNewsNews(sport: string, limit: number): Promise<NewsItem[]> {
+  private async fetchGNewsNews(): Promise<NewsItem[]> {
     try {
       // This would require an API key in production
       // For now, return mock data
-      return this.generateMockNews(sport, limit, "GNews")
+      return this.generateMockNews("", 50, "GNews")
     } catch (error) {
       console.error("❌ Error fetching GNews news:", error)
       return []
@@ -251,8 +242,8 @@ class MultiNewsAPI {
         try {
           const data = await apiClient.get(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
           if (data.items) {
-            data.items.slice(0, 10).forEach((item: any, index: number) => {
-              // Filter for sport-specific content
+            data.items.slice(0, 10).forEach((item: unknown, index: number) => {
+              // for sport-specific content
               if (this.isSportRelated(item.title, sport)) {
                 news.push({
                   id: `rss_${source}_${index}`,

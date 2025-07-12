@@ -56,7 +56,7 @@ export interface Player {
 
 export interface ChartData {
   labels: string[]
-  datasets: any[]
+  datasets: unknown[]
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -118,7 +118,7 @@ export interface DashboardWidget {
   id: string
   type: string
   title: string
-  data: any
+  data: unknown
   color: string
 }
 

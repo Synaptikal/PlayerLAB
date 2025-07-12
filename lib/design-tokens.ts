@@ -16,6 +16,32 @@ export const colors = {
     900: '#0c4a6e',
   },
   
+  // FIGMA SPEC NEON COLORS
+  neon: {
+    cyan: '#00FFFF',
+    blue: '#3B82F6',
+    green: '#00FF6A',
+    red: '#FF4C4C',
+    purple: '#8B5CF6',
+    magenta: '#FF00FF',
+    yellow: '#FFFF00',
+    orange: '#FF8C00',
+  },
+  
+  // Glassmorphism Colors
+  glass: {
+    light: 'rgba(255, 255, 255, 0.1)',
+    dark: 'rgba(0, 0, 0, 0.3)',
+    medium: 'rgba(255, 255, 255, 0.15)',
+  },
+  
+  // Text Colors
+  text: {
+    primary: '#FFFFFF',
+    secondary: '#AAAAAA',
+    muted: '#666666',
+  },
+  
   // Accent Colors
   cyan: {
     50: '#ecfeff',
@@ -175,14 +201,15 @@ export const colors = {
 }
 
 export const typography = {
-  // Font Families
+  // Font Families - FIGMA SPEC
   fontFamily: {
     sans: ['Inter', 'system-ui', 'sans-serif'],
     mono: ['JetBrains Mono', 'Consolas', 'monospace'],
     orbitron: ['Orbitron', 'system-ui', 'sans-serif'],
+    audiowide: ['Audiowide', 'system-ui', 'sans-serif'], // FIGMA SPEC ADDITION
   },
   
-  // Font Sizes
+  // Font Sizes - FIGMA SPEC
   fontSize: {
     xs: '0.75rem',      // 12px
     sm: '0.875rem',     // 14px
@@ -192,11 +219,21 @@ export const typography = {
     '2xl': '1.5rem',    // 24px
     '3xl': '1.875rem',  // 30px
     '4xl': '2.25rem',   // 36px
-    '5xl': '3rem',      // 48px
+    '5xl': '3rem',      // 48px - FIGMA H1 MIN
     '6xl': '3.75rem',   // 60px
-    '7xl': '4.5rem',    // 72px
+    '7xl': '4.5rem',    // 72px - FIGMA H1 MAX
     '8xl': '6rem',      // 96px
     '9xl': '8rem',      // 128px
+  },
+  
+  // FIGMA SPEC Typography Classes
+  figmaTypography: {
+    h1: 'text-5xl md:text-6xl lg:text-7xl font-orbitron font-bold', // 48-72px
+    h2: 'text-4xl md:text-5xl lg:text-6xl font-orbitron font-bold', // 32-48px
+    h3: 'text-3xl md:text-4xl lg:text-5xl font-orbitron font-semibold', // 24-32px
+    body: 'text-base font-inter leading-relaxed', // 16px
+    caption: 'text-xs font-audiowide leading-tight', // 12px Audiowide
+    micro: 'text-[10px] font-audiowide leading-tight', // 10px Audiowide
   },
   
   // Font Weights

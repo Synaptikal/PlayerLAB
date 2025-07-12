@@ -4,7 +4,8 @@ import { Inter, Orbitron } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navigation/navbar"
 import { Toaster } from "@/components/ui/toaster"
-import { ErrorBoundary } from '@/components/error-boundary';
+import { ErrorBoundary } from '@/components/error-boundary'
+import { HoloBackground } from '@/components/ui/holo-background'
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -18,15 +19,13 @@ const orbitron = Orbitron({
 
 export const metadata: Metadata = {
   title: {
-    default: "PlayerLAB - Advanced Fantasy Sports Analytics Platform",
+    default: "PlayerLAB - Advanced Fantasy Football Analytics Platform",
     template: "%s | PlayerLAB"
   },
-  description: "The ultimate fantasy sports platform with AI-powered analytics, trade analysis, draft tools, and real-time insights. Dominate your league with PlayerLAB.",
+  description: "The ultimate fantasy football platform with AI-powered analytics, trade analysis, draft tools, and real-time insights. Dominate your league with PlayerLAB.",
   keywords: [
     "fantasy sports",
     "fantasy football",
-    "fantasy basketball",
-    "fantasy baseball",
     "trade analyzer",
     "draft kit",
     "analytics",
@@ -52,22 +51,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://playerlab.net",
-    title: "PlayerLAB - Advanced Fantasy Sports Analytics Platform",
-    description: "The ultimate fantasy sports platform with AI-powered analytics, trade analysis, draft tools, and real-time insights. Dominate your league with PlayerLAB.",
+    title: "PlayerLAB - Advanced Fantasy Football Analytics Platform",
+    description: "The ultimate fantasy football platform with AI-powered analytics, trade analysis, draft tools, and real-time insights. Dominate your league with PlayerLAB.",
     siteName: "PlayerLAB",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "PlayerLAB - Advanced Fantasy Sports Analytics Platform",
+        alt: "PlayerLAB - Advanced Fantasy Football Analytics Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PlayerLAB - Advanced Fantasy Sports Analytics Platform",
-    description: "The ultimate fantasy sports platform with AI-powered analytics, trade analysis, draft tools, and real-time insights.",
+    title: "PlayerLAB - Advanced Fantasy Football Analytics Platform",
+    description: "The ultimate fantasy football platform with AI-powered analytics, trade analysis, draft tools, and real-time insights.",
     images: ["/og-image.png"],
     creator: "@playerlab",
     site: "@playerlab",
@@ -88,8 +87,8 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
-  category: "Sports",
-  classification: "Fantasy Sports Analytics",
+  category: "Football",
+  classification: "Fantasy Football Analytics",
   other: {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
@@ -132,9 +131,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "PlayerLAB",
-              "description": "Advanced Fantasy Sports Analytics Platform",
+              "description": "Advanced Fantasy Football Analytics Platform",
               "url": "https://playerlab.net",
-              "applicationCategory": "SportsApplication",
+              "applicationCategory": "FootballApplication",
               "operatingSystem": "Web Browser",
               "offers": {
                 "@type": "Offer",
@@ -154,13 +153,15 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-slate-950 text-white antialiased">
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">
-            <ErrorBoundary>{children}</ErrorBoundary>
-          </main>
-        </div>
-        <Toaster />
+        <HoloBackground>
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </main>
+          </div>
+          <Toaster />
+        </HoloBackground>
       </body>
     </html>
   )

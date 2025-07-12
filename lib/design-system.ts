@@ -13,38 +13,33 @@ export const DESIGN_TOKENS = {
     textPrimary: "#FFFFFF",
     textSecondary: "#AAAAAA",
     glassLight: "rgba(255, 255, 255, 0.1)",
-    glassDark: "rgba(0, 0, 0, 0.3)",
-  },
+    glassDark: "rgba(0, 0, 0, 0.3)"},
 
   // Locked Typography
   fonts: {
     header: "Orbitron, sans-serif",
-    body: "Inter, sans-serif",
-  },
+    body: "Inter, sans-serif"},
 
   // Locked Glassmorphism Rules
   glass: {
     blur: "backdrop-blur-2xl",
     background: "bg-white/10",
     border: "border-white/20",
-    shadow: "shadow-glass",
-  },
+    shadow: "shadow-glass"},
 
   // Locked Animation Durations
   animations: {
     fast: "0.3s",
     medium: "0.5s",
     slow: "0.8s",
-    pulse: "3s",
-  },
-} as const
+    pulse: "3s"}} as const
 
 // Design System Validation
-export function validateComponent(componentName: string, props: any) {
+export function validateComponent(componentName: string) {
   const violations: string[] = []
 
   // Enforce mandatory component usage
-  const mandatoryComponents = ["GlassContainer", "NeonPanel", "GlowButton", "HoloBackground"]
+  // const mandatoryComponents = ["GlassContainer", "NeonPanel", "GlowButton", "HoloBackground"]
 
   if (process.env.NODE_ENV === "development") {
     console.log(`✅ Design System: ${componentName} validated`)

@@ -1,7 +1,8 @@
 /* 🏆 PlayerLAB - AWARD-WINNING HOLOGRAPHIC INTERFACE */
 
-/* Google Fonts */
+/* Google Fonts - FIGMA SPEC */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -321,6 +322,86 @@
     }
     100% {
       transform: rotate(360deg);
+    }
+  }
+
+  /* FIGMA SPEC ANIMATIONS */
+  
+  /* Scanning Beam Animation - 15s duration */
+  @keyframes scanningBeam {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100vw);
+      opacity: 0;
+    }
+  }
+
+  /* Floating Data Nodes - 8s duration with staggered delays */
+  @keyframes floatingDataNode {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+      opacity: 0.8;
+    }
+  }
+
+  /* Holographic Grid Pattern - 4s duration */
+  @keyframes holographicGridPattern {
+    0%, 100% {
+      opacity: 0.1;
+      transform: perspective(1000px) rotateX(15deg) translateZ(0px);
+    }
+    50% {
+      opacity: 0.3;
+      transform: perspective(1000px) rotateX(15deg) translateZ(20px);
+    }
+  }
+
+  /* Pulsing Neon Elements - 2s duration */
+  @keyframes pulsingNeon {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  /* Dynamic Gradient Orbs - Mouse following */
+  @keyframes dynamicGradientOrb {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.6;
+    }
+  }
+
+  /* Data Stream Lines - 5 horizontal streams */
+  @keyframes dataStreamLine {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scaleX(0.8);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scaleX(1.2);
     }
   }
 }
@@ -863,4 +944,160 @@
   .print-break {
     page-break-before: always;
   }
+}
+
+/* FIGMA SPEC SPECIAL EFFECTS */
+  
+/* Scanning Beam Effect */
+.scanning-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #00FFFF, transparent);
+  animation: scanningBeam 15s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Floating Data Nodes - 12 nodes with staggered delays */
+.floating-data-nodes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.data-node {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00FFFF;
+  border-radius: 50%;
+  animation: floatingDataNode 8s ease-in-out infinite;
+}
+
+.data-node:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.data-node:nth-child(2) { left: 20%; top: 40%; animation-delay: 0.5s; }
+.data-node:nth-child(3) { left: 30%; top: 60%; animation-delay: 1s; }
+.data-node:nth-child(4) { left: 40%; top: 80%; animation-delay: 1.5s; }
+.data-node:nth-child(5) { left: 50%; top: 10%; animation-delay: 2s; }
+.data-node:nth-child(6) { left: 60%; top: 30%; animation-delay: 2.5s; }
+.data-node:nth-child(7) { left: 70%; top: 50%; animation-delay: 3s; }
+.data-node:nth-child(8) { left: 80%; top: 70%; animation-delay: 3.5s; }
+.data-node:nth-child(9) { left: 90%; top: 90%; animation-delay: 4s; }
+.data-node:nth-child(10) { left: 15%; top: 70%; animation-delay: 4.5s; }
+.data-node:nth-child(11) { left: 25%; top: 90%; animation-delay: 5s; }
+.data-node:nth-child(12) { left: 35%; top: 10%; animation-delay: 5.5s; }
+
+/* Corner HUD Elements - 96x96px with pulsing dots */
+.corner-hud {
+  position: fixed;
+  width: 96px;
+  height: 96px;
+  border: 2px solid #00FFFF;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.corner-hud.top-left {
+  top: 20px;
+  left: 20px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-hud.bottom-right {
+  bottom: 20px;
+  right: 20px;
+  border-left: none;
+  border-top: none;
+}
+
+.pulsing-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #00FFFF;
+  border-radius: 50%;
+  animation: pulsingNeon 2s ease-in-out infinite;
+}
+
+.corner-hud.top-left .pulsing-dot:nth-child(1) { top: 10px; left: 10px; }
+.corner-hud.top-left .pulsing-dot:nth-child(2) { top: 10px; right: 10px; }
+.corner-hud.top-left .pulsing-dot:nth-child(3) { bottom: 10px; left: 10px; }
+.corner-hud.top-left .pulsing-dot:nth-child(4) { bottom: 10px; right: 10px; }
+
+.corner-hud.bottom-right .pulsing-dot:nth-child(1) { top: 10px; left: 10px; }
+.corner-hud.bottom-right .pulsing-dot:nth-child(2) { top: 10px; right: 10px; }
+.corner-hud.bottom-right .pulsing-dot:nth-child(3) { bottom: 10px; left: 10px; }
+.corner-hud.bottom-right .pulsing-dot:nth-child(4) { bottom: 10px; right: 10px; }
+
+/* Data Stream Lines - 5 horizontal streams */
+.data-stream-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.data-stream-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #00FFFF, transparent);
+  animation: dataStreamLine 4s ease-in-out infinite;
+}
+
+.data-stream-line:nth-child(1) { top: 15%; width: 100%; animation-delay: 0s; }
+.data-stream-line:nth-child(2) { top: 30%; width: 100%; animation-delay: 0.6s; }
+.data-stream-line:nth-child(3) { top: 45%; width: 100%; animation-delay: 1.2s; }
+.data-stream-line:nth-child(4) { top: 60%; width: 100%; animation-delay: 1.8s; }
+.data-stream-line:nth-child(5) { top: 75%; width: 100%; animation-delay: 2.4s; }
+
+/* Dynamic Gradient Orbs - Mouse following */
+.dynamic-gradient-orbs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-orb {
+  position: absolute;
+  width: 384px;
+  height: 384px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+  animation: dynamicGradientOrb 6s ease-in-out infinite;
+}
+
+.gradient-orb:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.gradient-orb:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+.gradient-orb:nth-child(3) { top: 80%; left: 40%; animation-delay: 4s; }
+
+/* Holographic Grid Lines - SVG grid with gradient overlay */
+.holographic-grid-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(14, 165, 233, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: holographicGridPattern 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.1;
 }

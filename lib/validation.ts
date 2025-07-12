@@ -7,7 +7,7 @@ export const NewsItemSchema = z.object({
   summary: z.string(),
   source: z.string(),
   publishedAt: z.string(),
-  category: z.string(),
+  category: z.enum(["Fantasy Football", "Football Data", "External Data"]),
   sport: z.string(),
   impact: z.enum(['low', 'medium', 'high']),
   tags: z.array(z.string()),
