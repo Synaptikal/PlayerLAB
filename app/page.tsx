@@ -21,55 +21,7 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Holographic Background with All FIGMA Effects */}
-      <div className="absolute inset-0">
-        {/* Base Holographic Atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
-        
-        {/* Dynamic Gradient Orbs */}
-        <div className="dynamic-gradient-orbs">
-          <div className="gradient-orb"></div>
-          <div className="gradient-orb"></div>
-          <div className="gradient-orb"></div>
-        </div>
-        
-        {/* Floating Data Nodes */}
-        <div className="floating-data-nodes">
-          {[...Array(12)].map((_, i) => (
-            <div key={i} className="data-node"></div>
-          ))}
-        </div>
-        
-        {/* Data Stream Lines */}
-        <div className="data-stream-lines">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="data-stream-line"></div>
-          ))}
-        </div>
-        
-        {/* Corner HUD Elements */}
-        <div className="corner-hud top-left">
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-        </div>
-        <div className="corner-hud bottom-right">
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-          <div className="pulsing-dot"></div>
-        </div>
-        
-        {/* Scanning Beam */}
-        <div className="scanning-beam"></div>
-        
-        {/* Holographic Grid Lines */}
-        <div className="holographic-grid-lines"></div>
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-6">

@@ -1,53 +1,72 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import type { ReactNode } from "react"
+import { ReactNode } from "react"
+import { motion } from "framer-motion"
 
 interface MainWrapperProps {
   children: ReactNode
+  className?: string
 }
 
-export function MainWrapper({ children }: MainWrapperProps) {
-  const [sidebarWidth, setSidebarWidth] = useState(60)
-
-  useEffect(() => {
-    // Listen for sidebar width changes
-    const handleSidebarChange = () => {
-      const sidebar = document.querySelector("[data-sidebar]") as HTMLElement
-      if (sidebar) {
-        const width = sidebar.offsetWidth
-        setSidebarWidth(width)
-      }
-    }
-
-    // Initial check
-    handleSidebarChange()
-
-    // Listen for resize events
-    window.addEventListener("resize", handleSidebarChange)
-
-    // Use MutationObserver to watch for sidebar changes
-    const observer = new MutationObserver(handleSidebarChange)
-    const sidebar = document.querySelector("[data-sidebar]")
-    if (sidebar) {
-      observer.observe(sidebar, { attributes: true, attributeFilter: ["style", "class"] })
-    }
-
-    return () => {
-      window.removeEventListener("resize", handleSidebarChange)
-      observer.disconnect()
-    }
-  }, [])
-
+export default function MainWrapper({ children, className = "" }: MainWrapperProps) {
   return (
-    <main
-      className="min-h-screen transition-all duration-500 ease-out relative"
-      style={{
-        marginLeft: `${sidebarWidth}px`,
-        width: `calc(100% - ${sidebarWidth}px)`,
-      }}
-    >
-      {children}
-    </main>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Consistent Holographic Background for All Pages */}
+      <div className="absolute inset-0">
+        {/* Base Holographic Atmosphere */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+        
+        {/* Dynamic Gradient Orbs */}
+        <div className="dynamic-gradient-orbs">
+          <div className="gradient-orb"></div>
+          <div className="gradient-orb"></div>
+          <div className="gradient-orb"></div>
+        </div>
+        
+        {/* Floating Data Nodes */}
+        <div className="floating-data-nodes">
+          {[...Array(12)].map((_, i) => (
+            <div key={i} className="data-node"></div>
+          ))}
+        </div>
+        
+        {/* Data Stream Lines */}
+        <div className="data-stream-lines">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="data-stream-line"></div>
+          ))}
+        </div>
+        
+        {/* Corner HUD Elements */}
+        <div className="corner-hud top-left">
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+        </div>
+        <div className="corner-hud bottom-right">
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+          <div className="pulsing-dot"></div>
+        </div>
+        
+        {/* Scanning Beam */}
+        <div className="scanning-beam"></div>
+        
+        {/* Holographic Grid Lines */}
+        <div className="holographic-grid-lines"></div>
+      </div>
+
+      {/* Main Content */}
+      <motion.div 
+        className={`relative z-10 ${className}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        {children}
+      </motion.div>
+    </div>
   )
 }

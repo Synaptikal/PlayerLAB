@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { FlaskLogo } from "@/components/ui/flask-logo"
-import { Menu, X, Home, User, BarChart3, Settings, Target, LayoutDashboard, FlaskConical, Puzzle, Trophy, TrendingUp, Activity, Zap, Brain, Users } from 'lucide-react';import { cn } from "@/lib/utils"
+import { Menu, X, Home, User, BarChart3, Settings, Target, LayoutDashboard, FlaskConical, Puzzle, Trophy, TrendingUp, Activity, Zap, Brain, Users } from 'lucide-react'
+import { cn } from "@/lib/utils"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home, color: "cyan" },
@@ -61,18 +62,26 @@ export default function Navbar() {
   }, [pathname])
 
   const getColorClasses = (color: string, isActive: boolean) => {
-      const colors = {
-    cyan: isActive ? "text-cyan-400" : "text-slate-300",
-    blue: isActive ? "text-blue-400" : "text-slate-300",
-    purple: isActive ? "text-purple-400" : "text-slate-300",
-    green: isActive ? "text-green-400" : "text-slate-300",
-    pink: isActive ? "text-pink-400" : "text-slate-300",
-    indigo: isActive ? "text-indigo-400" : "text-slate-300",
-    orange: isActive ? "text-orange-400" : "text-slate-300",
-    teal: isActive ? "text-teal-400" : "text-slate-300",
-    amber: isActive ? "text-amber-400" : "text-slate-300",
-    yellow: isActive ? "text-yellow-400" : "text-slate-300",
-  }
+    const colors = {
+      cyan: isActive ? "text-cyan-400" : "text-slate-300",
+      blue: isActive ? "text-blue-400" : "text-slate-300",
+      purple: isActive ? "text-purple-400" : "text-slate-300",
+      green: isActive ? "text-green-400" : "text-slate-300",
+      emerald: isActive ? "text-emerald-400" : "text-slate-300",
+      pink: isActive ? "text-pink-400" : "text-slate-300",
+      indigo: isActive ? "text-indigo-400" : "text-slate-300",
+      orange: isActive ? "text-orange-400" : "text-slate-300",
+      red: isActive ? "text-red-400" : "text-slate-300",
+      violet: isActive ? "text-violet-400" : "text-slate-300",
+      teal: isActive ? "text-teal-400" : "text-slate-300",
+      amber: isActive ? "text-amber-400" : "text-slate-300",
+      yellow: isActive ? "text-yellow-400" : "text-slate-300",
+      lime: isActive ? "text-lime-400" : "text-slate-300",
+      sky: isActive ? "text-sky-400" : "text-slate-300",
+      rose: isActive ? "text-rose-400" : "text-slate-300",
+      fuchsia: isActive ? "text-fuchsia-400" : "text-slate-300",
+      slate: isActive ? "text-slate-400" : "text-slate-300",
+    }
     return colors[color as keyof typeof colors] || colors.cyan
   }
 
@@ -86,11 +95,11 @@ export default function Navbar() {
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {/* Holographic Background */}
+          {/* Modern Glass Background */}
           <div className="relative">
             <div
               className={cn(
-                "absolute inset-0 backdrop-blur-2xl transition-all duration-300",
+                "absolute inset-0 backdrop-blur-xl transition-all duration-300",
                 isScrolled 
                   ? "bg-slate-900/95 border-b border-cyan-400/20" 
                   : "bg-slate-900/80 border-b border-cyan-400/10"
@@ -105,31 +114,6 @@ export default function Navbar() {
             {/* Animated Border */}
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
             
-            {/* Floating Particles */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
-                  style={{
-                    left: `${10 + i * 15}%`,
-                    top: "50%",
-                  }}
-                  animate={{
-                    y: [-10, 10, -10],
-                    opacity: [0.3, 0.8, 0.3],
-                    scale: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 3 + i * 0.5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: i * 0.2,
-                  }}
-                />
-              ))}
-            </div>
-
             {/* Navigation Content */}
             <div className="relative container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
@@ -150,9 +134,9 @@ export default function Navbar() {
                   </motion.span>
                 </Link>
 
-                {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center space-x-1">
-                  {navItems.map((item, index) => {
+                {/* Desktop Navigation - Simplified */}
+                <div className="hidden lg:flex items-center space-x-2">
+                  {navItems.slice(0, 8).map((item, index) => {
                     const isActive = pathname === item.href
                     const Icon = item.icon
                     
@@ -164,7 +148,7 @@ export default function Navbar() {
                       >
                         <motion.div
                           className={cn(
-                            "flex items-center gap-2 px-4 py-2 rounded-xl font-orbitron text-sm transition-all duration-300 relative overflow-hidden",
+                            "flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm transition-all duration-300 relative overflow-hidden",
                             isActive
                               ? "text-white bg-gradient-to-r from-cyan-400/20 to-purple-400/20 border border-cyan-400/50"
                               : "text-slate-300 hover:text-white hover:bg-white/5"
@@ -173,18 +157,8 @@ export default function Navbar() {
                           whileTap={{ scale: 0.95 }}
                           initial={{ opacity: 0, y: -20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: index * 0.1 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
                         >
-                          {/* Active Glow Effect */}
-                          {isActive && (
-                            <motion.div
-                              className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-xl"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ duration: 0.3 }}
-                            />
-                          )}
-                          
                           {/* Icon */}
                           <Icon className={cn(
                             "w-4 h-4 relative z-10",
@@ -192,32 +166,57 @@ export default function Navbar() {
                           )} />
                           
                           {/* Label */}
-                          <span className="relative z-10 font-medium">
+                          <span className="relative z-10">
                             {item.label}
                           </span>
-                          
-                          {/* Hover Glow */}
-                          <motion.div
-                            className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20"
-                                                          style={{
-                                background: `radial-gradient(circle, ${item.color === "cyan" ? "#06b6d4" : 
-                                  item.color === "blue" ? "#3b82f6" :
-                                  item.color === "purple" ? "#8b5cf6" : 
-                                  item.color === "green" ? "#10b981" : 
-                                  item.color === "pink" ? "#ec4899" : 
-                                  item.color === "indigo" ? "#6366f1" :
-                                  item.color === "orange" ? "#f97316" :
-                                  item.color === "teal" ? "#14b8a6" :
-                                  item.color === "amber" ? "#f59e0b" :
-                                  "#eab308"}20, transparent)`
-                              }}
-                            whileHover={{ opacity: 0.3 }}
-                            transition={{ duration: 0.3 }}
-                          />
                         </motion.div>
                       </Link>
                     )
                   })}
+                  
+                  {/* More dropdown */}
+                  <div className="relative group">
+                    <button className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+                      <span>More</span>
+                      <motion.div
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </motion.div>
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-slate-900/95 backdrop-blur-xl border border-cyan-400/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                      <div className="p-2 grid grid-cols-2 gap-1">
+                        {navItems.slice(8).map((item) => {
+                          const isActive = pathname === item.href
+                          const Icon = item.icon
+                          
+                          return (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className={cn(
+                                "flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-all duration-300",
+                                isActive
+                                  ? "text-white bg-gradient-to-r from-cyan-400/20 to-purple-400/20"
+                                  : "text-slate-300 hover:text-white hover:bg-white/5"
+                              )}
+                            >
+                              <Icon className={cn(
+                                "w-4 h-4",
+                                getColorClasses(item.color, isActive)
+                              )} />
+                              <span>{item.label}</span>
+                            </Link>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Mobile menu button */}
@@ -257,16 +256,14 @@ export default function Navbar() {
                           >
                             <motion.div
                               className={cn(
-                                "flex items-center gap-3 px-4 py-3 rounded-xl font-orbitron transition-all duration-300",
+                                "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
                                 isActive
                                   ? "text-white bg-gradient-to-r from-cyan-400/20 to-purple-400/20 border border-cyan-400/50"
                                   : "text-slate-300 hover:text-white hover:bg-white/5"
                               )}
-                              whileHover={{ x: 5 }}
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3, delay: index * 0.1 }}
-                              onClick={() => setIsOpen(false)}
+                              transition={{ duration: 0.3, delay: index * 0.05 }}
                             >
                               <Icon className={cn(
                                 "w-5 h-5",
