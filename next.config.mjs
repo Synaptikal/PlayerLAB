@@ -1,11 +1,14 @@
+import { validateEnvironment } from "./lib/validate-env.mjs";
+
+const envErrors = validateEnvironment();
+if (envErrors.length > 0) {
+  console.warn(
+    `Environment validation warnings:\n${envErrors.join("\n")}`
+  );
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
   },

@@ -71,33 +71,7 @@ export const API_CONFIG = {
   }
 };
 
-// Validation function to check required environment variables
-export function validateEnvironment(): string[] {
-  const errors: string[] = [];
-  
-  // Check required API keys
-  if (!API_CONFIG.FANTASY_PROS.API_KEY) {
-    errors.push("FANTASY_PROS_API_KEY is required for FantasyPros integration");
-  }
-  
-  if (!API_CONFIG.NEWS.NEWS_API_KEY) {
-    errors.push("NEWS_API_KEY is required for NewsAPI integration");
-  }
-  
-  if (!API_CONFIG.NEWS.GNEWS_KEY) {
-    errors.push("GNEWS_API_KEY is required for GNews integration");
-  }
-  
-  if (!API_CONFIG.SOCIAL.YOUTUBE.API_KEY) {
-    errors.push("YOUTUBE_API_KEY is required for YouTube integration");
-  }
-  
-  if (!API_CONFIG.AI.HUGGINGFACE_KEY) {
-    errors.push("HUGGINGFACE_API_KEY is required for AI features");
-  }
-  
-  return errors;
-}
+export { validateEnvironment, REQUIRED_ENV_VARS } from './validate-env.mjs';
 
 // Rate limiting configuration
 export const RATE_LIMITS = {
