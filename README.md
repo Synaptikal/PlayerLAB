@@ -90,7 +90,7 @@ MIXPANEL_TOKEN=your_mixpanel_token
 
 #### Required API Keys
 
-The application validates critical third‑party API keys at build time. If any of the following variables are missing, the build will fail:
+The application checks for critical third‑party API keys during build. If any of the following variables are missing, a warning is emitted and related features may be disabled:
 
 - `FANTASY_PROS_API_KEY`
 - `NEWS_API_KEY`

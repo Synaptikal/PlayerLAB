@@ -2,8 +2,8 @@ import { validateEnvironment } from "./lib/config.ts";
 
 const envErrors = validateEnvironment();
 if (envErrors.length > 0) {
-  throw new Error(
-    `Environment validation failed:\n${envErrors.join("\n")}`
+  console.warn(
+    `Environment validation warnings:\n${envErrors.join("\n")}`
   );
 }
 
