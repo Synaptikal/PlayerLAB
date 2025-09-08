@@ -1,11 +1,14 @@
+import { validateEnvironment } from "./lib/config.ts";
+
+const envErrors = validateEnvironment();
+if (envErrors.length > 0) {
+  throw new Error(
+    `Environment validation failed:\n${envErrors.join("\n")}`
+  );
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
   },

@@ -88,6 +88,18 @@ GOOGLE_ANALYTICS_ID=your_ga_id
 MIXPANEL_TOKEN=your_mixpanel_token
 ```
 
+#### Required API Keys
+
+The application validates critical third‑party API keys at build time. If any of the following variables are missing, the build will fail:
+
+- `FANTASY_PROS_API_KEY`
+- `NEWS_API_KEY`
+- `GNEWS_API_KEY`
+- `YOUTUBE_API_KEY`
+- `HUGGINGFACE_API_KEY`
+
+This check is performed via the `validateEnvironment` utility in `lib/config.ts`.
+
 ### Development
 
 ```bash
