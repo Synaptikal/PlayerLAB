@@ -1,4 +1,4 @@
-# 🚀 PlayerLAB - Advanced Fantasy Sports Analytics Platform
+# ð PlayerLAB - Advanced Fantasy Sports Analytics Platform
 
 > **The ultimate fantasy sports platform with AI-powered analytics, trade analysis, draft tools, and real-time insights.**
 
@@ -9,40 +9,40 @@
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-10.16-purple)](https://www.framer.com/motion/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## ✨ Features
+## â¨ Features
 
-### 🎯 **Core Analytics**
+### ð¯ **Core Analytics**
 - **Real-time Dashboard** with drag-and-drop widgets
 - **AI-Powered Trade Analyzer** with confidence scoring
 - **Advanced Draft Kit** with player rankings and projections
 - **Heatmap Analytics** for user behavior insights
 - **A/B Testing Framework** for optimization
 
-### 🤖 **AI Tools**
+### ð¤ **AI Tools**
 - **Smart Tester** - AI-generated test cases
 - **Code Quality Analysis** with bug detection
 - **Automated Test Generation** for multiple frameworks
 - **Performance Optimization** recommendations
 
-### 🔌 **Plugin Ecosystem**
+### ð **Plugin Ecosystem**
 - **Marketplace** with 50+ plugins
 - **API Integrations** for external data sources
 - **Custom Analytics** tools
 - **Third-party Services** integration
 
-### 🏆 **Gamification**
+### ð **Gamification**
 - **Achievement System** with 100+ badges
 - **Progress Tracking** and leaderboards
 - **Points System** for engagement
 - **Community Features** and social elements
 
-### 🎨 **Design System**
+### ð¨ **Design System**
 - **Holographic UI** with glassmorphic effects
 - **Dark Theme** optimized for gaming
 - **Responsive Design** for all devices
 - **Smooth Animations** with Framer Motion
 
-## 🚀 Quick Start
+## ð Quick Start
 
 ### Prerequisites
 - Node.js 18+ 
@@ -90,17 +90,10 @@ MIXPANEL_TOKEN=your_mixpanel_token
 
 #### Required API Keys
 
-The application checks for critical third‑party API keys during build. If any of the following variables are missing, a warning is emitted and related features may be disabled:
-
-- `FANTASY_PROS_API_KEY`
-- `NEWS_API_KEY`
-- `GNEWS_API_KEY`
-- `YOUTUBE_API_KEY`
-- `HUGGINGFACE_API_KEY`
-
-This check is performed via the `validateEnvironment` utility in `lib/config.ts`.
+The application checks for critical third‑party API keys during build. The list of required variables is defined once in `lib/validate-env.mjs` (`REQUIRED_ENV_VARS`) to keep documentation and runtime validation in sync. Missing keys trigger a warning and may disable related features.
 
 ### Development
+
 
 ```bash
 # Start development server
@@ -119,34 +112,34 @@ npm run build
 npm start
 ```
 
-## 📁 Project Structure
+## ð Project Structure
 
 ```
 playerlab/
-├── app/                          # Next.js 14 App Router
-│   ├── (auth)/                  # Authentication pages
-│   ├── api/                     # API routes
-│   ├── dashboard/               # Dashboard pages
-│   ├── tools/                   # AI tools
-│   ├── analytics/               # Analytics pages
-│   ├── plugins/                 # Plugin marketplace
-│   ├── achievements/            # Gamification
-│   └── settings/                # User settings
-├── components/                   # Reusable components
-│   ├── ui/                      # Base UI components
-│   ├── navigation/              # Navigation components
-│   ├── dashboard/               # Dashboard widgets
-│   └── forms/                   # Form components
-├── lib/                         # Utility libraries
-│   ├── design-tokens.ts         # Design system tokens
-│   ├── validation.ts            # Zod validation schemas
-│   └── utils.ts                 # Utility functions
-├── store/                       # Zustand state management
-├── styles/                      # Global styles
-└── public/                      # Static assets
+âââ app/                          # Next.js 14 App Router
+â   âââ (auth)/                  # Authentication pages
+â   âââ api/                     # API routes
+â   âââ dashboard/               # Dashboard pages
+â   âââ tools/                   # AI tools
+â   âââ analytics/               # Analytics pages
+â   âââ plugins/                 # Plugin marketplace
+â   âââ achievements/            # Gamification
+â   âââ settings/                # User settings
+âââ components/                   # Reusable components
+â   âââ ui/                      # Base UI components
+â   âââ navigation/              # Navigation components
+â   âââ dashboard/               # Dashboard widgets
+â   âââ forms/                   # Form components
+âââ lib/                         # Utility libraries
+â   âââ design-tokens.ts         # Design system tokens
+â   âââ validation.ts            # Zod validation schemas
+â   âââ utils.ts                 # Utility functions
+âââ store/                       # Zustand state management
+âââ styles/                      # Global styles
+âââ public/                      # Static assets
 ```
 
-## 🎨 Design System
+## ð¨ Design System
 
 ### Color Palette
 - **Primary**: Cyan (#06b6d4)
@@ -166,7 +159,7 @@ playerlab/
 - **Glow Effects**: Neon-style highlights
 - **Animations**: Smooth transitions with Framer Motion
 
-## 🔧 API Documentation
+## ð§ API Documentation
 
 ### Core Endpoints
 
@@ -205,7 +198,7 @@ POST /api/achievements/unlock
 GET /api/achievements/leaderboard
 ```
 
-## 🚀 Deployment
+## ð Deployment
 
 ### Vercel (Recommended)
 
@@ -231,7 +224,7 @@ docker build -t playerlab .
 docker run -p 3000:3000 playerlab
 ```
 
-## 🧪 Testing
+## ð§ª Testing
 
 ```bash
 # Run tests
@@ -244,7 +237,7 @@ npm run test:coverage
 npm run test:e2e
 ```
 
-## 📊 Performance
+## ð Performance
 
 ### Lighthouse Scores
 - **Performance**: 95+
@@ -259,7 +252,7 @@ npm run test:e2e
 - **Tree Shaking**: Dead CSS elimination
 - **CDN**: Vercel Edge Network
 
-## 🤝 Contributing
+## ð¤ Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -274,11 +267,11 @@ npm run test:e2e
 - Update documentation
 - Follow conventional commits
 
-## 📝 License
+## ð License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## ð Acknowledgments
 
 - **Next.js Team** for the amazing framework
 - **Vercel** for hosting and deployment
@@ -287,24 +280,24 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Radix UI** for accessible components
 - **Zustand** for state management
 
-## 📞 Support
+## ð Support
 
 - **Website**: [playerlab.net](https://playerlab.net)
 - **Email**: support@playerlab.net
 - **Discord**: [Join our community](https://discord.gg/playerlab)
 - **Twitter**: [@playerlab](https://twitter.com/playerlab)
 
-## 🔄 Changelog
+## ð Changelog
 
 ### v1.0.0 (2024-01-15)
-- ✨ Initial release
-- 🎯 Complete dashboard with drag-and-drop
-- 🤖 AI-powered Smart Tester tool
-- 📊 Advanced analytics with heatmaps
-- 🔌 Plugin marketplace
-- 🏆 Achievement system
-- 🎨 Holographic design system
+- â¨ Initial release
+- ð¯ Complete dashboard with drag-and-drop
+- ð¤ AI-powered Smart Tester tool
+- ð Advanced analytics with heatmaps
+- ð Plugin marketplace
+- ð Achievement system
+- ð¨ Holographic design system
 
 ---
 
-**Made with ❤️ by the PlayerLAB Team**
+**Made with â¤ï¸ by the PlayerLAB Team**

@@ -272,11 +272,29 @@ class MultiSocialAPI {
   // Mastodon Posts Implementation
   private async fetchMastodonPosts(sport: string, playerName?: string): Promise<SocialPost[]> {
     try {
-      const data = await apiClient.get(`${API_CONFIG.SOCIAL.MASTODON.BASE_URL}/timelines/public?40`);
-      
+      interface MastodonPost {
+        id: string
+        content: string
+        account: {
+          display_name: string
+          username: string
+          acct: string
+          verified: boolean
+          followers_count: number
+        }
+        created_at: string
+        favourites_count: number
+        reblogs_count: number
+        replies_count: number
+        url: string
+        media_attachments?: { url: string }[]
+      }
+
+      const data = await apiClient.get<MastodonPost[]>(`${API_CONFIG.SOCIAL.MASTODON.BASE_URL}/timelines/public?40`);
+
       const posts: SocialPost[] = []
 
-      data.forEach((post: unknown) => {
+      data.forEach(post => {
         const content = post.content.replace(/<[^>]*>/g, '') // Remove HTML tags
         
         if (this.isRelevantContent(content, sport, playerName)) {

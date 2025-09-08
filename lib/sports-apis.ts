@@ -42,9 +42,9 @@ export interface SportsData {
   team: string
   position: string
   stats: unknown
-  news: unknown[]
-  trends: unknown
-  social: unknown
+  news?: unknown[]
+  trends?: unknown
+  social?: unknown
 }
 
 export interface APISource {
@@ -56,7 +56,7 @@ export interface APISource {
 }
 
 class MultiSportsAPI {
-  private cache: Map<string, unknown> = new Map()
+  private cache: Map<string, SportsData[]> = new Map()
   private cacheTimestamp: Map<string, number> = new Map()
   private readonly CACHE_DURATION = 1000 * 60 * 30 // 30 minutes
 
@@ -103,12 +103,12 @@ class MultiSportsAPI {
   private SUPPORTED_SPORTS = ["NFL"]
 
   // Get data from multiple sources and average them
-  async getAveragedPlayerData(sport: string, playerId?: string): Promise<unknown[]> {
+  async getAveragedPlayerData(sport: string, playerId?: string): Promise<SportsData[]> {
     try {
       console.log(`🔄 Fetching averaged ${sport} data from multiple sources...`)
-      
+
       const sources = this.apiSources.filter(source => source.sports.includes(sport))
-      const allData = []
+      const allData: SportsData[] = []
 
       for (const source of sources) {
         try {
@@ -117,7 +117,8 @@ class MultiSportsAPI {
             allData.push(...data)
           }
         } catch (error) {
-          console.warn(`⚠️ Failed to fetch from ${source.name}:`, error.message)
+          const message = error instanceof Error ? error.message : String(error)
+          console.warn(`⚠️ Failed to fetch from ${source.name}:`, message)
         }
       }
 
@@ -127,7 +128,7 @@ class MultiSportsAPI {
       
       return averagedData
     } catch (error) {
-      console.error(`❌ Error fetching averaged ${sport} data:`, error)
+      console.error(`❌ Error fetching averaged ${sport} data:`, error instanceof Error ? error : String(error))
       return []
     }
   }
@@ -186,16 +187,16 @@ class MultiSportsAPI {
   }
 
   // Fetch data from a specific source
-  private async fetchFromSource(source: APISource, sport: string, playerId?: string): Promise<unknown[]> {
+  private async fetchFromSource(source: APISource, sport: string, playerId?: string): Promise<SportsData[]> {
     const cacheKey = `${source.name}_${sport}_${playerId || 'all'}`
     
     // Check cache first
     if (this.cache.has(cacheKey) && Date.now() - (this.cacheTimestamp.get(cacheKey) || 0) < this.CACHE_DURATION) {
       console.log(`📦 Using cached data from ${source.name}`)
-      return this.cache.get(cacheKey)
+      return this.cache.get(cacheKey) as SportsData[]
     }
 
-    let data: unknown[] = []
+    let data: SportsData[] = []
 
     try {
       switch (source.name) {
@@ -224,24 +225,37 @@ class MultiSportsAPI {
 
       return data
     } catch (error) {
-      console.error(`❌ Error fetching from ${source.name}:`, error)
+      console.error(`❌ Error fetching from ${source.name}:`, error instanceof Error ? error : String(error))
       return []
     }
   }
 
   // NFL-specific data fetching
-  private async fetchNFLData(source: APISource): Promise<unknown[]> {
+  private async fetchNFLData(source: APISource): Promise<SportsData[]> {
+    interface SleeperPlayer {
+      full_name?: string
+      first_name?: string
+      last_name?: string
+      position?: string
+      team?: string
+    }
+
     try {
-      const response = await apiClient.get(`${source.baseUrl}/players/nfl`)
-      const players = Object.entries(response as Record<string, unknown>)
-        .filter(([, player]) => player && player.position && player.team)
+      const response = await apiClient.get<Record<string, SleeperPlayer>>(
+        `${source.baseUrl}/players/nfl`
+      )
+
+      const players: SportsData[] = Object.entries(response)
+        .filter(([, player]) => player.position && player.team)
         .map(([id, player]) => ({
           id,
-          name: player.full_name || `${player.first_name || ""} ${player.last_name || ""}`.trim(),
-          position: player.position,
-          team: player.team,
+          name:
+            player.full_name ||
+            `${player.first_name ?? ""} ${player.last_name ?? ""}`.trim(),
+          position: player.position!,
+          team: player.team!,
           sport: "NFL",
-          stats: this.generateMockStats("NFL", player.position)
+          stats: this.generateMockStats("NFL", player.position || "")
         }))
         .slice(0, 50) // Limit to top 50 players
 
@@ -316,22 +330,32 @@ class MultiSportsAPI {
   // }
 
   // ESPN NFL data fetching
-  private async fetchESPNNFLData(): Promise<unknown[]> {
+  private async fetchESPNNFLData(): Promise<SportsData[]> {
+    interface ESPNPlayer {
+      id: number
+      fullName: string
+      position?: { abbreviation?: string }
+      team?: { name?: string }
+    }
+
     try {
-      const response = await apiClient.get(`${ESPN_API_BASE}/football/nfl/athletes`)
-      const players = (response.athletes as unknown[]).map(player => ({
-        id: player.id.toString(),
-        name: player.fullName,
-        position: player.position?.abbreviation || "Unknown",
-        team: player.team?.name || "Unknown",
-        sport: "NFL",
-        stats: this.generateMockStats("NFL", player.position?.abbreviation)
-      }))
-      .slice(0, 50)
+      const response = await apiClient.get<{ athletes: ESPNPlayer[] }>(
+        `${ESPN_API_BASE}/football/nfl/athletes`
+      )
+      const players: SportsData[] = response.athletes
+        .map(player => ({
+          id: player.id.toString(),
+          name: player.fullName,
+          position: player.position?.abbreviation || "Unknown",
+          team: player.team?.name || "Unknown",
+          sport: "NFL",
+          stats: this.generateMockStats("NFL", player.position?.abbreviation || "")
+        }))
+        .slice(0, 50)
 
       return players
     } catch (error) {
-      console.error("❌ Error fetching ESPN NFL data:", error)
+      console.error("❌ Error fetching ESPN NFL data:", error instanceof Error ? error : String(error))
       return []
     }
   }
@@ -400,35 +424,39 @@ class MultiSportsAPI {
   // }
 
   // Average player data from multiple sources
-  private averagePlayerData(allData: unknown[]): unknown[] {
-    const playerMap = new Map<string, unknown>()
+  private averagePlayerData(allData: SportsData[]): SportsData[] {
+    const playerMap = new Map<string, SportsData>()
 
-    allData.forEach(player => {
-      const key = player.id || player.name
-      if (playerMap.has(key)) {
-        // Average stats for duplicate players
-        const existing = playerMap.get(key)
-        playerMap.set(key, {
-          ...existing,
-          stats: this.averageStats([existing.stats, player.stats])
-        })
-      } else {
-        playerMap.set(key, player)
-      }
-    })
+      allData.forEach(player => {
+        const key = player.id || player.name
+        if (playerMap.has(key)) {
+          const existing = playerMap.get(key)!
+          playerMap.set(key, {
+            ...existing,
+            stats: this.averageStats([
+              existing.stats as Record<string, number>,
+              player.stats as Record<string, number>
+            ])
+          })
+        } else {
+          playerMap.set(key, player)
+        }
+      })
 
-    return Array.from(playerMap.values())
-  }
+      return Array.from(playerMap.values())
+    }
 
   // Average stats from multiple sources
-  private averageStats(players: unknown[]): unknown {
+  private averageStats(players: Record<string, number>[]): Record<string, number> {
     if (players.length === 0) return {}
 
-    const averagedStats: unknown = {}
+    const averagedStats: Record<string, number> = {}
     const statKeys = Object.keys(players[0] || {})
 
     statKeys.forEach(key => {
-      const values = players.map(player => player[key]).filter(val => typeof val === 'number')
+      const values = players
+        .map(player => player[key])
+        .filter((val): val is number => typeof val === 'number')
       if (values.length > 0) {
         averagedStats[key] = values.reduce((sum, val) => sum + val, 0) / values.length
       }

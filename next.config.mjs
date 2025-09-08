@@ -1,4 +1,4 @@
-import { validateEnvironment } from "./lib/config.ts";
+import { validateEnvironment } from "./lib/validate-env.mjs";
 
 const envErrors = validateEnvironment();
 if (envErrors.length > 0) {
