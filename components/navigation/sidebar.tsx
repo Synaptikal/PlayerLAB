@@ -1,261 +1,173 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/ui/logo"
-import { NFLButton } from "@/components/ui/nfl-button"
-import { Home, Newspaper, BarChart3, Users, Mail, Menu, X, Trophy, Target } from "lucide-react"
+import {
+  LayoutDashboard,
+  BookOpen,
+  Swords,
+  Wrench,
+  Users,
+  MessageSquare,
+  Settings,
+  Menu,
+  X,
+  ChevronRight,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: Home },
-  { href: "/news", label: "NFL News", icon: Newspaper },
-  { href: "/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/about", label: "About", icon: Users },
-  { href: "/contact", label: "Contact", icon: Mail },
+  { href: "/dashboard",  label: "Dashboard",  icon: LayoutDashboard, section: null },
+  { href: "/library",    label: "Library",     icon: BookOpen,        section: "Explore" },
+  { href: "/campaigns",  label: "Campaigns",   icon: Swords,          section: "Explore" },
+  { href: "/creators",   label: "Creators",    icon: Users,           section: "Explore" },
+  { href: "/tools",      label: "Tools",       icon: Wrench,          section: "Create" },
+  { href: "/community",  label: "Community",   icon: MessageSquare,   section: "Create" },
+  { href: "/settings",   label: "Settings",    icon: Settings,        section: null },
 ]
 
-export function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null)
+const sections = ["Explore", "Create"]
+
+export default function Sidebar() {
+  const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
-  const shouldExpand = isExpanded || isHovered
-
-  // Handle clicks outside sidebar
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setIsExpanded(false)
-      }
-    }
-
-    if (isExpanded) {
-      document.addEventListener("mousedown", handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [isExpanded])
-
-  // Auto-collapse on route change
-  useEffect(() => {
-    setIsExpanded(false)
-    setIsHovered(false)
+    setMobileOpen(false)
   }, [pathname])
 
-  // Prevent body scroll when sidebar is expanded on mobile
   useEffect(() => {
-    if (isExpanded) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-
+    document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => {
-      document.body.style.overflow = "unset"
+      document.body.style.overflow = ""
     }
-  }, [isExpanded])
+  }, [mobileOpen])
+
+  const NavContent = () => (
+    <>
+      <div className="px-6 py-6 border-b border-bg-border flex-shrink-0">
+        <Logo size="sm" />
+      </div>
+
+      <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main navigation">
+        {navItems
+          .filter((item) => item.section === null && item.href !== "/settings")
+          .map((item) => (
+            <NavItem key={item.href} item={item} pathname={pathname} />
+          ))}
+
+        {sections.map((section) => {
+          const items = navItems.filter((item) => item.section === section)
+          return (
+            <div key={section} className="mt-6">
+              <p className="section-label px-3 mb-2">{section}</p>
+              {items.map((item) => (
+                <NavItem key={item.href} item={item} pathname={pathname} />
+              ))}
+            </div>
+          )
+        })}
+      </nav>
+
+      <div className="px-3 py-4 border-t border-bg-border flex-shrink-0 space-y-1">
+        <NavItem
+          item={navItems.find((i) => i.href === "/settings")!}
+          pathname={pathname}
+        />
+        <div className="px-3 pt-3">
+          <Button variant="secondary" size="sm" className="w-full" asChild>
+            <Link href="/library">Browse Content</Link>
+          </Button>
+        </div>
+        <p className="text-center font-mono text-[0.6rem] text-text-muted pt-2 tracking-widest uppercase">
+          v1.0.0
+        </p>
+      </div>
+    </>
+  )
 
   return (
     <>
-      {/* Mobile Overlay */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsExpanded(false)}
-          />
-        )}
-      </AnimatePresence>
+      <aside
+        className="app-sidebar hidden lg:flex flex-col"
+        aria-label="Site navigation"
+      >
+        <NavContent />
+      </aside>
 
-      {/* Sidebar Container */}
-      <motion.aside
-        ref={sidebarRef}
-        data-sidebar
+      <button
+        className="lg:hidden fixed top-4 left-4 z-50 flex items-center justify-center w-10 h-10 rounded-md bg-bg-surface border border-bg-border text-text-secondary hover:text-gold-primary hover:border-gold-muted transition-colors duration-[150ms]"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+        aria-expanded={mobileOpen}
+      >
+        {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
+
+      {mobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-bg-base/80 backdrop-blur-sm z-40"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
         className={cn(
-          "fixed left-0 top-0 h-full z-50 flex flex-col",
-          "nfl-glass border-r-2 border-blue-500/30",
-          "transition-all duration-500 ease-out",
+          "lg:hidden fixed left-0 top-0 h-full w-[280px] z-50 flex flex-col",
+          "bg-bg-surface border-r border-bg-border",
+          "transition-transform duration-[300ms] ease-out",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
-        style={{
-          width: shouldExpand ? "280px" : "60px",
-          background: `linear-gradient(
-            135deg,
-            rgba(15, 23, 42, 0.98) 0%,
-            rgba(14, 165, 233, 0.08) 50%,
-            rgba(15, 23, 42, 0.98) 100%
-          )`,
-          backdropFilter: "blur(32px) saturate(200%)",
-          boxShadow: shouldExpand
-            ? "4px 0 32px rgba(14, 165, 233, 0.2), 0 0 0 1px rgba(14, 165, 233, 0.1)"
-            : "4px 0 16px rgba(0, 0, 0, 0.3)",
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        initial={{ x: -60 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        aria-label="Mobile navigation"
+        aria-hidden={!mobileOpen}
       >
-        {/* Header Section */}
-        <div className="p-4 border-b border-blue-500/20 flex-shrink-0">
-          <div className="flex items-center justify-between">
-            {/* Logo Area */}
-            <div className="flex items-center min-w-0">
-              <AnimatePresence mode="wait">
-                {shouldExpand ? (
-                  <motion.div
-                    key="expanded-logo"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="truncate"
-                  >
-                    <Logo variant="nfl" size="sm" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="collapsed-logo"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-8 h-8 nfl-glass rounded-lg flex items-center justify-center nfl-glow-blue flex-shrink-0"
-                  >
-                    <span className="font-orbitron font-bold neon-blue text-sm">PL</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Toggle Button */}
-            <motion.button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className={cn(
-                "p-2 rounded-lg nfl-glass hover:nfl-glow-blue transition-all duration-300 flex-shrink-0",
-                shouldExpand ? "ml-2" : "ml-0",
-              )}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                {isExpanded ? <X className="w-5 h-5 neon-blue" /> : <Menu className="w-5 h-5 neon-blue" />}
-              </motion.div>
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Navigation Section */}
-        <nav className="flex-1 p-4 overflow-y-auto">
-          <div className="space-y-2">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-              >
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "group relative flex items-center gap-3 p-3 rounded-lg transition-all duration-300",
-                    "text-slate-300 hover:text-blue-400 hover:bg-blue-500/10",
-                    "border border-transparent hover:border-blue-500/30",
-                    pathname === item.href && "text-blue-400 bg-blue-500/15 border-blue-500/40",
-                  )}
-                  title={!shouldExpand ? item.label : undefined}
-                >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
-
-                  {/* Label with proper overflow handling */}
-                  <AnimatePresence>
-                    {shouldExpand && (
-                      <motion.span
-                        initial={{ opacity: 0, width: 0 }}
-                        animate={{ opacity: 1, width: "auto" }}
-                        exit={{ opacity: 0, width: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="font-orbitron font-medium text-sm uppercase tracking-wide whitespace-nowrap overflow-hidden"
-                      >
-                        {item.label}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Tooltip for collapsed state */}
-                  {!shouldExpand && (
-                    <div
-                      className={cn(
-                        "absolute left-full ml-3 px-3 py-2 bg-slate-900/90 text-white text-sm rounded-lg",
-                        "opacity-0 group-hover:opacity-100 transition-opacity duration-200",
-                        "pointer-events-none whitespace-nowrap z-50 border border-blue-500/30",
-                      )}
-                    >
-                      {item.label}
-                    </div>
-                  )}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </nav>
-
-        {/* Footer Section */}
-        <div className="p-4 border-t border-blue-500/20 flex-shrink-0">
-          <AnimatePresence mode="wait">
-            {shouldExpand ? (
-              <motion.div
-                key="expanded-footer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-3"
-              >
-                <NFLButton size="sm" className="w-full">
-                  <Trophy className="w-4 h-4 mr-2" />
-                  Get Started
-                </NFLButton>
-                <div className="text-center">
-                  <p className="text-xs text-slate-400">Fantasy Edge</p>
-                  <p className="text-xs neon-cyan font-mono">v2.0.1</p>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="collapsed-footer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3 }}
-                className="flex justify-center"
-              >
-                <div className="w-8 h-8 nfl-glass rounded-lg flex items-center justify-center">
-                  <Target className="w-4 h-4 neon-blue" />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.aside>
-
-      {/* Main Content Wrapper */}
-      <div
-        className="transition-all duration-500 ease-out"
-        style={{
-          marginLeft: shouldExpand ? "280px" : "60px",
-        }}
-      >
-        {/* This div will be used by the layout to push content */}
-      </div>
+        <NavContent />
+      </aside>
     </>
+  )
+}
+
+interface NavItemProps {
+  item: { href: string; label: string; icon: React.ElementType }
+  pathname: string
+}
+
+function NavItem({ item, pathname }: NavItemProps) {
+  const isActive =
+    pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+  const Icon = item.icon
+
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "group flex items-center gap-3 px-3 py-2.5 rounded-md font-sans text-sm font-medium",
+        "transition-all duration-[150ms] ease-out",
+        isActive
+          ? "bg-bg-elevated text-gold-primary border border-gold-muted/40"
+          : "text-text-secondary hover:text-text-primary hover:bg-bg-elevated border border-transparent"
+      )}
+    >
+      <Icon
+        className={cn(
+          "w-[18px] h-[18px] flex-shrink-0 transition-colors duration-[150ms]",
+          isActive
+            ? "text-gold-primary"
+            : "text-text-muted group-hover:text-text-secondary"
+        )}
+        aria-hidden="true"
+      />
+      <span className="flex-1 truncate">{item.label}</span>
+      {isActive && (
+        <ChevronRight
+          className="w-3.5 h-3.5 text-gold-muted flex-shrink-0"
+          aria-hidden="true"
+        />
+      )}
+    </Link>
   )
 }

@@ -1,310 +1,296 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { 
-  BarChart3, 
+  Map, 
+  Calendar, 
   Users, 
-  Target, 
-  Activity, 
-  AlertTriangle, 
-  CheckCircle, 
-  TrendingUp, 
-  Clock
-} from "lucide-react";
+  BookOpen, 
+  Clock,
+  ArrowRight,
+  Plus,
+  Bookmark,
+  Download,
+  Sparkles
+} from "lucide-react"
 
-interface DashboardData {
-  totalUsers: number;
-  activeUsers: number;
-  conversionRate: number;
-  avgSessionDuration: number;
-  topPlayers: Array<{
-    name: string;
-    team: string;
-    position: string;
-    points: number;
-    change: number;
-  }>;
-  recentActivity: Array<{
-    id: string;
-    type: string;
-    message: string;
-    timestamp: string;
-    user: string;
-  }>;
-  systemStatus: {
-    servers: "online" | "offline" | "maintenance";
-    database: "online" | "offline" | "maintenance";
-    api: "online" | "offline" | "maintenance";
-    cdn: "online" | "offline" | "maintenance";
-  };
-}
+// Sample data
+const activeCampaigns = [
+  {
+    id: 1,
+    name: "Curse of the Crimson Throne",
+    system: "Pathfinder 2e",
+    players: 5,
+    nextSession: "Tomorrow, 7:00 PM",
+    progress: 35,
+  },
+  {
+    id: 2,
+    name: "Waterdeep Dragon Heist",
+    system: "D&D 5e",
+    players: 4,
+    nextSession: "Saturday, 3:00 PM",
+    progress: 68,
+  },
+]
+
+const recentDownloads = [
+  { id: 1, title: "Goblin Cave One-Shot", type: "Adventure", date: "2 days ago" },
+  { id: 2, title: "NPC Generator Tables", type: "Tool", date: "1 week ago" },
+  { id: 3, title: "City District Maps Pack", type: "Maps", date: "2 weeks ago" },
+]
+
+const savedContent = [
+  { id: 1, title: "The Lost Mine Expanded", type: "Campaign", creator: "DM Guild" },
+  { id: 2, title: "100 Plot Hooks", type: "Resource", creator: "Crafty GM" },
+  { id: 3, title: "Monster Tactics Guide", type: "Supplement", creator: "Keith A." },
+]
 
 export default function DashboardPage() {
-  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedTimeframe, setSelectedTimeframe] = useState<"1h" | "24h" | "7d" | "30d">("24h");
-
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      setLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockData: DashboardData = {
-        totalUsers: 15420,
-        activeUsers: 3240,
-        conversionRate: 8.7,
-        avgSessionDuration: 4.2,
-        topPlayers: [
-          { name: "Christian McCaffrey", team: "SF", position: "RB", points: 28.5, change: 12.3 },
-          { name: "Tyreek Hill", team: "MIA", position: "WR", points: 26.8, change: 8.7 },
-          { name: "Josh Allen", team: "BUF", position: "QB", points: 24.2, change: -2.1 },
-          { name: "Travis Kelce", team: "KC", position: "TE", points: 22.1, change: 5.4 }
-        ],
-        recentActivity: [
-          { id: "1", type: "trade", message: "Trade completed: McCaffrey for Hill", timestamp: "2 min ago", user: "user123" },
-          { id: "2", type: "waiver", message: "Waiver claim processed", timestamp: "5 min ago", user: "user456" },
-          { id: "3", type: "analysis", message: "Player analysis completed", timestamp: "8 min ago", user: "user789" }
-        ],
-        systemStatus: {
-          servers: "online",
-          database: "online", 
-          api: "online",
-          cdn: "online"
-        }
-      };
-      
-      setDashboardData(mockData);
-      setLoading(false);
-    };
-
-    fetchDashboardData();
-  }, [selectedTimeframe]);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "online": return "text-green-400";
-      case "offline": return "text-red-400";
-      case "maintenance": return "text-yellow-400";
-      default: return "text-gray-400";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "online": return <CheckCircle className="w-4 h-4 text-green-400" />;
-      case "offline": return <AlertTriangle className="w-4 h-4 text-red-400" />;
-      case "maintenance": return <Clock className="w-4 h-4 text-yellow-400" />;
-      default: return <AlertTriangle className="w-4 h-4 text-gray-400" />;
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-white text-xl">Loading dashboard...</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!dashboardData) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-white text-xl">No dashboard data available</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
-            <BarChart3 className="text-blue-400" />
-            Dashboard
-          </h1>
-          <p className="text-gray-300">
-            Monitor your fantasy football platform performance and user activity
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+          Dashboard
+        </h1>
+        <p className="font-body text-muted-foreground">
+          Welcome back! Here&apos;s what&apos;s happening with your campaigns.
+        </p>
+      </div>
 
-        {/* Time Range Selector */}
-        <div className="flex gap-2 mb-6">
-          {(["1h", "24h", "7d", "30d"] as const).map((timeframe) => (
-            <Button
-              key={timeframe}
-              variant={selectedTimeframe === timeframe ? "default" : "outline"}
-              onClick={() => setSelectedTimeframe(timeframe)}
-              className="bg-white/5 border-white/20 text-white hover:bg-white/10"
-            >
-              {timeframe === "1h" ? "1 Hour" : timeframe === "24h" ? "24 Hours" : timeframe === "7d" ? "7 Days" : "30 Days"}
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <Button asChild className="h-auto py-4 flex-col gap-2">
+          <Link href="/campaigns/new">
+            <Plus className="w-5 h-5" />
+            <span className="font-ui text-xs">New Campaign</span>
+          </Link>
+        </Button>
+        <Button asChild variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Link href="/library">
+            <BookOpen className="w-5 h-5" />
+            <span className="font-ui text-xs">Browse Library</span>
+          </Link>
+        </Button>
+        <Button asChild variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Link href="/tools">
+            <Sparkles className="w-5 h-5" />
+            <span className="font-ui text-xs">Quick Generate</span>
+          </Link>
+        </Button>
+        <Button asChild variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Link href="/vault">
+            <Bookmark className="w-5 h-5" />
+            <span className="font-ui text-xs">My Vault</span>
+          </Link>
+        </Button>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Active Campaigns - Takes 2 columns */}
+        <div className="lg:col-span-2 space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-xl font-bold text-foreground">
+              Active Campaigns
+            </h2>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/campaigns">
+                View All
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
             </Button>
-          ))}
-        </div>
+          </div>
 
-        {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">Total Users</p>
-                  <p className="text-2xl font-bold text-white">
-                    {dashboardData.totalUsers.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-green-400 flex items-center gap-1 mt-1">
-                    <TrendingUp className="w-4 h-4" />
-                    +12.5%
-                  </p>
-                </div>
-                <Users className="text-blue-400 w-8 h-8" />
-              </div>
-            </CardContent>
-          </Card>
+          {activeCampaigns.length > 0 ? (
+            <div className="space-y-4">
+              {activeCampaigns.map((campaign) => (
+                <Card key={campaign.id} className="group">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                            {campaign.name}
+                          </h3>
+                          <Badge variant="secondary">{campaign.system}</Badge>
+                        </div>
+                        
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+                          <div className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            <span>{campaign.players} players</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <span>{campaign.nextSession}</span>
+                          </div>
+                        </div>
 
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">Active Users</p>
-                  <p className="text-2xl font-bold text-white">
-                    {dashboardData.activeUsers.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-green-400 flex items-center gap-1 mt-1">
-                    <TrendingUp className="w-4 h-4" />
-                    +8.2%
-                  </p>
-                </div>
-                <Activity className="text-green-400 w-8 h-8" />
-              </div>
-            </CardContent>
-          </Card>
+                        {/* Progress bar */}
+                        <div className="space-y-1">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-ui text-muted-foreground">Campaign Progress</span>
+                            <span className="font-ui text-primary">{campaign.progress}%</span>
+                          </div>
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-primary rounded-full transition-all"
+                              style={{ width: `${campaign.progress}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
 
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">Conversion Rate</p>
-                  <p className="text-2xl font-bold text-white">
-                    {dashboardData.conversionRate}%
-                  </p>
-                  <p className="text-sm text-green-400 flex items-center gap-1 mt-1">
-                    <TrendingUp className="w-4 h-4" />
-                    +2.1%
-                  </p>
-                </div>
-                <Target className="text-purple-400 w-8 h-8" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">Avg Session</p>
-                  <p className="text-2xl font-bold text-white">
-                    {dashboardData.avgSessionDuration}m
-                  </p>
-                  <p className="text-sm text-green-400 flex items-center gap-1 mt-1">
-                    <TrendingUp className="w-4 h-4" />
-                    +18s
-                  </p>
-                </div>
-                <Clock className="text-yellow-400 w-8 h-8" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* System Status */}
-        <Card className="bg-white/5 backdrop-blur-sm border-white/10 mb-8">
-          <CardHeader>
-            <CardTitle className="text-white">System Status</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {Object.entries(dashboardData.systemStatus).map(([service, status]) => (
-                <div key={service} className="flex items-center gap-3">
-                  {getStatusIcon(status)}
-                  <div>
-                    <p className="text-white font-medium capitalize">{service}</p>
-                    <p className={`text-sm ${getStatusColor(status)}`}>
-                      {status.charAt(0).toUpperCase() + status.slice(1)}
-                    </p>
-                  </div>
-                </div>
+                      <Button asChild size="sm" variant="outline">
+                        <Link href={`/campaigns/${campaign.id}`}>
+                          <Map className="w-4 h-4 mr-1" />
+                          Open
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          ) : (
+            <Card className="border-dashed">
+              <CardContent className="p-8 text-center">
+                <Map className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                  No Active Campaigns
+                </h3>
+                <p className="font-body text-sm text-muted-foreground mb-4">
+                  Start your first campaign to track sessions and manage your party.
+                </p>
+                <Button asChild>
+                  <Link href="/campaigns/new">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create Campaign
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          )}
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Players */}
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardHeader>
-              <CardTitle className="text-white">Top Performing Players</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {dashboardData.topPlayers.map((player, index) => (
-                  <div key={index} className="flex items-center justify-between">
+          {/* Recent Downloads */}
+          <div className="mt-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display text-xl font-bold text-foreground">
+                Recent Downloads
+              </h2>
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/vault?tab=downloads">
+                  View All
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+              </Button>
+            </div>
+
+            <Card>
+              <CardContent className="p-0 divide-y divide-border">
+                {recentDownloads.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between p-4 hover:bg-muted/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">
-                        {index + 1}
+                      <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
+                        <Download className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <p className="text-white font-medium">{player.name}</p>
-                        <p className="text-sm text-gray-400">{player.team} • {player.position}</p>
+                        <p className="font-ui font-medium text-foreground">{item.title}</p>
+                        <p className="font-ui text-sm text-muted-foreground">{item.type}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-white font-semibold">{player.points} pts</p>
-                      <p className={`text-sm ${player.change > 0 ? "text-green-400" : "text-red-400"}`}>
-                        {player.change > 0 ? "+" : ""}{player.change}%
-                      </p>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Clock className="w-4 h-4" />
+                      <span>{item.date}</span>
                     </div>
                   </div>
                 ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Sidebar - Saved Content */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-xl font-bold text-foreground">
+              Saved for Later
+            </h2>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/vault">
+                <Bookmark className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {savedContent.map((item) => (
+              <Card key={item.id} className="group cursor-pointer">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="font-ui font-medium text-foreground group-hover:text-primary transition-colors text-sm truncate">
+                        {item.title}
+                      </h3>
+                      <p className="font-ui text-xs text-muted-foreground">
+                        by {item.creator}
+                      </p>
+                    </div>
+                    <Badge variant="outline" className="shrink-0 text-xs">
+                      {item.type}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Quick Stats */}
+          <Card className="bg-card/50">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Your Stats</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="font-ui text-sm text-muted-foreground">Total Downloads</span>
+                <span className="font-display font-semibold text-primary">47</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-ui text-sm text-muted-foreground">Saved Items</span>
+                <span className="font-display font-semibold text-primary">12</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-ui text-sm text-muted-foreground">Active Campaigns</span>
+                <span className="font-display font-semibold text-primary">2</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-ui text-sm text-muted-foreground">Sessions Logged</span>
+                <span className="font-display font-semibold text-primary">23</span>
               </div>
             </CardContent>
           </Card>
 
-          {/* Recent Activity */}
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-            <CardHeader>
-              <CardTitle className="text-white">Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {dashboardData.recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-blue-400 mt-2"></div>
-                    <div className="flex-1">
-                      <p className="text-white text-sm">{activity.message}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <p className="text-xs text-gray-400">{activity.user}</p>
-                        <span className="text-xs text-gray-500">•</span>
-                        <p className="text-xs text-gray-400">{activity.timestamp}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {/* Explore More */}
+          <Card className="border-primary/30 bg-primary/5">
+            <CardContent className="p-5 text-center">
+              <Sparkles className="w-8 h-8 text-primary mx-auto mb-3" />
+              <h3 className="font-display font-semibold text-foreground mb-2">
+                Discover New Content
+              </h3>
+              <p className="font-body text-sm text-muted-foreground mb-4">
+                Browse our library for adventures, tools, and resources.
+              </p>
+              <Button asChild size="sm" className="w-full">
+                <Link href="/library">
+                  Explore Library
+                </Link>
+              </Button>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  );
-} 
+  )
+}

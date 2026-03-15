@@ -1,49 +1,43 @@
 import type { Config } from "tailwindcss"
 
-// PlayerLAB Vault v2 Design System Lock - FIGMA SPEC COMPLIANT
+// PlayerLAB TTRPG Design System
 const PLAYERLAB_DESIGN_TOKENS = {
   colors: {
-    // FIGMA SPEC NEON COLOR PALETTE
-    "deep-black": "#0D0D0D",
-    "neon-cyan": "#00FFFF",
-    "neon-blue": "#3B82F6",
-    "neon-green": "#00FF6A",
-    "neon-red": "#FF4C4C",
-    "neon-purple": "#8B5CF6",
-    "neon-magenta": "#FF00FF",
-    "neon-yellow": "#FFFF00",
-    "neon-orange": "#FF8C00",
-    "text-primary": "#FFFFFF",
-    "text-secondary": "#AAAAAA",
-    "glass-light": "rgba(255, 255, 255, 0.1)",
-    "glass-dark": "rgba(0, 0, 0, 0.3)",
-    "glass-medium": "rgba(255, 255, 255, 0.15)",
+    // Backgrounds - Midnight navy layered system
+    "bg-base": "hsl(232 30% 8%)",
+    "bg-surface": "hsl(232 27% 12%)",
+    "bg-elevated": "hsl(232 24% 16%)",
+    "bg-border": "hsl(232 20% 24%)",
+
+    // Gold Accent - Primary interactive color
+    "gold-primary": "hsl(43 55% 54%)",
+    "gold-muted": "hsl(40 45% 37%)",
+
+    // Purple Accent - Content type badges
+    "purple-accent": "hsl(265 35% 51%)",
+    "purple-muted": "hsl(265 30% 34%)",
+
+    // Text - Warm off-white
+    "text-primary": "hsl(40 25% 90%)",
+    "text-secondary": "hsl(42 15% 54%)",
+    "text-muted": "hsl(42 15% 32%)",
+
+    // Status Colors
+    "status-success": "hsl(142 35% 42%)",
+    "status-warning": "hsl(43 85% 38%)",
+    "status-danger": "hsl(0 40% 39%)",
   },
   fonts: {
-    // FIGMA SPEC FONT FAMILIES
-    header: ["Orbitron", "sans-serif"],
-    body: ["Inter", "sans-serif"],
-    orbitron: ["Orbitron", "sans-serif"],
-    inter: ["Inter", "sans-serif"],
-    audiowide: ["Audiowide", "sans-serif"], // FIGMA SPEC ADDITION
+    display: ["var(--font-cinzel)", "Cinzel", "serif"],
+    body: ["var(--font-lora)", "Lora", "serif"],
+    ui: ["var(--font-inter)", "Inter", "sans-serif"],
+    mono: ["var(--font-jetbrains)", "JetBrains Mono", "monospace"],
   },
   shadows: {
-    // Locked Glow System
-    glass: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-    glow: "0 0 20px rgba(0, 255, 255, 0.5)",
-    "glow-intense": "0 0 30px rgba(0, 255, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.6)",
-    "glow-blue": "0 0 20px #3b82f6",
-    "glow-green": "0 0 20px #10b981",
-    "glow-red": "0 0 20px #ef4444",
-    "glow-purple": "0 0 20px #8b5cf6",
-    "glow-cyan": "0 0 20px #00FFFF",
-    "glow-magenta": "0 0 20px #FF00FF",
-    "glow-blue-intense": "0 0 30px #3b82f6, 0 0 50px #3b82f6",
-    "glow-green-intense": "0 0 30px #10b981, 0 0 50px #10b981",
-    "glow-red-intense": "0 0 30px #ef4444, 0 0 50px #ef4444",
-    "glow-purple-intense": "0 0 30px #8b5cf6, 0 0 50px #8b5cf6",
-    "glow-cyan-intense": "0 0 30px #00FFFF, 0 0 50px #00FFFF",
-    "glow-magenta-intense": "0 0 30px #FF00FF, 0 0 50px #FF00FF",
+    "gold-sm": "0 1px 3px rgba(0,0,0,0.4)",
+    "gold-md": "0 4px 12px rgba(0,0,0,0.5)",
+    "gold-glow": "0 4px 24px hsla(43, 55%, 54%, 0.10)",
+    "gold-glow-lg": "0 8px 40px hsla(43, 55%, 54%, 0.15)",
   },
 }
 
@@ -55,101 +49,39 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
-  // CRITICAL: Safelist prevents purging of design system classes
   safelist: [
-    // 🔒 LOCKED DESIGN SYSTEM CLASSES - DO NOT REMOVE
-
-    // Glassmorphism (Mandatory)
-    "backdrop-blur-lg",
-    "backdrop-blur-2xl",
-    "backdrop-blur-3xl",
-    "bg-white/5",
-    "bg-white/10",
-    "bg-white/15",
-    "bg-white/20",
-    "border-white/15",
-    "border-white/20",
-    "border-white/30",
-
-    // Glow Effects (Team Colors)
-    "shadow-glow",
-    "shadow-glow-intense",
-    "shadow-glow-blue",
-    "shadow-glow-green",
-    "shadow-glow-red",
-    "shadow-glow-purple",
-    "shadow-glow-cyan",
-    "shadow-glow-magenta",
-    "shadow-glow-blue-intense",
-    "shadow-glow-green-intense",
-    "shadow-glow-red-intense",
-    "shadow-glow-purple-intense",
-    "shadow-glow-cyan-intense",
-    "shadow-glow-magenta-intense",
-
-    // Typography (Branding Fonts)
-    "font-header",
+    // TTRPG Design System Classes
+    "font-display",
     "font-body",
-    "font-orbitron",
-    "font-inter",
-
-    // Animations (Locked)
-    "animate-glow-pulse",
-    "animate-pulse-glow",
-    "animate-border-glow",
-    "animate-player-pulse",
-    "animate-hover-pulse",
-    "animate-holographic",
-    "animate-neon-sweep",
-
-    // Component Classes (Mandatory)
-    "glass-container",
-    "glass-card",
-    "glass-panel",
-    "glass-tile",
-    "neon-panel",
-    "glow-button",
-    "holo-background",
-    "neon-glow",
-    "neon-glow-hover",
-    "neon-border",
-    "neon-text",
-    "gradient-text",
-    "hud-grid",
-
-    // Team Color Variants
-    "team-glow-blue",
-    "team-glow-green",
-    "team-glow-red",
-    "team-glow-purple",
-    "team-glow-cyan",
-    "team-glow-magenta",
-
-    // Border Colors (Team)
-    "border-blue-400/30",
-    "border-green-400/30",
-    "border-red-400/30",
-    "border-purple-400/30",
-    "border-cyan-400/30",
-    "border-magenta-400/30",
-    "border-blue-400/50",
-    "border-green-400/50",
-    "border-red-400/50",
-    "border-purple-400/50",
-    "border-cyan-400/50",
-    "border-magenta-400/50",
-    "border-blue-400/80",
-    "border-green-400/80",
-    "border-red-400/80",
-    "border-purple-400/80",
-    "border-cyan-400/80",
-    "border-magenta-400/80",
+    "font-ui",
+    "font-mono",
+    "bg-base",
+    "bg-surface",
+    "bg-elevated",
+    "text-gold",
+    "text-gold-muted",
+    "border-gold",
+    "border-subtle",
+    "shadow-gold",
+    "shadow-gold-lg",
+    "surface-card",
+    "elevated-card",
+    "gold-divider",
+    "badge-adventure",
+    "badge-campaign",
+    "badge-premium",
+    "badge-free",
+    "nav-active",
+    "status-success",
+    "status-warning",
+    "status-danger",
+    "vignette",
   ],
   theme: {
     extend: {
       colors: {
         ...PLAYERLAB_DESIGN_TOKENS.colors,
-        // Shadcn compatibility
+        // shadcn/ui compatibility
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -192,70 +124,29 @@ const config: Config = {
         },
       },
       fontFamily: PLAYERLAB_DESIGN_TOKENS.fonts,
-      backdropBlur: {
-        glass: "12px",
-        "3xl": "64px",
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        pill: "24px",
-        glass: "12px",
       },
       boxShadow: PLAYERLAB_DESIGN_TOKENS.shadows,
       animation: {
-        "glow-pulse": "glowPulse 3s ease-in-out infinite",
-        "pulse-glow": "pulseGlow 2s ease-in-out infinite",
-        "border-glow": "borderGlow 3s ease-in-out infinite",
-        "neon-sweep": "neonSweep 2s ease-in-out",
-        "slide-down": "slideDown 0.3s ease-out",
-        "fade-up": "fadeUp 0.6s ease-out",
-        "scale-glow": "scaleGlow 0.3s ease-out",
-        "hover-pulse": "hoverPulse 0.6s ease-in-out infinite",
-        "player-pulse": "playerPulse 3s ease-in-out infinite",
-        holographic: "holographic 8s ease-in-out infinite",
+        "fade-in": "fadeIn 0.3s ease-out",
+        "slide-up": "slideUp 0.4s ease-out",
+        "gold-pulse": "goldPulse 2s ease-in-out infinite",
       },
       keyframes: {
-        glowPulse: {
-          "0%, 100%": { boxShadow: "0 0 20px #00FFFF" },
-          "50%": { boxShadow: "0 0 40px #00FFFF, 0 0 60px #00FFFF" },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
-        pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 15px rgba(139, 92, 246, 0.5)" },
-          "50%": { boxShadow: "0 0 25px rgba(139, 92, 246, 0.8), 0 0 35px rgba(139, 92, 246, 0.6)" },
-        },
-        borderGlow: {
-          "0%, 100%": { transform: "translateX(-100%)" },
-          "50%": { transform: "translateX(100%)" },
-        },
-        neonSweep: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        slideDown: {
-          "0%": { transform: "translateY(-100%)", opacity: "0" },
+        slideUp: {
+          "0%": { transform: "translateY(10px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
-        fadeUp: {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
-        scaleGlow: {
-          "0%": { transform: "scale(1)", boxShadow: "0 0 20px #00FFFF" },
-          "100%": { transform: "scale(1.05)", boxShadow: "0 0 30px #00FFFF, 0 0 50px #00FFFF" },
-        },
-        hoverPulse: {
-          "0%, 100%": { boxShadow: "0 0 15px rgba(0, 255, 255, 0.5)" },
-          "50%": { boxShadow: "0 0 25px rgba(0, 255, 255, 0.8), 0 0 35px rgba(0, 255, 255, 0.6)" },
-        },
-        playerPulse: {
-          "0%, 100%": { boxShadow: "0 0 10px rgba(139, 92, 246, 0.3)" },
-          "50%": { boxShadow: "0 0 20px rgba(139, 92, 246, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)" },
-        },
-        holographic: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
+        goldPulse: {
+          "0%, 100%": { boxShadow: "0 4px 24px hsla(43, 55%, 54%, 0.10)" },
+          "50%": { boxShadow: "0 4px 32px hsla(43, 55%, 54%, 0.20)" },
         },
       },
     },
