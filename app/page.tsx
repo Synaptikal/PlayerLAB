@@ -2,40 +2,41 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { 
-  BookOpen, 
+import {
+  BookOpen,
   ArrowRight,
   Users,
   Map,
   Wrench,
   Compass,
-  Sparkles,
   Crown,
   Scroll,
   Dice6,
   Sword,
-  Shield
+  Shield,
+  Star,
 } from "lucide-react"
 
-// Sample featured content data
 const featuredContent = [
   {
     id: 1,
-    title: "The Crimson Depths",
-    creator: "Dungeon Master Dave",
+    title: "The Shattered Crown",
+    creator: "Morgan Blackwood",
     type: "Adventure",
-    price: "Premium",
+    price: "Free",
     rating: 4.8,
-    description: "A 5th-level adventure through ancient underwater ruins filled with forgotten magic and lurking dangers.",
+    description:
+      "A level 5–7 urban intrigue adventure set in the crumbling city of Thornhaven, where noble houses compete for a fractured throne.",
   },
   {
     id: 2,
-    title: "Wilderness Survival Guide",
+    title: "Wilderness Survival Compendium",
     creator: "Ranger's Guild",
     type: "Supplement",
     price: "Free",
     rating: 4.5,
-    description: "Comprehensive rules for wilderness exploration, foraging, and survival in hostile environments.",
+    description:
+      "Comprehensive rules for wilderness exploration, foraging, and survival in hostile environments. System-agnostic.",
   },
   {
     id: 3,
@@ -44,16 +45,18 @@ const featuredContent = [
     type: "Campaign",
     price: "Premium",
     rating: 4.9,
-    description: "A full campaign setting with political intrigue, ancient mysteries, and world-shaking conflicts.",
+    description:
+      "A full campaign setting with political intrigue, ancient mysteries, and world-shaking conflicts across twelve sessions.",
   },
   {
     id: 4,
-    title: "100 Unique NPCs",
+    title: "100 Memorable NPCs",
     creator: "Character Collective",
     type: "Resource",
     price: "Free",
     rating: 4.6,
-    description: "A collection of memorable NPCs with detailed backgrounds, motivations, and plot hooks.",
+    description:
+      "A collection of memorable NPCs with detailed backgrounds, motivations, and plot hooks. Printable reference cards included.",
   },
 ]
 
@@ -69,159 +72,149 @@ const categories = [
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-        
-        <div className="container mx-auto max-w-5xl relative z-10">
-          <div className="text-center mb-12">
-            <Badge variant="premium" className="mb-6">
-              <Sparkles className="w-3 h-3 mr-1" />
-              TTRPG Content Platform
-            </Badge>
-            
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Your Campaign
-              <span className="block text-primary">Headquarters</span>
+
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <section className="relative px-6 py-24 lg:py-32 overflow-hidden">
+        {/* Vignette layer */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 65%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+
+            <p className="section-label mb-4">TTRPG Content Platform</p>
+
+            <h1 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-text-primary leading-[1.15] tracking-wide text-balance mb-6">
+              A Digital Home for{" "}
+              <span className="text-gold-gradient">Every Campaign</span>
             </h1>
-            
-            <p className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-              Discover adventures, tools, and content crafted by the TTRPG community. 
-              Everything you need to run unforgettable games.
+
+            <p className="font-serif text-lg text-text-secondary leading-[1.75] max-w-xl mx-auto mb-10">
+              Discover adventures, supplements, and tools crafted by the TTRPG
+              community. Everything a game master needs — in one well-worn tome.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg">
+              <Button size="lg" asChild>
                 <Link href="/library">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  Browse Library
+                  <BookOpen className="w-4 h-4" />
+                  Browse the Library
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" asChild>
                 <Link href="/dashboard">
-                  <Dice6 className="w-5 h-5 mr-2" />
-                  Start Campaign
+                  Open Dashboard
                 </Link>
               </Button>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
-            <div className="text-center">
-              <div className="font-display text-2xl md:text-3xl font-bold text-primary">1,200+</div>
-              <div className="font-ui text-sm text-muted-foreground">Adventures</div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-2xl md:text-3xl font-bold text-primary">500+</div>
-              <div className="font-ui text-sm text-muted-foreground">Creators</div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-2xl md:text-3xl font-bold text-primary">50k+</div>
-              <div className="font-ui text-sm text-muted-foreground">Downloads</div>
-            </div>
+          {/* Stats bar */}
+          <div className="mt-20 grid grid-cols-3 gap-6 max-w-md mx-auto text-center">
+            {[
+              { value: "1,200+", label: "Adventures" },
+              { value: "500+",   label: "Creators" },
+              { value: "50k+",   label: "Downloads" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-2xl font-bold text-gold-primary">{stat.value}</p>
+                <p className="font-sans text-xs text-text-secondary uppercase tracking-widest mt-1">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Gold Divider */}
-      <div className="gold-divider mx-auto max-w-xl" />
+      <hr className="gold-divider container" />
 
-      {/* Featured Content */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center justify-between mb-8">
+      {/* ── Featured Content ─────────────────────────────────────── */}
+      <section className="px-6 py-16">
+        <div className="container">
+          <div className="flex items-end justify-between mb-8 gap-4">
             <div>
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
+              <p className="section-label mb-2">Hand-Picked</p>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-text-primary leading-tight">
                 Featured Content
               </h2>
-              <p className="font-body text-muted-foreground">
-                Hand-picked adventures and resources from our community
-              </p>
             </div>
-            <Button asChild variant="ghost" className="hidden md:flex">
+            <Button variant="ghost" size="sm" asChild className="hidden md:inline-flex flex-shrink-0">
               <Link href="/library">
-                View All
-                <ArrowRight className="w-4 h-4 ml-2" />
+                View All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredContent.map((item) => (
-              <Card key={item.id} className="group cursor-pointer">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <Badge variant={item.type === "Adventure" ? "adventure" : item.type === "Campaign" ? "campaign" : "secondary"}>
-                      {item.type}
-                    </Badge>
-                    <Badge variant={item.price === "Premium" ? "premium" : "free"}>
-                      {item.price}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-1">
-                    {item.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm">
-                    by {item.creator}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="font-body text-sm text-muted-foreground line-clamp-2 mb-3">
-                    {item.description}
-                  </p>
-                  <div className="flex items-center gap-1 text-sm text-primary">
-                    <Sparkles className="w-3 h-3" />
-                    <span className="font-ui font-medium">{item.rating}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <Link key={item.id} href={`/library`} className="group block">
+                <Card className="h-full flex flex-col">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <Badge variant="default">{item.type}</Badge>
+                      <Badge variant={item.price === "Premium" ? "premium" : "free"}>
+                        {item.price}
+                      </Badge>
+                    </div>
+                    <CardTitle className="text-base leading-snug group-hover:text-gold-primary transition-colors duration-[150ms] line-clamp-2">
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription>by {item.creator}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0 flex-1 flex flex-col justify-between gap-4">
+                    <p className="font-serif text-sm text-text-secondary leading-relaxed line-clamp-3">
+                      {item.description}
+                    </p>
+                    <div className="flex items-center gap-1.5 font-sans text-xs text-gold-muted">
+                      <Star className="w-3.5 h-3.5 fill-gold-muted text-gold-muted" />
+                      <span className="font-semibold text-gold-primary">{item.rating}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
           <div className="mt-6 text-center md:hidden">
-            <Button asChild variant="outline">
-              <Link href="/library">
-                View All Content
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
+            <Button variant="secondary" asChild>
+              <Link href="/library">View All Content <ArrowRight className="w-3.5 h-3.5" /></Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-16 px-4 bg-card/50">
-        <div className="container mx-auto max-w-6xl">
+      {/* ── Categories ────────────────────────────────────────────── */}
+      <section className="px-6 py-16" style={{ backgroundColor: "var(--bg-surface)" }}>
+        <div className="container">
           <div className="text-center mb-10">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
-              Browse by Category
+            <p className="section-label mb-2">Browse</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-text-primary">
+              Find What You Need
             </h2>
-            <p className="font-body text-muted-foreground">
-              Find exactly what you need for your next session
-            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map((category) => (
+            {categories.map((cat) => (
               <Link
-                key={category.name}
-                href={`/library?category=${category.name.toLowerCase()}`}
-                className="group"
+                key={cat.name}
+                href={`/library?category=${cat.name.toLowerCase()}`}
+                className="group block"
               >
-                <Card className="h-full text-center hover:border-primary/40 hover:shadow-gold transition-all">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 mx-auto mb-3 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <category.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-ui font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="font-ui text-sm text-muted-foreground">
-                      {category.count} items
+                <Card className="h-full text-center p-5 flex flex-col items-center gap-3">
+                  <div className="w-11 h-11 rounded-lg bg-bg-elevated flex items-center justify-center group-hover:bg-gold-glow transition-colors duration-[250ms]">
+                    <cat.icon className="w-5 h-5 text-gold-muted group-hover:text-gold-primary transition-colors duration-[150ms]" />
+                  </div>
+                  <div>
+                    <p className="font-sans font-semibold text-sm text-text-primary group-hover:text-gold-primary transition-colors duration-[150ms]">
+                      {cat.name}
                     </p>
-                  </CardContent>
+                    <p className="font-sans text-xs text-text-secondary mt-0.5">{cat.count} items</p>
+                  </div>
                 </Card>
               </Link>
             ))}
@@ -229,83 +222,70 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Tools Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+      {/* ── GM Tools ─────────────────────────────────────────────── */}
+      <section className="px-6 py-16">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge variant="accent" className="mb-4">
-                <Wrench className="w-3 h-3 mr-1" />
-                GM Tools
-              </Badge>
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Everything You Need to Run Great Games
+              <p className="section-label mb-4">For Game Masters</p>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-text-primary leading-tight mb-5">
+                Tools That Earn Their Place at the Table
               </h2>
-              <p className="font-body text-muted-foreground mb-6 leading-relaxed">
-                From name generators to encounter builders, our tools help you prepare 
-                and improvise with confidence. Spend less time on prep and more time playing.
+              <p className="font-serif text-text-secondary leading-[1.75] mb-8">
+                From encounter builders to NPC generators, our tools help you
+                prepare with confidence and improvise with ease. Spend less time
+                on prep — more time playing.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <Button asChild>
-                  <Link href="/tools">
-                    Explore Tools
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
+              <Button asChild>
+                <Link href="/tools">
+                  Explore All Tools <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
-              <Card className="p-4">
-                <Dice6 className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-ui font-semibold text-foreground mb-1">Random Tables</h3>
-                <p className="font-body text-sm text-muted-foreground">Generate encounters, loot, and more</p>
-              </Card>
-              <Card className="p-4">
-                <Users className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-ui font-semibold text-foreground mb-1">NPC Generator</h3>
-                <p className="font-body text-sm text-muted-foreground">Create memorable characters instantly</p>
-              </Card>
-              <Card className="p-4">
-                <Sword className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-ui font-semibold text-foreground mb-1">Combat Tracker</h3>
-                <p className="font-body text-sm text-muted-foreground">Manage initiative and HP</p>
-              </Card>
-              <Card className="p-4">
-                <Shield className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-ui font-semibold text-foreground mb-1">Encounter Builder</h3>
-                <p className="font-body text-sm text-muted-foreground">Balance encounters by party level</p>
-              </Card>
+              {[
+                { icon: Dice6, label: "Random Tables",    desc: "Generate encounters, loot, weather" },
+                { icon: Users, label: "NPC Generator",    desc: "Memorable characters in seconds" },
+                { icon: Sword, label: "Combat Tracker",   desc: "Initiative, HP, and conditions" },
+                { icon: Shield, label: "Encounter Builder", desc: "Balanced by party level" },
+              ].map(({ icon: Icon, label, desc }) => (
+                <Card key={label} className="p-5">
+                  <Icon className="w-6 h-6 text-gold-muted mb-3" />
+                  <p className="font-sans font-semibold text-sm text-text-primary mb-1">{label}</p>
+                  <p className="font-serif text-xs text-text-secondary leading-relaxed">{desc}</p>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 px-4 bg-card/50">
-        <div className="container mx-auto max-w-3xl text-center">
-          <Crown className="w-12 h-12 text-primary mx-auto mb-6" />
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-            Ready to Level Up Your Games?
+      {/* ── CTA ──────────────────────────────────────────────────── */}
+      <section
+        className="px-6 py-20"
+        style={{ backgroundColor: "var(--bg-surface)" }}
+      >
+        <div className="container max-w-2xl text-center">
+          <Crown className="w-10 h-10 text-gold-muted mx-auto mb-6" aria-hidden="true" />
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-text-primary mb-4 text-balance">
+            Ready to Run Unforgettable Games?
           </h2>
-          <p className="font-body text-muted-foreground mb-8 max-w-xl mx-auto">
-            Join thousands of GMs and players who use PlayerLAB to discover 
-            content and run unforgettable campaigns.
+          <p className="font-serif text-text-secondary leading-[1.75] mb-8">
+            Join thousands of GMs and players who rely on PlayerLAB to discover
+            great content and manage their campaigns.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg">
-              <Link href="/library">
-                Start Exploring
-              </Link>
+            <Button size="lg" asChild>
+              <Link href="/library">Start Exploring</Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/creators">
-                Become a Creator
-              </Link>
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="/creators">Become a Creator</Link>
             </Button>
           </div>
         </div>
       </section>
+
     </div>
   )
 }
